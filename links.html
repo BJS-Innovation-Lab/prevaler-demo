@@ -12,7 +12,7 @@
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
-body{font-family:'Inter',system-ui,sans-serif;min-height:100vh;min-height:100dvh;overflow-x:hidden;overflow-y:auto;-webkit-font-smoothing:antialiased;position:relative;display:flex;justify-content:center}
+body{font-family:'Inter',system-ui,sans-serif;min-height:100vh;min-height:100dvh;overflow-x:hidden;-webkit-font-smoothing:antialiased;position:relative;display:flex;align-items:center;justify-content:center}
 
 /* ===== BG ===== */
 .bg{position:fixed;inset:0;z-index:0;background:linear-gradient(170deg,#050528 0%,#00005c 50%,#0a0a4e 100%)}
@@ -52,12 +52,22 @@ body{font-family:'Inter',system-ui,sans-serif;min-height:100vh;min-height:100dvh
 .link-btn .arrow{color:rgba(255,255,255,.25);font-size:.8rem;transition:transform .3s,color .3s}
 .link-btn:hover .arrow{transform:translateX(3px);color:rgba(255,255,255,.5)}
 
-/* Stagger animation */
-.link-btn:nth-child(1){animation:fadeUp .5s ease .25s both}
-.link-btn:nth-child(2){animation:fadeUp .5s ease .35s both}
-.link-btn:nth-child(3){animation:fadeUp .5s ease .45s both}
-.link-btn:nth-child(4){animation:fadeUp .5s ease .55s both}
-.link-btn:nth-child(5){animation:fadeUp .5s ease .65s both}
+/* ===== INSTAGRAM BTN ===== */
+.insta-btn{display:flex;align-items:center;gap:14px;background:linear-gradient(135deg,rgba(221,42,123,.08),rgba(245,133,41,.08));border:1px solid rgba(221,42,123,.2);border-radius:14px;padding:16px 18px;color:#fff;font-weight:600;font-size:.88rem;transition:all .3s cubic-bezier(.25,.46,.45,.94);cursor:pointer;text-decoration:none;margin-bottom:20px;animation:fadeUp .5s ease .8s both;position:relative;overflow:hidden}
+.insta-btn::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(245,133,41,.05),rgba(221,42,123,.05),rgba(129,52,175,.05));opacity:0;transition:opacity .3s}
+.insta-btn:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(221,42,123,.15);border-color:rgba(221,42,123,.4)}
+.insta-btn:hover::before{opacity:1}
+.insta-btn:active{transform:translateY(0)}
+.insta-btn svg{width:36px;height:36px;flex-shrink:0;position:relative;z-index:1}
+.insta-text{flex:1;text-align:left;position:relative;z-index:1}
+.insta-label{font-weight:700;font-size:.9rem;margin-bottom:2px}
+.insta-text span{font-size:.7rem;color:rgba(255,255,255,.4);font-weight:400}
+.insta-btn .arrow{color:rgba(255,255,255,.25);font-size:.8rem;transition:transform .3s,color .3s;position:relative;z-index:1}
+.insta-btn:hover .arrow{transform:translateX(3px);color:rgba(255,255,255,.5)}
+
+/* Stagger - wa buttons */
+.wa-split .wa-btn:nth-child(1){animation:fadeUp .5s ease .3s both}
+.wa-split .wa-btn:nth-child(2){animation:fadeUp .5s ease .45s both}
 
 /* ===== PREMIUM LINK (dashboard) ===== */
 .link-btn.premium{background:linear-gradient(135deg,rgba(255,120,0,.15),rgba(255,120,0,.05));border-color:rgba(255,120,0,.3)}
@@ -142,39 +152,6 @@ body{font-family:'Inter',system-ui,sans-serif;min-height:100vh;min-height:100dvh
   <h1 class="brand-name">CMD PREVALER</h1>
   <p class="brand-sub">Centro Médico</p>
 
-  <!-- Links -->
-  <div class="links">
-    <a href="https://wa.me/15855222431?text=Hola,%20quiero%20agendar%20una%20cita" class="link-btn" target="_blank" rel="noopener">
-      <div class="link-icon orange"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01"/></svg></div>
-      <div class="link-text">Agenda tu cita<small>Reserva en minutos</small></div>
-      <span class="arrow">→</span>
-    </a>
-
-    <a href="#" class="link-btn" target="_blank" rel="noopener">
-      <div class="link-icon purple"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><path d="M8 7h8M8 11h6"/></svg></div>
-      <div class="link-text">Congreso Columna Vertebral<small>XXV Aniversario — Registro</small></div>
-      <span class="arrow">→</span>
-    </a>
-
-    <a href="#" class="link-btn" target="_blank" rel="noopener">
-      <div class="link-icon teal"><svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
-      <div class="link-text">Cursos y Docencia<small>Formación médica continua</small></div>
-      <span class="arrow">→</span>
-    </a>
-
-    <a href="https://bjs-innovation-lab.github.io/prevaler-demo/" class="link-btn premium" target="_blank" rel="noopener">
-      <div class="link-icon orange"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
-      <div class="link-text">Página Web<small>Visita nuestro sitio premium ✨</small></div>
-      <span class="arrow">→</span>
-    </a>
-
-    <a href="#" class="link-btn" target="_blank" rel="noopener">
-      <div class="link-icon blue"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8M16 17H8M10 9H8"/></svg></div>
-      <div class="link-text">Resultados de Laboratorio<small>Sede Valencia</small></div>
-      <span class="arrow">→</span>
-    </a>
-  </div>
-
   <!-- WhatsApp Split -->
   <div class="wa-split">
     <a href="https://wa.me/15855222431" class="wa-btn" target="_blank" rel="noopener">
@@ -189,19 +166,18 @@ body{font-family:'Inter',system-ui,sans-serif;min-height:100vh;min-height:100dvh
     </a>
   </div>
 
+  <!-- Instagram -->
+  <a href="https://www.instagram.com/clinicaprevaler" class="insta-btn" target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" fill="none" stroke="url(#ig)" stroke-width="2"/><circle cx="12" cy="12" r="5" fill="none" stroke="url(#ig)" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.5" fill="url(#ig)"/><defs><linearGradient id="ig" x1="0" y1="24" x2="24" y2="0"><stop stop-color="#f58529"/><stop offset=".5" stop-color="#dd2a7b"/><stop offset="1" stop-color="#8134af"/></linearGradient></defs></svg>
+    <div class="insta-text">
+      <div class="insta-label">@clinicaprevaler</div>
+      <span>Síguenos en Instagram</span>
+    </div>
+    <span class="arrow">→</span>
+  </a>
+
   <!-- Footer -->
   <div class="bio-footer">
-    <div class="social-row">
-      <a href="https://www.instagram.com/clinicaprevaler" class="social-link" target="_blank" rel="noopener" aria-label="Instagram">
-        <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5"/></svg>
-      </a>
-      <a href="https://wa.me/15855222431" class="social-link" target="_blank" rel="noopener" aria-label="WhatsApp">
-        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.832-1.438A9.955 9.955 0 0 0 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg>
-      </a>
-      <a href="https://bjs-innovation-lab.github.io/prevaler-demo/" class="social-link" target="_blank" rel="noopener" aria-label="Web">
-        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" fill="none" stroke="currentColor" stroke-width="2"/></svg>
-      </a>
-    </div>
     <p class="powered">Prevaler © 2025</p>
   </div>
 </div>
