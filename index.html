@@ -8,7 +8,8 @@
 <meta name="theme-color" content="#00005c">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;0,800;1,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+<link rel="preload" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&display=swap" as="style">
 <style>
 /* ===== RESET ===== */
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
@@ -49,7 +50,7 @@ button{font-family:'Inter',sans-serif;cursor:pointer;border:none;background:none
 @keyframes glow-line{0%{left:-30%}100%{left:130%}}
 
 /* ===== GRAIN ===== */
-.grain::after{content:'';position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.035'/%3E%3C/svg%3E");background-size:256px;pointer-events:none;z-index:0}
+.grain::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 20%,rgba(255,255,255,.02) 0%,transparent 70%);pointer-events:none;z-index:0}
 
 /* ===== DECORATIVE SHAPES ===== */
 .deco-circle{position:absolute;border-radius:50%;pointer-events:none}
@@ -83,11 +84,11 @@ button{font-family:'Inter',sans-serif;cursor:pointer;border:none;background:none
 .mob-cta{display:block!important;background:var(--orange)!important;color:#fff!important;text-align:center;padding:16px 28px!important;border-radius:var(--radius-full)!important;font-weight:700!important;margin-top:28px!important;border:none!important;letter-spacing:1px}
 
 /* ===== HERO ===== */
-.hero{min-height:100vh;min-height:100dvh;background:linear-gradient(170deg,var(--navy-deep) 0%,var(--navy) 40%,var(--navy-light) 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:140px 32px 80px;text-align:center}
-.hero-orb{position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none;opacity:.4}
-.hero-orb.o1{width:500px;height:500px;background:radial-gradient(circle,rgba(255,120,0,.15),transparent);top:-10%;right:-10%}
-.hero-orb.o2{width:400px;height:400px;background:radial-gradient(circle,rgba(100,100,255,.1),transparent);bottom:-15%;left:-5%}
-.hero-orb.o3{width:200px;height:200px;background:radial-gradient(circle,rgba(201,168,76,.1),transparent);top:30%;left:10%}
+.hero{min-height:100vh;min-height:100dvh;background:linear-gradient(170deg,var(--navy-deep) 0%,var(--navy) 40%,var(--navy-light) 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:120px 32px 60px;text-align:center}
+.hero-orb{position:absolute;border-radius:50%;pointer-events:none;opacity:.35}
+.hero-orb.o1{width:420px;height:420px;background:radial-gradient(circle,rgba(255,120,0,.12),transparent);top:-10%;right:-10%}
+.hero-orb.o2{width:320px;height:320px;background:radial-gradient(circle,rgba(100,100,255,.08),transparent);bottom:-15%;left:-5%}
+.hero-orb.o3{display:none}
 .hero-content{position:relative;z-index:1;max-width:720px;width:100%}
 .hero-eyebrow{display:inline-flex;align-items:center;gap:8px;background:var(--glass);border:1px solid var(--glass-border);padding:10px 24px;border-radius:var(--radius-full);color:var(--gold-light);font-size:.72rem;font-weight:600;margin-bottom:36px;letter-spacing:2.5px;text-transform:uppercase;backdrop-filter:blur(10px)}
 .hero-eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--gold);animation:pulse-ring 2s infinite}
@@ -264,16 +265,20 @@ footer{background:var(--navy-deep);padding:64px 0 28px;border-top:1px solid rgba
 }
 @media(max-width:640px){
   .container{padding:0 20px}
-  .hero{padding:110px 20px 56px}
-  .hero h1{letter-spacing:4px}
-  .hero h1 .accent{letter-spacing:6px;font-size:.8rem}
-  .hero-eyebrow{font-size:.65rem;padding:8px 18px}
-  .search-bar{flex-direction:column;border-radius:14px}
-  .search-bar select{border-right:none!important;border-bottom:1px solid #eee;padding:16px 18px}
+  .hero{padding:80px 20px 36px;min-height:auto;min-height:unset;height:100vh;height:100dvh}
+  .hero h1{letter-spacing:3px;font-size:2.6rem}
+  .hero h1 .accent{letter-spacing:5px;font-size:.72rem;margin-top:4px}
+  .hero-eyebrow{font-size:.6rem;padding:6px 14px;margin-bottom:20px}
+  .hero .tagline{margin-bottom:28px;font-size:.92rem}
+  .hero-line{margin:0 auto 24px;width:36px}
+  .search-bar{flex-direction:column;border-radius:12px;margin-bottom:24px}
+  .search-bar select{border-right:none!important;border-bottom:1px solid #eee;padding:14px 16px;font-size:.85rem}
   .search-bar select+select{border-left:none}
-  .search-bar .btn-agendar{padding:16px 20px}
-  .trust-row{gap:8px}
-  .trust-badge{padding:5px 10px;font-size:.58rem}
+  .search-bar .btn-agendar{padding:14px 18px;font-size:.82rem}
+  .trust-row{gap:6px}
+  .trust-badge{padding:4px 8px;font-size:.55rem}
+  .trust-label{font-size:.58rem}
+  .scroll-hint{bottom:16px}
   .stats{padding:56px 0}
   .stats-grid{grid-template-columns:repeat(2,1fr);gap:0}
   .stat-item{padding:24px 12px}
@@ -301,9 +306,12 @@ footer{background:var(--navy-deep);padding:64px 0 28px;border-top:1px solid rgba
 }
 @media(max-width:380px){
   .container{padding:0 16px}
-  .hero{padding:96px 16px 44px}
-  .hero h1{font-size:2.4rem;letter-spacing:3px}
-  .hero h1 .accent{font-size:.7rem;letter-spacing:4px}
+  .hero{padding:68px 16px 28px}
+  .hero h1{font-size:2.1rem;letter-spacing:2px}
+  .hero h1 .accent{font-size:.65rem;letter-spacing:3px}
+  .hero-eyebrow{font-size:.55rem;padding:5px 12px;margin-bottom:16px}
+  .hero .tagline{font-size:.85rem;margin-bottom:22px}
+  .hero-line{margin:0 auto 20px;width:28px}
   .hero .tagline{font-size:.9rem}
   .stat-number{font-size:1.5rem}
   .stat-label{font-size:.7rem}
