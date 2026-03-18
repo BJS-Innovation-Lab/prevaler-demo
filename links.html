@@ -3,183 +3,153 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-<title>CMD Prevaler — Enlaces</title>
-<meta name="description" content="Centro Médico Prevaler. Agenda tu cita, cursos, resultados y más.">
-<meta name="theme-color" content="#00005c">
+<title>CMD Prevaler</title>
+<meta name="theme-color" content="#0a0a1a">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-html{-webkit-text-size-adjust:100%}
-body{font-family:'Inter',system-ui,sans-serif;min-height:100vh;min-height:100dvh;overflow-x:hidden;-webkit-font-smoothing:antialiased;position:relative;display:flex;align-items:center;justify-content:center}
+html,body{height:100%;width:100%}
+body{font-family:'Inter',system-ui,sans-serif;background:#0a0a1a;color:#fff;display:flex;align-items:center;justify-content:center;overflow:hidden;-webkit-font-smoothing:antialiased}
 
-/* ===== BG ===== */
-.bg{position:fixed;inset:0;z-index:0;background:linear-gradient(170deg,#050528 0%,#00005c 50%,#0a0a4e 100%)}
-.bg-orb{position:absolute;border-radius:50%;pointer-events:none}
-.bg-orb.a{width:380px;height:380px;background:radial-gradient(circle,rgba(255,120,0,.1),transparent);top:-8%;right:-12%;animation:drift 8s ease-in-out infinite alternate}
-.bg-orb.b{width:300px;height:300px;background:radial-gradient(circle,rgba(80,80,200,.08),transparent);bottom:-10%;left:-8%;animation:drift 10s ease-in-out infinite alternate-reverse}
-@keyframes drift{0%{transform:translate(0,0)}100%{transform:translate(20px,-15px)}}
+/* BG */
+.bg{position:fixed;inset:0;z-index:0;overflow:hidden}
+.bg::before{content:'';position:absolute;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(255,120,0,.06) 0%,transparent 70%);top:-20%;right:-15%;animation:drift 12s ease-in-out infinite alternate}
+.bg::after{content:'';position:absolute;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(100,80,200,.04) 0%,transparent 70%);bottom:-20%;left:-10%;animation:drift 15s ease-in-out infinite alternate-reverse}
+@keyframes drift{0%{transform:translate(0,0)}100%{transform:translate(15px,-10px)}}
 
-/* ===== CARD ===== */
-.card{position:relative;z-index:1;width:100%;max-width:420px;padding:40px 24px 32px;text-align:center;margin:0 auto}
+.page{position:relative;z-index:1;width:100%;max-width:380px;padding:0 24px;text-align:center}
 
-/* ===== LOGO ===== */
-.logo-wrap{width:72px;height:72px;margin:0 auto 14px;border-radius:20px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);animation:fadeIn .6s ease;overflow:hidden}
-.logo-wrap svg{width:42px;height:42px}
-@keyframes fadeIn{from{opacity:0;transform:scale(.9)}to{opacity:1;transform:scale(1)}}
+/* AVATAR */
+.avatar{width:80px;height:80px;margin:0 auto 20px;border-radius:50%;background:linear-gradient(135deg,#1a1a3e,#2a2a5e);border:2px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;animation:pop .5s cubic-bezier(.175,.885,.32,1.275) both}
+.avatar svg{width:36px;height:36px}
+@keyframes pop{from{opacity:0;transform:scale(.6)}to{opacity:1;transform:scale(1)}}
 
-.brand-name{font-family:'Playfair Display',serif;font-size:1.35rem;font-weight:800;color:#fff;letter-spacing:3px;margin-bottom:2px;animation:fadeUp .6s ease .1s both}
-.brand-sub{font-size:.65rem;color:rgba(255,255,255,.4);letter-spacing:3px;text-transform:uppercase;font-weight:600;margin-bottom:24px;animation:fadeUp .6s ease .2s both}
-@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.name{font-size:1.1rem;font-weight:700;letter-spacing:1px;margin-bottom:3px;animation:fadeIn .5s ease .15s both}
+.subtitle{font-size:.7rem;color:rgba(255,255,255,.35);font-weight:500;letter-spacing:2px;text-transform:uppercase;margin-bottom:36px;animation:fadeIn .5s ease .25s both}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 
-/* ===== LINKS ===== */
-.links{display:flex;flex-direction:column;gap:10px;margin-bottom:20px}
-.link-btn{display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:14px 18px;color:#fff;font-size:.85rem;font-weight:600;text-align:left;transition:all .3s cubic-bezier(.25,.46,.45,.94);cursor:pointer;text-decoration:none;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);position:relative;overflow:hidden;letter-spacing:.2px}
-.link-btn::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.1),transparent);opacity:0;transition:opacity .3s}
-.link-btn:hover{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.2);transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,0,0,.2)}
-.link-btn:hover::before{opacity:1}
-.link-btn:active{transform:translateY(0);transition-duration:.1s}
-.link-btn .link-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.link-btn .link-icon svg{width:18px;height:18px;stroke:#fff;fill:none;stroke-width:1.8}
-.link-btn .link-icon.orange{background:linear-gradient(135deg,#ff7800,#ff9a3e)}
-.link-btn .link-icon.navy{background:linear-gradient(135deg,#00005c,#0a0a6e)}
-.link-btn .link-icon.teal{background:linear-gradient(135deg,#0d9488,#14b8a6)}
-.link-btn .link-icon.purple{background:linear-gradient(135deg,#6d28d9,#8b5cf6)}
-.link-btn .link-icon.blue{background:linear-gradient(135deg,#2563eb,#3b82f6)}
-.link-btn .link-text{flex:1;line-height:1.3}
-.link-btn .link-text small{display:block;font-size:.68rem;font-weight:400;color:rgba(255,255,255,.4);margin-top:2px}
-.link-btn .arrow{color:rgba(255,255,255,.25);font-size:.8rem;transition:transform .3s,color .3s}
-.link-btn:hover .arrow{transform:translateX(3px);color:rgba(255,255,255,.5)}
+/* WA BUTTONS */
+.wa-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
+.wa-card{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:24px 16px;border-radius:20px;text-decoration:none;color:#fff;transition:all .3s ease;position:relative;overflow:hidden}
+.wa-card::before{content:'';position:absolute;inset:0;border-radius:20px;border:1px solid transparent;transition:border-color .3s}
 
-/* ===== INSTAGRAM BTN ===== */
-.insta-btn{display:flex;align-items:center;gap:14px;background:linear-gradient(135deg,rgba(221,42,123,.08),rgba(245,133,41,.08));border:1px solid rgba(221,42,123,.2);border-radius:14px;padding:16px 18px;color:#fff;font-weight:600;font-size:.88rem;transition:all .3s cubic-bezier(.25,.46,.45,.94);cursor:pointer;text-decoration:none;margin-bottom:20px;animation:fadeUp .5s ease .8s both;position:relative;overflow:hidden}
-.insta-btn::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(245,133,41,.05),rgba(221,42,123,.05),rgba(129,52,175,.05));opacity:0;transition:opacity .3s}
-.insta-btn:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(221,42,123,.15);border-color:rgba(221,42,123,.4)}
-.insta-btn:hover::before{opacity:1}
-.insta-btn:active{transform:translateY(0)}
-.insta-btn svg{width:36px;height:36px;flex-shrink:0;position:relative;z-index:1}
-.insta-text{flex:1;text-align:left;position:relative;z-index:1}
-.insta-label{font-weight:700;font-size:.9rem;margin-bottom:2px}
-.insta-text span{font-size:.7rem;color:rgba(255,255,255,.4);font-weight:400}
-.insta-btn .arrow{color:rgba(255,255,255,.25);font-size:.8rem;transition:transform .3s,color .3s;position:relative;z-index:1}
-.insta-btn:hover .arrow{transform:translateX(3px);color:rgba(255,255,255,.5)}
+.wa-card.msg{background:linear-gradient(160deg,rgba(37,211,102,.12) 0%,rgba(37,211,102,.04) 100%)}
+.wa-card.msg::before{border-color:rgba(37,211,102,.2)}
+.wa-card.msg:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(37,211,102,.12)}
+.wa-card.msg:hover::before{border-color:rgba(37,211,102,.4)}
 
-/* Stagger - wa buttons */
-.wa-split .wa-btn:nth-child(1){animation:fadeUp .5s ease .3s both}
-.wa-split .wa-btn:nth-child(2){animation:fadeUp .5s ease .45s both}
+.wa-card.call{background:linear-gradient(160deg,rgba(37,211,102,.12) 0%,rgba(37,211,102,.04) 100%)}
+.wa-card.call::before{border-color:rgba(37,211,102,.2)}
+.wa-card.call:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(37,211,102,.12)}
+.wa-card.call:hover::before{border-color:rgba(37,211,102,.4)}
 
-/* ===== PREMIUM LINK (dashboard) ===== */
-.link-btn.premium{background:linear-gradient(135deg,rgba(255,120,0,.15),rgba(255,120,0,.05));border-color:rgba(255,120,0,.3)}
-.link-btn.premium:hover{background:linear-gradient(135deg,rgba(255,120,0,.25),rgba(255,120,0,.1));border-color:rgba(255,120,0,.5);box-shadow:0 8px 32px rgba(255,120,0,.15)}
+.wa-card:active{transform:translateY(0)!important;transition-duration:.1s}
 
-/* ===== WHATSAPP SPLIT ===== */
-.wa-split{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px;animation:fadeUp .5s ease .75s both}
-.wa-btn{display:flex;flex-direction:column;align-items:center;gap:6px;background:rgba(37,211,102,.1);border:1px solid rgba(37,211,102,.25);border-radius:14px;padding:14px 10px;color:#fff;font-size:.78rem;font-weight:600;transition:all .3s;cursor:pointer;text-decoration:none;position:relative;overflow:hidden}
-.wa-btn:hover{background:rgba(37,211,102,.2);border-color:rgba(37,211,102,.45);transform:translateY(-2px);box-shadow:0 8px 24px rgba(37,211,102,.15)}
-.wa-btn:active{transform:translateY(0)}
-.wa-btn svg{width:24px;height:24px;fill:#25d366}
-.wa-btn span{color:rgba(255,255,255,.6);font-size:.65rem;font-weight:400;letter-spacing:.5px}
-.wa-btn .wa-label{color:#fff;font-weight:600;font-size:.82rem}
+.wa-icon{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.wa-card.msg .wa-icon{background:rgba(37,211,102,.15)}
+.wa-card.call .wa-icon{background:rgba(37,211,102,.15)}
+.wa-icon svg{width:22px;height:22px}
 
-/* ===== FOOTER ===== */
-.bio-footer{animation:fadeUp .5s ease .85s both}
-.bio-footer .social-row{display:flex;justify-content:center;gap:12px;margin-bottom:16px}
-.social-link{width:38px;height:38px;border-radius:10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center;transition:all .3s}
-.social-link:hover{background:rgba(255,120,0,.15);border-color:rgba(255,120,0,.3)}
-.social-link svg{width:16px;height:16px;fill:rgba(255,255,255,.5)}
-.social-link:hover svg{fill:#ff7800}
-.powered{font-size:.6rem;color:rgba(255,255,255,.15);letter-spacing:1px;text-transform:uppercase}
-.powered a{color:rgba(255,255,255,.25);transition:color .3s}
-.powered a:hover{color:#ff7800}
+.wa-card .label{font-size:.9rem;font-weight:600;letter-spacing:.3px}
+.wa-card .meta{font-size:.65rem;color:rgba(255,255,255,.3);font-weight:400}
 
-/* ===== RESPONSIVE ===== */
-@media(max-width:480px){
-  .card{padding:28px 18px 24px}
-  .logo-wrap{width:64px;height:64px;border-radius:16px}
-  .logo-wrap svg{width:38px;height:38px}
-  .brand-name{font-size:1.15rem;letter-spacing:2px}
-  .brand-sub{margin-bottom:18px;font-size:.6rem}
-  .links{gap:8px;margin-bottom:16px}
-  .link-btn{padding:12px 14px;font-size:.82rem;border-radius:12px}
-  .link-btn .link-icon{width:32px;height:32px;border-radius:8px}
-  .link-btn .link-icon svg{width:15px;height:15px}
-  .link-btn .link-text small{font-size:.62rem}
-  .wa-split{gap:8px;margin-bottom:16px}
-  .wa-btn{padding:12px 8px;border-radius:12px}
-  .wa-btn svg{width:20px;height:20px}
-  .wa-btn .wa-label{font-size:.78rem}
-  .wa-btn span{font-size:.6rem}
-  .social-row{margin-bottom:10px}
-  .social-link{width:34px;height:34px;border-radius:8px}
+/* Stagger */
+.wa-card.msg{animation:fadeIn .4s ease .35s both}
+.wa-card.call{animation:fadeIn .4s ease .45s both}
+
+/* IG BUTTON */
+.ig-link{display:flex;align-items:center;gap:14px;padding:16px 20px;border-radius:16px;text-decoration:none;color:#fff;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);transition:all .3s ease;animation:fadeIn .4s ease .55s both}
+.ig-link:hover{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.12);transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.15)}
+.ig-link:active{transform:translateY(0);transition-duration:.1s}
+
+.ig-icon{width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,#f58529,#dd2a7b,#8134af);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.ig-icon svg{width:20px;height:20px;fill:#fff}
+
+.ig-info{flex:1;text-align:left}
+.ig-handle{font-size:.88rem;font-weight:600}
+.ig-sub{font-size:.65rem;color:rgba(255,255,255,.3);font-weight:400;margin-top:1px}
+
+.ig-arrow{width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.04);display:flex;align-items:center;justify-content:center;transition:all .3s}
+.ig-link:hover .ig-arrow{background:rgba(255,255,255,.08);transform:translateX(2px)}
+.ig-arrow svg{width:12px;height:12px;stroke:rgba(255,255,255,.3);fill:none;stroke-width:2.5}
+
+/* FOOTER */
+.foot{margin-top:32px;font-size:.6rem;color:rgba(255,255,255,.12);letter-spacing:1.5px;text-transform:uppercase;animation:fadeIn .4s ease .65s both}
+
+/* RESPONSIVE */
+@media(max-width:400px){
+  .page{padding:0 20px}
+  .avatar{width:68px;height:68px}
+  .avatar svg{width:30px;height:30px}
+  .name{font-size:1rem}
+  .subtitle{margin-bottom:28px}
+  .wa-card{padding:20px 12px;border-radius:16px}
+  .wa-icon{width:38px;height:38px}
+  .wa-icon svg{width:18px;height:18px}
+  .wa-card .label{font-size:.84rem}
+  .ig-link{padding:14px 16px}
+  .ig-icon{width:36px;height:36px;border-radius:10px}
 }
-@media(max-width:360px){
-  .card{padding:24px 16px 20px}
-  .logo-wrap{width:56px;height:56px;border-radius:14px}
-  .logo-wrap svg{width:34px;height:34px}
-  .brand-name{font-size:1.05rem;letter-spacing:1.5px}
-  .brand-sub{margin-bottom:14px}
-  .links{gap:7px;margin-bottom:14px}
-  .link-btn{padding:11px 12px;font-size:.78rem;gap:10px;border-radius:10px}
-  .link-btn .link-icon{width:28px;height:28px;border-radius:7px}
-  .wa-split{gap:6px}
-  .wa-btn{padding:10px 6px}
+@media(max-width:340px){
+  .wa-row{gap:8px}
+  .wa-card{padding:16px 10px;border-radius:14px}
+  .name{font-size:.92rem}
+  .ig-link{gap:10px;padding:12px 14px}
 }
 </style>
 </head>
 <body>
 
-<!-- BG -->
-<div class="bg">
-  <div class="bg-orb a"></div>
-  <div class="bg-orb b"></div>
-</div>
+<div class="bg"></div>
 
-<!-- CARD -->
-<div class="card">
-  <!-- Logo -->
-  <div class="logo-wrap">
+<div class="page">
+  <!-- Avatar -->
+  <div class="avatar">
     <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
-      <!-- Simplified CMD Prevaler logo: V with circle -->
-      <circle cx="60" cy="35" r="18" fill="none" stroke="#ff7800" stroke-width="4"/>
-      <ellipse cx="60" cy="28" rx="8" ry="5" fill="#ff7800" opacity=".6"/>
-      <path d="M30 45 L60 105 L90 45" fill="none" stroke="#00005c" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
-      <path d="M30 45 L60 105 L90 45" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" opacity=".15"/>
-      <path d="M42 65 L60 105 L78 65" fill="none" stroke="#ff7800" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="60" cy="32" r="16" fill="none" stroke="#ff7800" stroke-width="3" opacity=".7"/>
+      <ellipse cx="60" cy="26" rx="7" ry="4" fill="#ff7800" opacity=".5"/>
+      <path d="M32 42 L60 100 L88 42" fill="none" stroke="rgba(255,255,255,.5)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M44 60 L60 100 L76 60" fill="none" stroke="#ff7800" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity=".6"/>
     </svg>
   </div>
 
-  <h1 class="brand-name">CMD PREVALER</h1>
-  <p class="brand-sub">Centro Médico</p>
+  <!-- Name -->
+  <h1 class="name">CMD Prevaler</h1>
+  <p class="subtitle">Centro Médico</p>
 
   <!-- WhatsApp Split -->
-  <div class="wa-split">
-    <a href="https://wa.me/15855222431" class="wa-btn" target="_blank" rel="noopener">
-      <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.832-1.438A9.955 9.955 0 0 0 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg>
-      <div class="wa-label">Escribir</div>
-      <span>Mensaje directo</span>
+  <div class="wa-row">
+    <a href="https://wa.me/15855222431" class="wa-card msg" target="_blank" rel="noopener">
+      <div class="wa-icon">
+        <svg viewBox="0 0 24 24" fill="#25d366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.832-1.438A9.955 9.955 0 0 0 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg>
+      </div>
+      <div class="label">Escribir</div>
+      <div class="meta">Mensaje directo</div>
     </a>
-    <a href="tel:+15855222431" class="wa-btn">
-      <svg viewBox="0 0 24 24" fill="none" stroke="#25d366" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-      <div class="wa-label">Llamar</div>
-      <span>+1 (585) 522-2431</span>
+    <a href="tel:+15855222431" class="wa-card call">
+      <div class="wa-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#25d366" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      </div>
+      <div class="label">Llamar</div>
+      <div class="meta">+1 (585) 522-2431</div>
     </a>
   </div>
 
   <!-- Instagram -->
-  <a href="https://www.instagram.com/clinicaprevaler" class="insta-btn" target="_blank" rel="noopener">
-    <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" fill="none" stroke="url(#ig)" stroke-width="2"/><circle cx="12" cy="12" r="5" fill="none" stroke="url(#ig)" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.5" fill="url(#ig)"/><defs><linearGradient id="ig" x1="0" y1="24" x2="24" y2="0"><stop stop-color="#f58529"/><stop offset=".5" stop-color="#dd2a7b"/><stop offset="1" stop-color="#8134af"/></linearGradient></defs></svg>
-    <div class="insta-text">
-      <div class="insta-label">@clinicaprevaler</div>
-      <span>Síguenos en Instagram</span>
+  <a href="https://www.instagram.com/clinicaprevaler" class="ig-link" target="_blank" rel="noopener">
+    <div class="ig-icon">
+      <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" fill="none" stroke="#fff" stroke-width="1.5"/><circle cx="12" cy="12" r="5" fill="none" stroke="#fff" stroke-width="1.5"/><circle cx="17.5" cy="6.5" r="1.2" fill="#fff"/></svg>
     </div>
-    <span class="arrow">→</span>
+    <div class="ig-info">
+      <div class="ig-handle">@clinicaprevaler</div>
+      <div class="ig-sub">Síguenos en Instagram</div>
+    </div>
+    <div class="ig-arrow"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
   </a>
 
-  <!-- Footer -->
-  <div class="bio-footer">
-    <p class="powered">Prevaler © 2025</p>
-  </div>
+  <p class="foot">Prevaler © 2025</p>
 </div>
 
 </body>
