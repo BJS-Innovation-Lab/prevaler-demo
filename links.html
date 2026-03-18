@@ -4,209 +4,260 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
 <title>CMD Prevaler</title>
-<meta name="theme-color" content="#ffffff">
+<meta name="theme-color" content="#00005c">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-html{height:100%}
+html,body{height:100%;width:100%}
 body{
   font-family:'DM Sans',system-ui,sans-serif;
-  min-height:100%;
-  background:#fff;
-  color:#1a1a2e;
-  display:flex;
-  align-items:center;
-  justify-content:center;
+  color:#fff;
   -webkit-font-smoothing:antialiased;
-  padding:48px 0;
+  overflow:hidden;
 }
 
-.page{width:100%;max-width:400px;padding:0 28px;text-align:center}
+/* ===== FULL BG IMAGE ===== */
+.bg{
+  position:fixed;inset:0;z-index:0;
+  background:
+    linear-gradient(175deg,rgba(0,0,50,.82) 0%,rgba(0,0,40,.7) 40%,rgba(0,0,60,.85) 100%),
+    url('https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=800&q=80') center/cover no-repeat;
+}
+/* Fallback if image doesn't load */
+.bg::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(175deg,#00004a,#000038,#00005c);
+  z-index:-1;
+}
+
+/* ===== LAYOUT ===== */
+.page{
+  position:relative;z-index:1;
+  width:100%;height:100vh;height:100dvh;
+  display:flex;align-items:center;justify-content:center;
+  padding:24px;
+}
+
+.card{
+  width:100%;max-width:360px;
+  padding:40px 28px 32px;
+  border-radius:28px;
+  background:rgba(255,255,255,.08);
+  backdrop-filter:blur(40px) saturate(150%);
+  -webkit-backdrop-filter:blur(40px) saturate(150%);
+  border:1px solid rgba(255,255,255,.12);
+  box-shadow:0 24px 80px rgba(0,0,0,.3);
+  text-align:center;
+  animation:cardIn .6s cubic-bezier(.22,1,.36,1) both;
+}
+@keyframes cardIn{from{opacity:0;transform:translateY(30px) scale(.96)}to{opacity:1;transform:none}}
 
 /* ===== AVATAR ===== */
 .avatar{
-  width:100px;height:100px;margin:0 auto 24px;
+  width:88px;height:88px;margin:0 auto 20px;
   border-radius:50%;overflow:hidden;
-  background:#f5f5f5;
-  box-shadow:0 2px 12px rgba(0,0,60,.08);
-  animation:drop .55s cubic-bezier(.175,.885,.32,1.275) both;
+  border:3px solid rgba(255,255,255,.15);
+  box-shadow:0 4px 20px rgba(0,0,0,.2);
+  animation:popIn .5s cubic-bezier(.175,.885,.32,1.275) .15s both;
 }
-.avatar img{width:100%;height:100%;object-fit:cover;display:block}
-@keyframes drop{from{opacity:0;transform:translateY(-20px) scale(.85)}to{opacity:1;transform:none}}
+.avatar img{width:100%;height:100%;object-fit:cover}
+@keyframes popIn{from{opacity:0;transform:scale(.6)}to{opacity:1;transform:scale(1)}}
 
-/* ===== NAME ===== */
+/* ===== TEXT ===== */
 .name{
-  font-family:'DM Serif Display',Georgia,serif;
-  font-size:1.55rem;font-weight:400;
-  color:#00005c;letter-spacing:.5px;
-  margin-bottom:4px;
-  animation:up .5s ease .08s both;
+  font-family:'DM Serif Display',serif;
+  font-size:1.45rem;font-weight:400;
+  letter-spacing:.5px;
+  margin-bottom:3px;
+  animation:fadeUp .45s ease .25s both;
 }
-.tagline{
-  font-size:.72rem;color:#999;
+.sub{
+  font-size:.68rem;color:rgba(255,255,255,.45);
   font-weight:500;letter-spacing:2px;text-transform:uppercase;
-  margin-bottom:8px;
-  animation:up .5s ease .16s both;
+  animation:fadeUp .45s ease .32s both;
 }
-.divider{
-  width:32px;height:2px;
-  background:linear-gradient(90deg,#ff7800,#ffaa44);
-  border-radius:2px;margin:0 auto 32px;
-  animation:up .5s ease .22s both;
+.line{
+  width:28px;height:1.5px;margin:16px auto 28px;
+  background:linear-gradient(90deg,transparent,#ff7800,transparent);
+  border-radius:1px;
+  animation:fadeUp .45s ease .38s both;
 }
-@keyframes up{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 
 /* ===== BUTTONS ===== */
 .btns{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
 
-.btn{
-  display:flex;flex-direction:column;align-items:center;gap:12px;
-  padding:28px 14px 22px;
-  border-radius:20px;border:1.5px solid #e8e8ee;
-  background:#fff;
-  text-decoration:none;color:#1a1a2e;
-  transition:all .25s ease;
+.b{
+  display:flex;flex-direction:column;align-items:center;gap:10px;
+  padding:24px 12px 18px;
+  border-radius:18px;
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.1);
+  text-decoration:none;color:#fff;
+  transition:all .3s ease;
   -webkit-tap-highlight-color:transparent;
 }
-.btn:hover{
-  border-color:#00005c;
-  box-shadow:0 8px 28px rgba(0,0,60,.08);
+.b:hover{
+  background:rgba(255,255,255,.12);
+  border-color:rgba(255,255,255,.2);
   transform:translateY(-3px);
+  box-shadow:0 8px 24px rgba(0,0,0,.15);
 }
-.btn:active{transform:translateY(0);box-shadow:none;transition-duration:.08s}
+.b:active{transform:translateY(0);box-shadow:none;transition-duration:.08s}
 
-/* Icon pill */
-.ico{
-  width:52px;height:52px;border-radius:16px;
+.b .ic{
+  width:48px;height:48px;border-radius:50%;
   display:flex;align-items:center;justify-content:center;
+  transition:transform .3s;
 }
-.ico.wa{background:#25d366}
-.ico.wa svg{width:24px;height:24px;fill:#fff}
-.ico.ph{background:#00005c}
-.ico.ph svg{width:22px;height:22px;stroke:#fff;fill:none;stroke-width:2}
+.b:hover .ic{transform:scale(1.05)}
+.b .ic.green{background:#25d366;box-shadow:0 4px 16px rgba(37,211,102,.25)}
+.b .ic.navy{background:#ff7800;box-shadow:0 4px 16px rgba(255,120,0,.2)}
+.b .ic svg{width:22px;height:22px}
 
-.btn .label{font-size:.92rem;font-weight:700;color:#1a1a2e}
-.btn .meta{font-size:.64rem;color:#aaa;font-weight:500}
+.b .lbl{font-size:.88rem;font-weight:700}
+.b .mt{font-size:.6rem;color:rgba(255,255,255,.35);font-weight:500}
 
-/* Stagger */
-.btn:nth-child(1){animation:up .4s ease .3s both}
-.btn:nth-child(2){animation:up .4s ease .4s both}
+.b:nth-child(1){animation:fadeUp .4s ease .44s both}
+.b:nth-child(2){animation:fadeUp .4s ease .52s both}
 
 /* ===== INSTAGRAM ===== */
 .ig{
   display:flex;align-items:center;gap:14px;
-  padding:18px 22px;
-  border-radius:16px;border:1.5px solid #e8e8ee;
-  background:#fff;
-  text-decoration:none;color:#1a1a2e;
-  transition:all .25s ease;
-  animation:up .4s ease .5s both;
+  padding:16px 20px;
+  border-radius:16px;
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.1);
+  text-decoration:none;color:#fff;
+  transition:all .3s ease;
+  animation:fadeUp .4s ease .6s both;
   -webkit-tap-highlight-color:transparent;
 }
 .ig:hover{
-  border-color:#dd2a7b;
-  box-shadow:0 8px 28px rgba(221,42,123,.08);
+  background:rgba(255,255,255,.12);
+  border-color:rgba(255,255,255,.2);
   transform:translateY(-3px);
+  box-shadow:0 8px 24px rgba(0,0,0,.15);
 }
 .ig:active{transform:translateY(0);box-shadow:none;transition-duration:.08s}
 
-.ig-ico{
-  width:44px;height:44px;border-radius:13px;flex-shrink:0;
+.ig-ic{
+  width:42px;height:42px;border-radius:12px;flex-shrink:0;
   background:linear-gradient(135deg,#f58529,#dd2a7b,#8134af);
   display:flex;align-items:center;justify-content:center;
+  box-shadow:0 4px 14px rgba(221,42,123,.2);
+  transition:transform .3s;
 }
-.ig-ico svg{width:22px;height:22px}
+.ig:hover .ig-ic{transform:scale(1.05)}
+.ig-ic svg{width:20px;height:20px}
 
-.ig-info{flex:1;text-align:left}
-.ig-handle{font-size:.9rem;font-weight:700}
-.ig-sub{font-size:.62rem;color:#aaa;margin-top:1px;font-weight:500}
+.ig-t{flex:1;text-align:left}
+.ig-h{font-size:.88rem;font-weight:700}
+.ig-s{font-size:.6rem;color:rgba(255,255,255,.35);margin-top:1px;font-weight:500}
 
-.ig .chevron{
-  width:28px;height:28px;border-radius:50%;
-  background:#f5f5f5;
+.ig .arr{
+  width:26px;height:26px;border-radius:50%;
+  background:rgba(255,255,255,.06);
   display:flex;align-items:center;justify-content:center;
-  transition:all .25s;
+  transition:all .3s;
 }
-.ig:hover .chevron{background:#fce8f2;transform:translateX(2px)}
-.chevron svg{width:11px;height:11px;stroke:#bbb;fill:none;stroke-width:2.5}
-.ig:hover .chevron svg{stroke:#dd2a7b}
+.ig:hover .arr{background:rgba(255,255,255,.12);transform:translateX(2px)}
+.arr svg{width:10px;height:10px;stroke:rgba(255,255,255,.35);fill:none;stroke-width:2.5}
 
 /* ===== FOOTER ===== */
-.foot{
-  margin-top:36px;
-  font-size:.6rem;color:#ccc;
-  letter-spacing:1.5px;text-transform:uppercase;
-  animation:up .4s ease .6s both;
+.ft{
+  margin-top:24px;
+  font-size:.55rem;color:rgba(255,255,255,.2);
+  letter-spacing:2px;text-transform:uppercase;
+  animation:fadeUp .4s ease .68s both;
 }
 
 /* ===== RESPONSIVE ===== */
 @media(max-width:420px){
-  body{padding:36px 0}
-  .page{padding:0 22px}
-  .avatar{width:88px;height:88px;margin-bottom:20px}
-  .name{font-size:1.4rem}
-  .divider{margin-bottom:26px}
-  .btn{padding:24px 12px 18px;border-radius:18px}
-  .ico{width:46px;height:46px;border-radius:14px}
-  .btn .label{font-size:.88rem}
-  .ig{padding:16px 18px;border-radius:14px}
-  .ig-ico{width:40px;height:40px;border-radius:11px}
+  .card{padding:32px 22px 26px;border-radius:24px}
+  .avatar{width:76px;height:76px;margin-bottom:16px}
+  .name{font-size:1.3rem}
+  .line{margin:14px auto 22px}
+  .b{padding:20px 10px 16px;border-radius:16px}
+  .b .ic{width:44px;height:44px}
+  .b .ic svg{width:20px;height:20px}
+  .b .lbl{font-size:.84rem}
+  .ig{padding:14px 16px;border-radius:14px}
+  .ig-ic{width:38px;height:38px;border-radius:11px}
 }
 @media(max-width:360px){
-  .page{padding:0 18px}
-  .avatar{width:76px;height:76px}
-  .name{font-size:1.25rem}
+  .page{padding:16px}
+  .card{padding:28px 18px 22px;border-radius:22px}
+  .avatar{width:68px;height:68px}
+  .name{font-size:1.15rem}
   .btns{gap:10px}
-  .btn{padding:20px 10px 16px;border-radius:16px}
-  .ico{width:42px;height:42px;border-radius:12px}
-  .ig{gap:12px;padding:14px 16px}
+  .b{padding:18px 8px 14px;border-radius:14px}
+  .b .ic{width:40px;height:40px}
+  .b .lbl{font-size:.8rem}
+  .ig{gap:10px;padding:12px 14px;border-radius:12px}
+  .ig-ic{width:36px;height:36px;border-radius:10px}
 }
+
+/* ===== SUBTLE AMBIENT ANIMATION ===== */
+@keyframes breathe{0%,100%{opacity:.08}50%{opacity:.12}}
+.card::before{
+  content:'';position:absolute;
+  top:-1px;left:20%;right:20%;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.3),transparent);
+  border-radius:1px;
+  animation:breathe 4s ease-in-out infinite;
+}
+.card{position:relative;overflow:hidden}
 </style>
 </head>
 <body>
 
+<div class="bg"></div>
+
 <div class="page">
+  <div class="card">
 
-  <div class="avatar">
-    <img src="https://ugc.production.linktr.ee/y5ylGyXTtaFf3ebFkIQC_CmrdAYCbL3KPD5Re?io=true&size=avatar-v3_0" alt="CMD Prevaler" width="100" height="100">
-  </div>
-
-  <h1 class="name">CMD Prevaler</h1>
-  <p class="tagline">Centro Médico</p>
-  <div class="divider"></div>
-
-  <div class="btns">
-    <a href="https://wa.me/15855222431" class="btn" target="_blank" rel="noopener">
-      <div class="ico wa">
-        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.832-1.438A9.955 9.955 0 0 0 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg>
-      </div>
-      <div class="label">Escribir</div>
-      <div class="meta">Mensaje directo</div>
-    </a>
-    <a href="tel:+15855222431" class="btn">
-      <div class="ico ph">
-        <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-      </div>
-      <div class="label">Llamar</div>
-      <div class="meta">+1 (585) 522-2431</div>
-    </a>
-  </div>
-
-  <a href="https://www.instagram.com/clinicaprevaler" class="ig" target="_blank" rel="noopener">
-    <div class="ig-ico">
-      <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.2" fill="#fff" stroke="none"/></svg>
+    <div class="avatar">
+      <img src="https://ugc.production.linktr.ee/y5ylGyXTtaFf3ebFkIQC_CmrdAYCbL3KPD5Re?io=true&size=avatar-v3_0" alt="CMD Prevaler" width="88" height="88">
     </div>
-    <div class="ig-info">
-      <div class="ig-handle">@clinicaprevaler</div>
-      <div class="ig-sub">Síguenos en Instagram</div>
+
+    <h1 class="name">CMD Prevaler</h1>
+    <p class="sub">Centro Médico</p>
+    <div class="line"></div>
+
+    <div class="btns">
+      <a href="https://wa.me/15855222431" class="b" target="_blank" rel="noopener">
+        <div class="ic green">
+          <svg viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.832-1.438A9.955 9.955 0 0 0 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg>
+        </div>
+        <div class="lbl">Escribir</div>
+        <div class="mt">WhatsApp</div>
+      </a>
+      <a href="tel:+15855222431" class="b">
+        <div class="ic navy">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </div>
+        <div class="lbl">Llamar</div>
+        <div class="mt">+1 (585) 522-2431</div>
+      </a>
     </div>
-    <div class="chevron"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-  </a>
 
-  <p class="foot">Prevaler © 2025</p>
+    <a href="https://www.instagram.com/clinicaprevaler" class="ig" target="_blank" rel="noopener">
+      <div class="ig-ic">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.2" fill="#fff" stroke="none"/></svg>
+      </div>
+      <div class="ig-t">
+        <div class="ig-h">@clinicaprevaler</div>
+        <div class="ig-s">Síguenos en Instagram</div>
+      </div>
+      <div class="arr"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    </a>
 
+    <p class="ft">Prevaler © 2025</p>
+
+  </div>
 </div>
 
 </body>
