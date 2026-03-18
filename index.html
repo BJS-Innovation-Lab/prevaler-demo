@@ -4,289 +4,323 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
 <title>Prevaler — Centro Médico | Tu salud, sin esperas</title>
-<meta name="description" content="Prevaler Centro Médico. Más de 20 años cuidando tu salud en Porlamar, Valencia y Maracay. Agenda tu cita hoy.">
-<meta property="og:title" content="Prevaler — Centro Médico">
-<meta property="og:description" content="Tu salud, sin esperas. +20 años, 3 sedes, 32 especialistas.">
-<meta property="og:type" content="website">
+<meta name="description" content="Prevaler Centro Médico. Más de 20 años cuidando tu salud en Porlamar, Valencia y Maracay.">
 <meta name="theme-color" content="#00005c">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;0,800;1,700&display=swap" rel="stylesheet">
 <style>
-/* ===== RESET & BASE ===== */
+/* ===== RESET ===== */
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-body{font-family:'Inter',system-ui,-apple-system,sans-serif;color:#333;background:#fff;overflow-x:hidden;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
-h1,h2,h3,h4{font-family:'Montserrat',sans-serif}
+body{font-family:'Inter',system-ui,sans-serif;color:#1a1a2e;background:#fff;overflow-x:hidden;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;letter-spacing:-.01em}
+h1,h2,h3{font-family:'Playfair Display',Georgia,serif}
+h4,h5,h6{font-family:'Inter',sans-serif}
 a{text-decoration:none;color:inherit}
 button{font-family:'Inter',sans-serif;cursor:pointer;border:none;background:none}
-img{max-width:100%;height:auto;display:block}
-.container{width:100%;max-width:1120px;margin:0 auto;padding:0 24px}
+.container{width:100%;max-width:1140px;margin:0 auto;padding:0 32px}
 
-/* ===== ANIMATIONS ===== */
-.reveal{opacity:0;transform:translateY(28px);transition:opacity .6s cubic-bezier(.22,1,.36,1),transform .6s cubic-bezier(.22,1,.36,1)}
-.reveal.visible{opacity:1;transform:translateY(0)}
-@keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(10px)}}
-@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(255,120,0,.5)}70%{box-shadow:0 0 0 18px rgba(255,120,0,0)}100%{box-shadow:0 0 0 0 rgba(255,120,0,0)}}
-@keyframes fadeSlideIn{from{opacity:0;transform:translateY(-12px)}to{opacity:1;transform:translateY(0)}}
-
-/* ===== GRAIN TEXTURE ===== */
-.grain::before{content:'';position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.05'/%3E%3C/svg%3E");background-size:128px;opacity:.5;pointer-events:none}
-
-/* ===== NAV ===== */
-.nav{position:fixed;top:0;left:0;width:100%;z-index:1000;padding:16px 0;transition:padding .3s,background .3s,box-shadow .3s}
-.nav.scrolled{background:rgba(0,0,90,.94);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);padding:10px 0;box-shadow:0 2px 24px rgba(0,0,0,.2)}
-.nav .container{display:flex;align-items:center;justify-content:space-between;gap:16px}
-.nav-logo{font-family:'Montserrat',sans-serif;font-weight:900;font-size:1.35rem;color:#fff;letter-spacing:3px;flex-shrink:0}
-.nav-links{display:flex;gap:28px;list-style:none;align-items:center}
-.nav-links a{color:rgba(255,255,255,.85);font-size:.88rem;font-weight:500;transition:color .3s;white-space:nowrap}
-.nav-links a:hover{color:#ff7800}
-.nav-cta{display:inline-flex;align-items:center;background:#ff7800;color:#fff;padding:10px 24px;border-radius:50px;font-weight:600;font-size:.85rem;white-space:nowrap;transition:transform .3s,box-shadow .3s}
-.nav-cta:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(255,120,0,.4)}
-.hamburger{display:none;flex-direction:column;gap:5px;padding:8px;z-index:1001}
-.hamburger span{width:22px;height:2px;background:#fff;border-radius:2px;transition:all .3s}
-.hamburger.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
-.hamburger.active span:nth-child(2){opacity:0}
-.hamburger.active span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
-
-/* Mobile menu */
-.mobile-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:998;opacity:0;pointer-events:none;transition:opacity .3s}
-.mobile-overlay.open{opacity:1;pointer-events:all}
-.mobile-menu{position:fixed;top:0;right:-100%;width:min(300px,85vw);height:100vh;height:100dvh;background:#00005c;z-index:999;padding:80px 28px 28px;transition:right .35s ease;overflow-y:auto;display:flex;flex-direction:column;gap:4px}
-.mobile-menu.open{right:0}
-.mobile-menu a{display:block;color:rgba(255,255,255,.9);font-size:1.05rem;font-weight:500;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.08);transition:color .2s}
-.mobile-menu a:hover{color:#ff7800}
-.mobile-menu .mob-cta{display:inline-block;background:#ff7800;color:#fff;text-align:center;padding:14px 28px;border-radius:50px;font-weight:700;margin-top:20px;border:none}
-
-/* ===== HERO ===== */
-.hero{min-height:100vh;min-height:100dvh;background:linear-gradient(160deg,#00005c 0%,#0a0a3e 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:120px 24px 60px;text-align:center}
-.hero-content{position:relative;z-index:1;max-width:680px;width:100%}
-.hero-badge{display:inline-block;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);padding:8px 20px;border-radius:50px;color:rgba(255,255,255,.75);font-size:.78rem;font-weight:500;margin-bottom:28px;letter-spacing:1.5px}
-.hero h1{font-size:clamp(2.6rem,7vw,4.8rem);font-weight:900;color:#fff;letter-spacing:clamp(4px,1.5vw,10px);margin-bottom:12px;line-height:1.05}
-.hero .tagline{font-size:clamp(1rem,2.5vw,1.45rem);color:rgba(255,255,255,.7);font-weight:400;margin-bottom:44px}
-
-/* Search bar */
-.search-bar{display:flex;background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 16px 48px rgba(0,0,0,.25);max-width:580px;margin:0 auto 32px;width:100%}
-.search-bar select{flex:1;border:none;padding:16px 18px;font-size:.92rem;font-family:'Inter',sans-serif;outline:none;color:#333;background:#fff;cursor:pointer;min-width:0;-webkit-appearance:none;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23999' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center}
-.search-bar select+select{border-left:1px solid #eee}
-.search-bar .btn-agendar{background:#ff7800;color:#fff;font-weight:600;padding:16px 28px;white-space:nowrap;transition:background .3s;font-size:.92rem;flex-shrink:0}
-.search-bar .btn-agendar:hover{background:#e66d00}
-
-/* Insurance */
-.insurance-row{display:flex;align-items:center;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:12px;opacity:.45}
-.insurance-row span{color:rgba(255,255,255,.55);font-size:.7rem;font-weight:600;letter-spacing:1.5px;text-transform:uppercase}
-.insurance-logo{padding:6px 14px;background:rgba(255,255,255,.1);border-radius:6px;font-size:.6rem;color:rgba(255,255,255,.45);font-weight:600;white-space:nowrap}
-
-/* Scroll indicator */
-.scroll-indicator{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);z-index:2;animation:bounce 2s infinite}
-.scroll-indicator svg{width:26px;height:26px;stroke:rgba(255,255,255,.35);fill:none;stroke-width:2}
-
-/* ===== STATS ===== */
-.stats{padding:72px 0;background:#fff}
-.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;text-align:center}
-.stat-item h3{font-size:clamp(1.8rem,4vw,3rem);font-weight:900;color:#00005c;margin-bottom:6px;line-height:1.1}
-.stat-item p{color:#666;font-size:.85rem;font-weight:500}
-
-/* ===== SECTION COMMON ===== */
-.section-label{text-align:center;color:#504c6a;font-size:.75rem;font-weight:600;letter-spacing:3px;text-transform:uppercase;margin-bottom:10px}
-.section-title{text-align:center;font-size:clamp(1.7rem,3.5vw,2.5rem);font-weight:900;color:#00005c;margin-bottom:48px;line-height:1.2}
-
-/* ===== SEDES ===== */
-.sedes{padding:88px 0;background:#f8f9fa}
-.sedes-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-.sede-card{background:#fff;border-radius:18px;overflow:hidden;transition:transform .4s ease,box-shadow .4s ease}
-.sede-card:hover{transform:translateY(-6px);box-shadow:0 20px 48px rgba(0,0,92,.1)}
-.sede-img{height:180px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
-.sede-img.porlamar{background:linear-gradient(135deg,#00005c,#1a1a6e)}
-.sede-img.valencia{background:linear-gradient(135deg,#0a0a3e,#2a1a5e)}
-.sede-img.maracay{background:linear-gradient(135deg,#1a0a4e,#00005c)}
-.sede-img span{color:rgba(255,255,255,.25);font-size:3.5rem;transition:transform .5s}
-.sede-card:hover .sede-img span{transform:scale(1.08)}
-.sede-body{padding:24px}
-.sede-body h3{font-size:1.1rem;font-weight:800;color:#00005c;margin-bottom:12px}
-.sede-info{color:#555;font-size:.84rem;line-height:1.9;margin-bottom:18px}
-.sede-info strong{color:#333}
-.btn-whatsapp{display:inline-flex;align-items:center;gap:8px;background:#25d366;color:#fff;padding:11px 22px;border-radius:50px;font-weight:600;font-size:.84rem;transition:transform .3s,box-shadow .3s}
-.btn-whatsapp:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(37,211,102,.3)}
-
-/* ===== ESPECIALIDADES ===== */
-.especialidades{padding:88px 0;background:#fff}
-.esp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.esp-card{background:#f8f9fa;border-radius:14px;padding:28px 20px;text-align:center;cursor:pointer;transition:all .25s ease;border:2px solid transparent;user-select:none;-webkit-tap-highlight-color:transparent}
-.esp-card:hover,.esp-card.active{border-color:#ff7800;background:#fff;box-shadow:0 8px 32px rgba(0,0,92,.07)}
-.esp-card .icon{font-size:2.2rem;margin-bottom:10px;display:block}
-.esp-card h3{font-size:.95rem;font-weight:700;color:#00005c;margin-bottom:4px}
-.esp-card p{font-size:.78rem;color:#666}
-.esp-detail{display:none;grid-column:1/-1;background:#fff;border-radius:14px;padding:28px;box-shadow:0 8px 32px rgba(0,0,92,.07);border:1px solid #eee;animation:fadeSlideIn .35s ease}
-.esp-detail.show{display:block}
-.esp-detail h4{font-size:1.1rem;color:#00005c;margin-bottom:16px}
-.doc-row{display:flex;gap:16px;align-items:center;padding:12px 0;border-bottom:1px solid #f0f0f0}
-.doc-row:last-of-type{border:none}
-.doc-avatar{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#00005c,#504c6a);display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.1rem;flex-shrink:0}
-.doc-info .name{display:block;font-weight:600;color:#333;font-size:.92rem}
-.doc-info .spec{display:block;font-size:.82rem;color:#666}
-.btn-primary{display:inline-block;background:#ff7800;color:#fff;padding:12px 28px;border-radius:50px;font-weight:600;font-size:.88rem;margin-top:16px;transition:transform .3s,box-shadow .3s}
-.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(255,120,0,.3)}
-
-/* ===== EQUIPO ===== */
-.equipo{padding:88px 0;background:#00005c;overflow:hidden;position:relative}
-.equipo .section-label{color:rgba(255,255,255,.45)}
-.equipo .section-title{color:#fff}
-.carousel-wrapper{position:relative;overflow:hidden;-webkit-overflow-scrolling:touch}
-.carousel-track{display:flex;gap:20px;transition:transform .45s cubic-bezier(.25,.46,.45,.94);padding:4px 0;touch-action:pan-y}
-.doctor-card{width:260px;min-width:260px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:18px;overflow:hidden;flex-shrink:0;transition:transform .3s,box-shadow .3s}
-.doctor-card:hover{transform:translateY(-5px);box-shadow:0 16px 40px rgba(0,0,0,.25)}
-.doctor-photo{height:180px;display:flex;align-items:center;justify-content:center;font-size:3.5rem}
-.doctor-photo.d1{background:linear-gradient(135deg,#1a1a6e,#2a2a8e)}
-.doctor-photo.d2{background:linear-gradient(135deg,#2a1a5e,#3a2a7e)}
-.doctor-photo.d3{background:linear-gradient(135deg,#0a2a5e,#1a3a7e)}
-.doctor-photo.d4{background:linear-gradient(135deg,#1a0a4e,#2a1a6e)}
-.doctor-photo.d5{background:linear-gradient(135deg,#0a1a5e,#1a2a7e)}
-.doctor-photo.d6{background:linear-gradient(135deg,#2a0a4e,#3a1a6e)}
-.doctor-photo span{color:rgba(255,255,255,.18)}
-.doctor-card-body{padding:20px}
-.doctor-card-body h4{color:#fff;font-size:.95rem;margin-bottom:3px}
-.doctor-card-body .specialty{color:rgba(255,255,255,.55);font-size:.82rem;margin-bottom:6px}
-.doctor-card-body .years{color:#ff7800;font-size:.78rem;font-weight:600}
-.carousel-nav{display:flex;justify-content:center;gap:12px;margin-top:28px}
-.carousel-btn{width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);color:#fff;font-size:1.1rem;display:flex;align-items:center;justify-content:center;transition:background .3s}
-.carousel-btn:hover{background:rgba(255,255,255,.2)}
-
-/* ===== TESTIMONIOS ===== */
-.testimonios{padding:88px 0;background:#f8f9fa;overflow:hidden}
-.test-track{display:flex;gap:20px;padding:4px 0;touch-action:pan-y}
-.test-card{width:320px;min-width:280px;max-width:340px;background:#fff;border:1px solid rgba(0,0,0,.06);border-radius:18px;padding:28px;flex-shrink:0;transition:transform .3s;box-shadow:0 4px 20px rgba(0,0,92,.04)}
-.test-card:hover{transform:translateY(-3px)}
-.test-stars{color:#ff7800;font-size:.95rem;margin-bottom:14px;letter-spacing:2px}
-.test-quote{color:#444;font-size:.9rem;line-height:1.7;margin-bottom:18px;font-style:italic}
-.test-author{display:flex;align-items:center;gap:12px}
-.test-avatar{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#00005c,#504c6a);display:flex;align-items:center;justify-content:center;color:#fff;font-size:.8rem;font-weight:700;flex-shrink:0}
-.test-name{font-weight:600;color:#333;font-size:.88rem}
-.test-loc{font-size:.78rem;color:#666}
-
-/* ===== CTA FINAL ===== */
-.cta-final{padding:88px 0;background:linear-gradient(160deg,#00005c,#0a0a3e);text-align:center;position:relative;overflow:hidden}
-.cta-final .container{position:relative;z-index:1}
-.cta-final h2{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:900;color:#fff;margin-bottom:16px}
-.cta-final p{color:rgba(255,255,255,.65);font-size:1.05rem;margin-bottom:36px;max-width:480px;margin-left:auto;margin-right:auto;line-height:1.6}
-.btn-pulse{display:inline-block;background:#ff7800;color:#fff;padding:16px 44px;border-radius:50px;font-weight:700;font-size:1.05rem;animation:pulse 2.5s infinite;transition:transform .3s}
-.btn-pulse:hover{transform:scale(1.05)}
-.cta-phones{display:flex;justify-content:center;gap:36px;margin-top:44px;flex-wrap:wrap}
-.cta-phone{color:rgba(255,255,255,.75);font-size:.88rem}
-.cta-phone strong{display:block;color:#fff;font-size:.95rem;margin-bottom:4px}
-.map-embed{margin-top:48px;height:280px;background:linear-gradient(135deg,#1a1a2e,#0a0a3e);border-radius:18px;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.18);font-size:.9rem;border:1px solid rgba(255,255,255,.08)}
-
-/* ===== FOOTER ===== */
-footer{background:#0d0d1a;padding:56px 0 28px}
-.footer-grid{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:36px;margin-bottom:36px}
-.footer-logo{font-family:'Montserrat',sans-serif;font-weight:900;font-size:1.2rem;color:#fff;letter-spacing:3px;margin-bottom:10px}
-.footer-brand p{color:rgba(255,255,255,.4);font-size:.82rem;line-height:1.7}
-.footer-social{display:flex;gap:10px;margin-top:18px}
-.footer-social a{width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.5);font-size:1rem;transition:background .3s,color .3s}
-.footer-social a:hover{background:#ff7800;color:#fff}
-.footer-links h4{color:#fff;font-size:.8rem;font-weight:700;margin-bottom:14px;text-transform:uppercase;letter-spacing:1px}
-.footer-links a{display:block;color:rgba(255,255,255,.4);font-size:.82rem;padding:4px 0;transition:color .3s}
-.footer-links a:hover{color:#ff7800}
-.footer-bottom{border-top:1px solid rgba(255,255,255,.06);padding-top:20px;text-align:center;color:rgba(255,255,255,.25);font-size:.75rem}
-
-/* ===== STICKY BAR ===== */
-.sticky-bar{position:fixed;bottom:-80px;left:0;width:100%;background:rgba(0,0,90,.94);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);z-index:900;padding:10px 0;transition:bottom .35s ease;box-shadow:0 -4px 24px rgba(0,0,0,.2)}
-.sticky-bar.show{bottom:0}
-.sticky-bar .container{display:flex;align-items:center;justify-content:space-between;gap:12px}
-.sticky-logo{font-family:'Montserrat',sans-serif;font-weight:900;color:#fff;letter-spacing:2px;font-size:.95rem}
-.sticky-phone{color:rgba(255,255,255,.6);font-size:.82rem;white-space:nowrap}
-.sticky-bar .nav-cta{padding:9px 20px;font-size:.8rem}
-
-/* ==================== RESPONSIVE ==================== */
-
-/* Tablet landscape */
-@media(max-width:1024px){
-  .sedes-grid{gap:20px}
-  .doctor-card{width:240px;min-width:240px}
+/* ===== DESIGN TOKENS ===== */
+:root{
+  --navy:#00005c;--navy-deep:#050528;--navy-light:#0a0a4e;
+  --orange:#ff7800;--orange-hover:#ff8c1a;--orange-glow:rgba(255,120,0,.25);
+  --gold:#c9a84c;--gold-light:#e8d5a0;
+  --surface:#fafbfc;--surface-warm:#f7f6f3;
+  --text-primary:#1a1a2e;--text-secondary:#5a5a72;--text-muted:#8a8aa0;
+  --glass:rgba(255,255,255,.06);--glass-border:rgba(255,255,255,.1);
+  --glass-light:rgba(255,255,255,.7);
+  --shadow-sm:0 2px 8px rgba(0,0,40,.04);
+  --shadow-md:0 8px 32px rgba(0,0,40,.08);
+  --shadow-lg:0 20px 60px rgba(0,0,40,.12);
+  --shadow-glow:0 8px 40px var(--orange-glow);
+  --radius:16px;--radius-lg:24px;--radius-full:100px;
+  --transition:all .35s cubic-bezier(.25,.46,.45,.94);
 }
 
-/* Tablet portrait */
+/* ===== ANIMATIONS ===== */
+.reveal{opacity:0;transform:translateY(32px);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-left{opacity:0;transform:translateX(-40px);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1)}
+.reveal-left.visible{opacity:1;transform:translateX(0)}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
+@keyframes pulse-ring{0%{box-shadow:0 0 0 0 rgba(255,120,0,.45)}70%{box-shadow:0 0 0 20px rgba(255,120,0,0)}100%{box-shadow:0 0 0 0 rgba(255,120,0,0)}}
+@keyframes fade-up{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+@keyframes glow-line{0%{left:-30%}100%{left:130%}}
+
+/* ===== GRAIN ===== */
+.grain::after{content:'';position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.035'/%3E%3C/svg%3E");background-size:256px;pointer-events:none;z-index:0}
+
+/* ===== DECORATIVE SHAPES ===== */
+.deco-circle{position:absolute;border-radius:50%;pointer-events:none}
+.deco-gradient{background:radial-gradient(circle,rgba(255,120,0,.08) 0%,transparent 70%)}
+
+/* ===== NAV ===== */
+.nav{position:fixed;top:0;left:0;width:100%;z-index:1000;padding:20px 0;transition:padding .4s,background .4s,box-shadow .4s}
+.nav.scrolled{background:rgba(5,5,40,.92);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);padding:12px 0;box-shadow:0 1px 0 rgba(255,255,255,.06)}
+.nav .container{display:flex;align-items:center;justify-content:space-between;gap:20px}
+.nav-logo{font-family:'Playfair Display',serif;font-weight:800;font-size:1.3rem;color:#fff;letter-spacing:4px}
+.nav-links{display:flex;gap:32px;list-style:none;align-items:center}
+.nav-links a{color:rgba(255,255,255,.7);font-size:.82rem;font-weight:500;transition:var(--transition);letter-spacing:.5px;text-transform:uppercase;position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--orange);transition:width .3s}
+.nav-links a:hover{color:#fff}
+.nav-links a:hover::after{width:100%}
+.nav-cta{display:inline-flex;align-items:center;gap:8px;background:transparent;color:#fff;padding:10px 28px;border-radius:var(--radius-full);font-weight:600;font-size:.8rem;letter-spacing:.5px;text-transform:uppercase;border:1px solid rgba(255,255,255,.25);transition:var(--transition)}
+.nav-cta:hover{background:var(--orange);border-color:var(--orange);box-shadow:var(--shadow-glow)}
+.hamburger{display:none;flex-direction:column;gap:6px;padding:8px;z-index:1001}
+.hamburger span{width:24px;height:1.5px;background:#fff;border-radius:2px;transition:all .3s}
+.hamburger.active span:nth-child(1){transform:rotate(45deg) translate(5px,5.5px)}
+.hamburger.active span:nth-child(2){opacity:0}
+.hamburger.active span:nth-child(3){transform:rotate(-45deg) translate(5px,-5.5px)}
+
+/* Mobile menu */
+.mobile-overlay{position:fixed;inset:0;background:rgba(0,0,20,.6);backdrop-filter:blur(4px);z-index:998;opacity:0;pointer-events:none;transition:opacity .3s}
+.mobile-overlay.open{opacity:1;pointer-events:all}
+.mobile-menu{position:fixed;top:0;right:-100%;width:min(320px,85vw);height:100vh;height:100dvh;background:var(--navy-deep);z-index:999;padding:100px 36px 36px;transition:right .4s cubic-bezier(.25,.46,.45,.94);overflow-y:auto;display:flex;flex-direction:column;gap:4px;border-left:1px solid rgba(255,255,255,.06)}
+.mobile-menu.open{right:0}
+.mobile-menu a{display:block;color:rgba(255,255,255,.75);font-size:1rem;font-weight:500;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.05);letter-spacing:.5px;transition:color .2s}
+.mobile-menu a:hover{color:var(--orange)}
+.mob-cta{display:block!important;background:var(--orange)!important;color:#fff!important;text-align:center;padding:16px 28px!important;border-radius:var(--radius-full)!important;font-weight:700!important;margin-top:28px!important;border:none!important;letter-spacing:1px}
+
+/* ===== HERO ===== */
+.hero{min-height:100vh;min-height:100dvh;background:linear-gradient(170deg,var(--navy-deep) 0%,var(--navy) 40%,var(--navy-light) 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:140px 32px 80px;text-align:center}
+.hero-orb{position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none;opacity:.4}
+.hero-orb.o1{width:500px;height:500px;background:radial-gradient(circle,rgba(255,120,0,.15),transparent);top:-10%;right:-10%}
+.hero-orb.o2{width:400px;height:400px;background:radial-gradient(circle,rgba(100,100,255,.1),transparent);bottom:-15%;left:-5%}
+.hero-orb.o3{width:200px;height:200px;background:radial-gradient(circle,rgba(201,168,76,.1),transparent);top:30%;left:10%}
+.hero-content{position:relative;z-index:1;max-width:720px;width:100%}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;background:var(--glass);border:1px solid var(--glass-border);padding:10px 24px;border-radius:var(--radius-full);color:var(--gold-light);font-size:.72rem;font-weight:600;margin-bottom:36px;letter-spacing:2.5px;text-transform:uppercase;backdrop-filter:blur(10px)}
+.hero-eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--gold);animation:pulse-ring 2s infinite}
+.hero h1{font-size:clamp(3rem,8vw,5.5rem);font-weight:800;color:#fff;letter-spacing:clamp(6px,2vw,14px);margin-bottom:16px;line-height:1}
+.hero h1 .accent{display:block;font-size:clamp(1rem,2.5vw,1.4rem);font-family:'Inter',sans-serif;font-weight:300;letter-spacing:clamp(8px,3vw,18px);color:rgba(255,255,255,.45);margin-top:8px;text-transform:uppercase}
+.hero .tagline{font-size:clamp(1.05rem,2vw,1.3rem);color:rgba(255,255,255,.5);font-weight:300;margin-bottom:52px;letter-spacing:.5px}
+.hero-line{width:48px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:0 auto 48px}
+
+/* Search bar - glass premium */
+.search-bar{display:flex;background:rgba(255,255,255,.95);backdrop-filter:blur(20px);border-radius:var(--radius);overflow:hidden;box-shadow:0 24px 64px rgba(0,0,0,.25),0 0 0 1px rgba(255,255,255,.1);max-width:560px;margin:0 auto 40px;width:100%}
+.search-bar select{flex:1;border:none;padding:18px 20px;font-size:.88rem;font-family:'Inter',sans-serif;outline:none;color:var(--text-primary);background:transparent;cursor:pointer;min-width:0;-webkit-appearance:none;appearance:none;font-weight:500;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 5 5-5' stroke='%23999' stroke-width='1.2' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center}
+.search-bar select+select{border-left:1px solid #eee}
+.search-bar .btn-agendar{background:var(--navy);color:#fff;font-weight:600;padding:18px 32px;white-space:nowrap;transition:var(--transition);font-size:.85rem;flex-shrink:0;letter-spacing:.5px;text-transform:uppercase}
+.search-bar .btn-agendar:hover{background:var(--orange)}
+
+/* Trust badges */
+.trust-row{display:flex;align-items:center;gap:20px;justify-content:center;flex-wrap:wrap;opacity:.5;transition:opacity .5s}
+.trust-row:hover{opacity:.7}
+.trust-label{color:rgba(255,255,255,.4);font-size:.65rem;font-weight:600;letter-spacing:2px;text-transform:uppercase}
+.trust-badge{padding:7px 16px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:8px;font-size:.65rem;color:rgba(255,255,255,.4);font-weight:600;letter-spacing:.5px}
+
+/* Scroll indicator */
+.scroll-hint{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);z-index:2;display:flex;flex-direction:column;align-items:center;gap:6px;color:rgba(255,255,255,.25);font-size:.6rem;letter-spacing:3px;text-transform:uppercase;animation:float 3s ease-in-out infinite}
+.scroll-line{width:1px;height:32px;background:linear-gradient(to bottom,rgba(255,255,255,.3),transparent);border-radius:1px}
+
+/* ===== STATS ===== */
+.stats{padding:80px 0;background:var(--surface);position:relative}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
+.stat-item{text-align:center;padding:32px 16px;position:relative}
+.stat-item+.stat-item::before{content:'';position:absolute;left:0;top:20%;height:60%;width:1px;background:linear-gradient(to bottom,transparent,rgba(0,0,40,.08),transparent)}
+.stat-number{font-family:'Playfair Display',serif;font-size:clamp(2rem,4.5vw,3.2rem);font-weight:800;color:var(--navy);margin-bottom:4px;line-height:1}
+.stat-label{color:var(--text-muted);font-size:.78rem;font-weight:500;letter-spacing:.5px}
+
+/* ===== SECTION HEADERS ===== */
+.section-eyebrow{text-align:center;color:var(--orange);font-size:.68rem;font-weight:700;letter-spacing:4px;text-transform:uppercase;margin-bottom:12px}
+.section-heading{text-align:center;font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:800;color:var(--navy);margin-bottom:16px;line-height:1.15}
+.section-sub{text-align:center;color:var(--text-secondary);font-size:.95rem;font-weight:400;max-width:520px;margin:0 auto 56px;line-height:1.7}
+
+/* ===== SEDES ===== */
+.sedes{padding:100px 0;background:#fff;position:relative;overflow:hidden}
+.sedes-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.sede-card{background:#fff;border-radius:var(--radius-lg);overflow:hidden;transition:var(--transition);border:1px solid rgba(0,0,40,.06);position:relative}
+.sede-card:hover{transform:translateY(-8px);box-shadow:var(--shadow-lg)}
+.sede-card::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--navy),var(--orange));opacity:0;transition:opacity .3s}
+.sede-card:hover::after{opacity:1}
+.sede-visual{height:200px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.sede-visual.porlamar{background:linear-gradient(135deg,#00005c 0%,#0a1a6e 100%)}
+.sede-visual.valencia{background:linear-gradient(135deg,#0a0a3e 0%,#1a1050 100%)}
+.sede-visual.maracay{background:linear-gradient(135deg,#0a0040 0%,#00005c 100%)}
+.sede-icon{width:64px;height:64px;background:rgba(255,255,255,.08);border-radius:16px;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.1)}
+.sede-icon svg{width:28px;height:28px;stroke:rgba(255,255,255,.7);fill:none;stroke-width:1.5}
+.sede-visual .sede-label{position:absolute;bottom:16px;left:20px;font-size:.65rem;color:rgba(255,255,255,.35);font-weight:600;letter-spacing:2px;text-transform:uppercase}
+.sede-body{padding:28px}
+.sede-body h3{font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:700;color:var(--navy);margin-bottom:16px}
+.sede-detail{display:flex;align-items:flex-start;gap:10px;margin-bottom:10px;color:var(--text-secondary);font-size:.84rem;line-height:1.5}
+.sede-detail svg{width:16px;height:16px;stroke:var(--orange);fill:none;stroke-width:1.8;flex-shrink:0;margin-top:2px}
+.btn-wa{display:inline-flex;align-items:center;gap:8px;background:var(--navy);color:#fff;padding:12px 24px;border-radius:var(--radius-full);font-weight:600;font-size:.8rem;letter-spacing:.3px;transition:var(--transition);margin-top:8px}
+.btn-wa:hover{background:var(--orange);box-shadow:var(--shadow-glow)}
+.btn-wa svg{width:16px;height:16px;fill:#fff}
+
+/* ===== ESPECIALIDADES ===== */
+.especialidades{padding:100px 0;background:var(--surface-warm);position:relative}
+.esp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.esp-card{background:#fff;border-radius:var(--radius);padding:32px 24px;text-align:center;cursor:pointer;transition:var(--transition);border:1px solid transparent;user-select:none;-webkit-tap-highlight-color:transparent;position:relative;overflow:hidden}
+.esp-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--orange);transform:scaleX(0);transition:transform .3s;transform-origin:center}
+.esp-card:hover::before,.esp-card.active::before{transform:scaleX(1)}
+.esp-card:hover,.esp-card.active{border-color:rgba(0,0,92,.08);box-shadow:var(--shadow-md);transform:translateY(-4px)}
+.esp-icon-wrap{width:56px;height:56px;margin:0 auto 16px;background:linear-gradient(135deg,var(--navy),var(--navy-light));border-radius:14px;display:flex;align-items:center;justify-content:center;transition:var(--transition)}
+.esp-card:hover .esp-icon-wrap,.esp-card.active .esp-icon-wrap{background:linear-gradient(135deg,var(--orange),#ff9a3e)}
+.esp-icon-wrap svg{width:24px;height:24px;stroke:#fff;fill:none;stroke-width:1.5}
+.esp-card h3{font-family:'Inter',sans-serif;font-size:.88rem;font-weight:700;color:var(--navy);margin-bottom:4px;letter-spacing:.3px}
+.esp-card p{font-size:.76rem;color:var(--text-muted)}
+.esp-detail{display:none;grid-column:1/-1;background:#fff;border-radius:var(--radius);padding:32px;box-shadow:var(--shadow-md);border:1px solid rgba(0,0,40,.06);animation:fade-up .35s ease}
+.esp-detail.show{display:block}
+.esp-detail h4{font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--navy);margin-bottom:20px}
+.doc-row{display:flex;gap:16px;align-items:center;padding:14px 0;border-bottom:1px solid var(--surface)}
+.doc-row:last-of-type{border:none}
+.doc-avatar{width:48px;height:48px;border-radius:14px;background:linear-gradient(135deg,var(--navy),var(--navy-light));display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.doc-avatar svg{width:22px;height:22px;stroke:rgba(255,255,255,.7);fill:none;stroke-width:1.5}
+.doc-info .name{display:block;font-weight:600;color:var(--text-primary);font-size:.9rem}
+.doc-info .spec{display:block;font-size:.8rem;color:var(--text-muted)}
+.btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--orange);color:#fff;padding:13px 28px;border-radius:var(--radius-full);font-weight:600;font-size:.84rem;margin-top:20px;transition:var(--transition);letter-spacing:.3px}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:var(--shadow-glow)}
+
+/* ===== EQUIPO ===== */
+.equipo{padding:100px 0;background:linear-gradient(170deg,var(--navy-deep),var(--navy));overflow:hidden;position:relative}
+.equipo .section-eyebrow{color:var(--gold)}
+.equipo .section-heading{color:#fff}
+.equipo .section-sub{color:rgba(255,255,255,.45)}
+.carousel-wrapper{position:relative;overflow:hidden;-webkit-overflow-scrolling:touch}
+.carousel-track{display:flex;gap:20px;transition:transform .5s cubic-bezier(.25,.46,.45,.94);padding:4px;touch-action:pan-y}
+.doctor-card{width:280px;min-width:280px;background:var(--glass);border:1px solid var(--glass-border);border-radius:var(--radius-lg);overflow:hidden;flex-shrink:0;transition:var(--transition);backdrop-filter:blur(10px)}
+.doctor-card:hover{transform:translateY(-6px);box-shadow:0 20px 48px rgba(0,0,0,.3);border-color:rgba(255,255,255,.18)}
+.doctor-photo{height:220px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.doctor-photo svg{width:48px;height:48px;stroke:rgba(255,255,255,.12);fill:none;stroke-width:1}
+.doc-gradient-1{background:linear-gradient(135deg,#0a1050,#1a2080)}
+.doc-gradient-2{background:linear-gradient(135deg,#1a0a40,#2a1a60)}
+.doc-gradient-3{background:linear-gradient(135deg,#0a2050,#1a3070)}
+.doc-gradient-4{background:linear-gradient(135deg,#100840,#201060)}
+.doc-gradient-5{background:linear-gradient(135deg,#0a1848,#1a2868)}
+.doc-gradient-6{background:linear-gradient(135deg,#180840,#281060)}
+.doctor-card-body{padding:24px}
+.doctor-card-body h4{color:#fff;font-size:.95rem;font-weight:600;margin-bottom:4px}
+.doctor-card-body .specialty{color:rgba(255,255,255,.45);font-size:.82rem;margin-bottom:8px;font-weight:400}
+.doctor-card-body .years{color:var(--gold);font-size:.75rem;font-weight:600;letter-spacing:.5px}
+.carousel-nav{display:flex;justify-content:center;gap:12px;margin-top:32px}
+.carousel-btn{width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:#fff;font-size:1.1rem;display:flex;align-items:center;justify-content:center;transition:var(--transition);backdrop-filter:blur(10px)}
+.carousel-btn:hover{background:rgba(255,255,255,.15);border-color:rgba(255,255,255,.2)}
+
+/* ===== TESTIMONIOS ===== */
+.testimonios{padding:100px 0;background:#fff;overflow:hidden;position:relative}
+.test-track{display:flex;gap:20px;padding:4px;touch-action:pan-y}
+.test-card{width:340px;min-width:300px;background:#fff;border:1px solid rgba(0,0,40,.06);border-radius:var(--radius-lg);padding:32px;flex-shrink:0;transition:var(--transition);position:relative}
+.test-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-md)}
+.test-card::before{content:'"';position:absolute;top:20px;right:24px;font-family:'Playfair Display',serif;font-size:4rem;line-height:1;color:rgba(0,0,92,.04);font-weight:800}
+.test-stars{display:flex;gap:2px;margin-bottom:16px}
+.test-stars svg{width:14px;height:14px;fill:var(--orange);stroke:none}
+.test-quote{color:var(--text-secondary);font-size:.88rem;line-height:1.8;margin-bottom:20px;font-style:italic;font-weight:400}
+.test-author{display:flex;align-items:center;gap:12px}
+.test-avatar{width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,var(--navy),var(--navy-light));display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.7);font-size:.75rem;font-weight:700;flex-shrink:0;letter-spacing:1px}
+.test-name{font-weight:600;color:var(--text-primary);font-size:.85rem}
+.test-loc{font-size:.75rem;color:var(--text-muted)}
+
+/* ===== CTA ===== */
+.cta-final{padding:100px 0;background:linear-gradient(170deg,var(--navy-deep),var(--navy));text-align:center;position:relative;overflow:hidden}
+.cta-final .container{position:relative;z-index:1}
+.cta-final h2{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3rem);font-weight:800;color:#fff;margin-bottom:16px}
+.cta-final p{color:rgba(255,255,255,.5);font-size:1rem;margin-bottom:40px;max-width:460px;margin-left:auto;margin-right:auto;line-height:1.7;font-weight:300}
+.btn-cta-main{display:inline-flex;align-items:center;gap:10px;background:var(--orange);color:#fff;padding:18px 48px;border-radius:var(--radius-full);font-weight:700;font-size:1rem;letter-spacing:.5px;animation:pulse-ring 2.5s infinite;transition:var(--transition)}
+.btn-cta-main:hover{transform:scale(1.04);background:var(--orange-hover)}
+.btn-cta-main svg{width:18px;height:18px;fill:#fff}
+.cta-phones{display:flex;justify-content:center;gap:40px;margin-top:52px;flex-wrap:wrap}
+.cta-phone{text-align:center}
+.cta-phone strong{display:block;color:rgba(255,255,255,.9);font-size:.85rem;margin-bottom:4px;font-weight:600}
+.cta-phone span{color:rgba(255,255,255,.4);font-size:.85rem;font-weight:400}
+.cta-divider{width:48px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:48px auto 0}
+
+/* ===== FOOTER ===== */
+footer{background:var(--navy-deep);padding:64px 0 28px;border-top:1px solid rgba(255,255,255,.04)}
+.footer-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:40px;margin-bottom:40px}
+.footer-logo{font-family:'Playfair Display',serif;font-weight:800;font-size:1.2rem;color:#fff;letter-spacing:4px;margin-bottom:12px}
+.footer-brand p{color:rgba(255,255,255,.3);font-size:.8rem;line-height:1.8}
+.footer-social{display:flex;gap:10px;margin-top:20px}
+.footer-social a{width:36px;height:36px;border-radius:10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center;transition:var(--transition)}
+.footer-social a:hover{background:var(--orange);border-color:var(--orange)}
+.footer-social a svg{width:16px;height:16px;fill:rgba(255,255,255,.5)}
+.footer-social a:hover svg{fill:#fff}
+.footer-links h4{color:rgba(255,255,255,.7);font-size:.72rem;font-weight:700;margin-bottom:16px;text-transform:uppercase;letter-spacing:2px}
+.footer-links a{display:block;color:rgba(255,255,255,.3);font-size:.8rem;padding:5px 0;transition:color .3s}
+.footer-links a:hover{color:var(--orange)}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.04);padding-top:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.footer-bottom span{color:rgba(255,255,255,.2);font-size:.72rem}
+
+/* ===== FLOATING WA BUTTON (replaces sticky bar) ===== */
+.wa-float{position:fixed;bottom:28px;right:28px;z-index:900;width:56px;height:56px;border-radius:50%;background:#25d366;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,.35);transition:var(--transition);opacity:0;transform:scale(.8);pointer-events:none}
+.wa-float.show{opacity:1;transform:scale(1);pointer-events:all}
+.wa-float:hover{transform:scale(1.08);box-shadow:0 8px 32px rgba(37,211,102,.45)}
+.wa-float svg{width:26px;height:26px;fill:#fff}
+
+/* ==================== RESPONSIVE ==================== */
+@media(max-width:1024px){
+  .sedes-grid{gap:20px}
+  .doctor-card{width:260px;min-width:260px}
+}
 @media(max-width:860px){
-  .nav-links,.nav .nav-cta{display:none}
+  .nav-links,.nav>.container>.nav-cta{display:none}
   .hamburger{display:flex}
   .sedes-grid{grid-template-columns:repeat(2,1fr)}
   .esp-grid{grid-template-columns:repeat(2,1fr)}
-  .stats-grid{grid-template-columns:repeat(2,1fr);gap:20px}
+  .stats-grid{grid-template-columns:repeat(4,1fr)}
   .footer-grid{grid-template-columns:1fr 1fr;gap:28px}
-  .doctor-card{width:230px;min-width:230px}
-  .test-card{width:290px;min-width:260px}
+  .doctor-card{width:240px;min-width:240px}
+  .test-card{width:300px;min-width:260px}
 }
-
-/* Mobile */
 @media(max-width:640px){
   .container{padding:0 20px}
-  .hero{padding:100px 20px 48px;min-height:calc(100vh - 20px);min-height:calc(100dvh - 20px)}
+  .hero{padding:110px 20px 56px}
   .hero h1{letter-spacing:4px}
-  .hero .tagline{margin-bottom:32px;font-size:1rem}
-  .hero-badge{font-size:.72rem;padding:7px 16px}
-  .search-bar{flex-direction:column;border-radius:12px}
-  .search-bar select{border-right:none !important;border-bottom:1px solid #eee;padding:14px 16px;border-left:none}
+  .hero h1 .accent{letter-spacing:6px;font-size:.8rem}
+  .hero-eyebrow{font-size:.65rem;padding:8px 18px}
+  .search-bar{flex-direction:column;border-radius:14px}
+  .search-bar select{border-right:none!important;border-bottom:1px solid #eee;padding:16px 18px}
   .search-bar select+select{border-left:none}
-  .search-bar .btn-agendar{padding:14px 20px}
-  .insurance-row{gap:8px}
-  .insurance-logo{padding:5px 10px;font-size:.55rem}
-  .insurance-row span{font-size:.65rem}
+  .search-bar .btn-agendar{padding:16px 20px}
+  .trust-row{gap:8px}
+  .trust-badge{padding:5px 10px;font-size:.58rem}
   .stats{padding:56px 0}
-  .stats-grid{grid-template-columns:repeat(2,1fr);gap:16px}
-  .stat-item h3{font-size:1.8rem}
-  .stat-item p{font-size:.78rem}
-  .sedes,.especialidades,.equipo,.testimonios,.cta-final{padding:64px 0}
-  .section-title{margin-bottom:36px;font-size:1.6rem}
+  .stats-grid{grid-template-columns:repeat(2,1fr);gap:0}
+  .stat-item{padding:24px 12px}
+  .stat-item:nth-child(3)::before{display:none}
+  .stat-number{font-size:1.8rem}
+  .sedes,.especialidades,.equipo,.testimonios,.cta-final{padding:72px 0}
+  .section-heading{font-size:1.6rem;margin-bottom:12px}
+  .section-sub{margin-bottom:40px;font-size:.88rem}
   .sedes-grid{grid-template-columns:1fr;max-width:400px;margin:0 auto}
-  .sede-img{height:160px}
+  .sede-visual{height:160px}
   .esp-grid{grid-template-columns:repeat(2,1fr);gap:12px}
-  .esp-card{padding:20px 14px}
-  .esp-card .icon{font-size:1.8rem;margin-bottom:8px}
-  .esp-card h3{font-size:.85rem}
-  .esp-card p{font-size:.72rem}
-  .esp-detail{padding:20px}
-  .doctor-card{width:200px;min-width:200px}
-  .doctor-photo{height:150px;font-size:2.8rem}
-  .doctor-card-body{padding:16px}
-  .doctor-card-body h4{font-size:.88rem}
-  .test-card{width:260px;min-width:240px;padding:22px}
-  .test-quote{font-size:.84rem}
+  .esp-card{padding:22px 14px}
+  .esp-icon-wrap{width:48px;height:48px;border-radius:12px;margin-bottom:12px}
+  .esp-card h3{font-size:.82rem}
+  .doctor-card{width:220px;min-width:220px}
+  .doctor-photo{height:170px}
+  .test-card{width:270px;min-width:250px;padding:24px}
   .cta-phones{flex-direction:column;gap:16px;align-items:center}
-  .map-embed{height:200px;margin-top:36px}
-  .footer-grid{grid-template-columns:1fr;gap:24px;text-align:center}
+  .footer-grid{grid-template-columns:1fr;gap:28px;text-align:center}
   .footer-social{justify-content:center}
   .footer-brand p{max-width:320px;margin:0 auto}
-  .sticky-phone{display:none}
-  .sticky-bar .container{justify-content:space-between}
-  .carousel-nav{gap:10px;margin-top:20px}
-  .carousel-btn{width:38px;height:38px;font-size:1rem}
+  .footer-bottom{justify-content:center;text-align:center}
+  .wa-float{bottom:20px;right:20px;width:52px;height:52px}
+  .carousel-btn{width:38px;height:38px;font-size:.95rem}
 }
-
-/* Small mobile */
 @media(max-width:380px){
   .container{padding:0 16px}
-  .hero{padding:88px 16px 40px}
-  .hero h1{letter-spacing:2px;font-size:2.2rem}
-  .hero .tagline{font-size:.92rem}
-  .stats-grid{gap:12px}
-  .stat-item h3{font-size:1.5rem}
-  .esp-grid{grid-template-columns:1fr 1fr;gap:10px}
-  .esp-card{padding:16px 10px}
-  .esp-card .icon{font-size:1.5rem}
-  .esp-card h3{font-size:.8rem}
-  .sede-body{padding:18px}
-  .doctor-card{width:180px;min-width:180px}
-  .doctor-photo{height:130px;font-size:2.4rem}
-  .test-card{width:240px;min-width:220px;padding:18px}
-  .cta-final h2{font-size:1.5rem}
-  .btn-pulse{padding:14px 32px;font-size:.95rem}
+  .hero{padding:96px 16px 44px}
+  .hero h1{font-size:2.4rem;letter-spacing:3px}
+  .hero h1 .accent{font-size:.7rem;letter-spacing:4px}
+  .hero .tagline{font-size:.9rem}
+  .stat-number{font-size:1.5rem}
+  .stat-label{font-size:.7rem}
+  .esp-grid{gap:8px}
+  .esp-card{padding:18px 10px}
+  .esp-icon-wrap{width:42px;height:42px;border-radius:10px}
+  .doctor-card{width:190px;min-width:190px}
+  .doctor-photo{height:140px}
+  .test-card{width:240px;min-width:220px;padding:20px}
+  .btn-cta-main{padding:16px 36px;font-size:.9rem}
 }
 </style>
 </head>
 <body>
 
 <!-- NAV -->
-<nav class="nav" id="mainNav" aria-label="Navegación principal">
+<nav class="nav" id="mainNav">
   <div class="container">
     <a href="#" class="nav-logo">PREVALER</a>
     <ul class="nav-links">
@@ -303,16 +337,20 @@ footer{background:#0d0d1a;padding:56px 0 28px}
 <div class="mobile-menu" id="mobileMenu">
   <a href="#sedes">Sedes</a>
   <a href="#especialidades">Especialidades</a>
-  <a href="#equipo">Equipo</a>
+  <a href="#equipo">Equipo Médico</a>
   <a href="#testimonios">Testimonios</a>
   <a href="#cta" class="mob-cta">Agendar Cita</a>
 </div>
 
 <!-- HERO -->
 <section class="hero grain" id="hero">
+  <div class="hero-orb o1"></div>
+  <div class="hero-orb o2"></div>
+  <div class="hero-orb o3"></div>
   <div class="hero-content">
-    <span class="hero-badge">+20 AÑOS CUIDANDO TU SALUD</span>
-    <h1>PREVALER</h1>
+    <span class="hero-eyebrow"><span class="dot"></span> Más de 20 años de excelencia médica</span>
+    <h1>PREVALER<span class="accent">Centro Médico</span></h1>
+    <div class="hero-line"></div>
     <p class="tagline">Tu salud, sin esperas</p>
     <div class="search-bar">
       <select aria-label="Especialidad">
@@ -332,25 +370,27 @@ footer{background:#0d0d1a;padding:56px 0 28px}
       </select>
       <button class="btn-agendar" onclick="document.getElementById('cta').scrollIntoView({behavior:'smooth'})">Agendar</button>
     </div>
-    <div class="insurance-row">
-      <span>Seguros aliados</span>
-      <div class="insurance-logo">Mercantil</div>
-      <div class="insurance-logo">Qualitas</div>
-      <div class="insurance-logo">Mapfre</div>
-      <div class="insurance-logo">La Previsora</div>
+    <div class="trust-row">
+      <span class="trust-label">Seguros aliados</span>
+      <span class="trust-badge">Mercantil</span>
+      <span class="trust-badge">Qualitas</span>
+      <span class="trust-badge">Mapfre</span>
+      <span class="trust-badge">La Previsora</span>
     </div>
   </div>
-  <a href="#stats" class="scroll-indicator" aria-label="Desplazar"><svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+  <div class="scroll-hint">
+    <div class="scroll-line"></div>
+  </div>
 </section>
 
 <!-- STATS -->
 <section class="stats" id="stats">
   <div class="container">
     <div class="stats-grid">
-      <div class="stat-item reveal"><h3><span class="counter" data-target="20">0</span>+</h3><p>Años de experiencia</p></div>
-      <div class="stat-item reveal"><h3><span class="counter" data-target="32">0</span></h3><p>Especialistas</p></div>
-      <div class="stat-item reveal"><h3><span class="counter" data-target="12000">0</span>+</h3><p>Pacientes atendidos</p></div>
-      <div class="stat-item reveal"><h3><span class="counter" data-target="3">0</span></h3><p>Sedes en Venezuela</p></div>
+      <div class="stat-item reveal"><div class="stat-number"><span class="counter" data-target="20">0</span>+</div><div class="stat-label">Años de experiencia</div></div>
+      <div class="stat-item reveal"><div class="stat-number"><span class="counter" data-target="32">0</span></div><div class="stat-label">Especialistas</div></div>
+      <div class="stat-item reveal"><div class="stat-number"><span class="counter" data-target="12000">0</span>+</div><div class="stat-label">Pacientes atendidos</div></div>
+      <div class="stat-item reveal"><div class="stat-number"><span class="counter" data-target="3">0</span></div><div class="stat-label">Sedes en Venezuela</div></div>
     </div>
   </div>
 </section>
@@ -358,31 +398,47 @@ footer{background:#0d0d1a;padding:56px 0 28px}
 <!-- SEDES -->
 <section class="sedes" id="sedes">
   <div class="container">
-    <p class="section-label reveal">Nuestras sedes</p>
-    <h2 class="section-title reveal">Estamos cerca de ti</h2>
+    <p class="section-eyebrow reveal">Nuestras sedes</p>
+    <h2 class="section-heading reveal">Estamos cerca de ti</h2>
+    <p class="section-sub reveal">Tres ubicaciones estratégicas para brindarte la mejor atención médica del país.</p>
     <div class="sedes-grid">
       <div class="sede-card reveal">
-        <div class="sede-img porlamar"><span>🏝️</span></div>
+        <div class="sede-visual porlamar">
+          <div class="sede-icon"><svg viewBox="0 0 24 24"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6"/><path d="M9 9h1M14 9h1M9 13h1M14 13h1"/></svg></div>
+          <span class="sede-label">Sede principal</span>
+        </div>
         <div class="sede-body">
           <h3>Prevaler Porlamar</h3>
-          <div class="sede-info"><strong>📍</strong> Av. Santiago Mariño, Porlamar<br><strong>📞</strong> +58 295-000-0000<br><strong>🕐</strong> Lun–Sáb: 7am – 7pm</div>
-          <a href="https://wa.me/582950000000" class="btn-whatsapp" target="_blank" rel="noopener">💬 WhatsApp</a>
+          <div class="sede-detail"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Av. Santiago Mariño, Porlamar</span></div>
+          <div class="sede-detail"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span>+58 295-000-0000</span></div>
+          <div class="sede-detail"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg><span>Lun – Sáb: 7:00am – 7:00pm</span></div>
+          <a href="https://wa.me/582950000000" class="btn-wa" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.832-1.438A9.955 9.955 0 0 0 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg> Agendar</a>
         </div>
       </div>
       <div class="sede-card reveal">
-        <div class="sede-img valencia"><span>🏙️</span></div>
+        <div class="sede-visual valencia">
+          <div class="sede-icon"><svg viewBox="0 0 24 24"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6"/><path d="M9 9h1M14 9h1M9 13h1M14 13h1"/></svg></div>
+          <span class="sede-label">Sede Valencia</span>
+        </div>
         <div class="sede-body">
           <h3>Prevaler Valencia</h3>
-          <div class="sede-info"><strong>📍</strong> Av. Bolívar Norte, Valencia<br><strong>📞</strong> +58 241-000-0000<br><strong>🕐</strong> Lun–Sáb: 7am – 7pm</div>
-          <a href="https://wa.me/582410000000" class="btn-whatsapp" target="_blank" rel="noopener">💬 WhatsApp</a>
+          <div class="sede-detail"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Av. Bolívar Norte, Valencia</span></div>
+          <div class="sede-detail"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span>+58 241-000-0000</span></div>
+          <div class="sede-detail"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg><span>Lun – Sáb: 7:00am – 7:00pm</span></div>
+          <a href="https://wa.me/582410000000" class="btn-wa" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.832-1.438A9.955 9.955 0 0 0 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg> Agendar</a>
         </div>
       </div>
       <div class="sede-card reveal">
-        <div class="sede-img maracay"><span>🌿</span></div>
+        <div class="sede-visual maracay">
+          <div class="sede-icon"><svg viewBox="0 0 24 24"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6"/><path d="M9 9h1M14 9h1M9 13h1M14 13h1"/></svg></div>
+          <span class="sede-label">Sede Maracay</span>
+        </div>
         <div class="sede-body">
           <h3>Prevaler Maracay</h3>
-          <div class="sede-info"><strong>📍</strong> Av. Las Delicias, Maracay<br><strong>📞</strong> +58 243-000-0000<br><strong>🕐</strong> Lun–Sáb: 7am – 7pm</div>
-          <a href="https://wa.me/582430000000" class="btn-whatsapp" target="_blank" rel="noopener">💬 WhatsApp</a>
+          <div class="sede-detail"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Av. Las Delicias, Maracay</span></div>
+          <div class="sede-detail"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span>+58 243-000-0000</span></div>
+          <div class="sede-detail"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg><span>Lun – Sáb: 7:00am – 7:00pm</span></div>
+          <a href="https://wa.me/582430000000" class="btn-wa" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.832-1.438A9.955 9.955 0 0 0 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg> Agendar</a>
         </div>
       </div>
     </div>
@@ -392,20 +448,39 @@ footer{background:#0d0d1a;padding:56px 0 28px}
 <!-- ESPECIALIDADES -->
 <section class="especialidades" id="especialidades">
   <div class="container">
-    <p class="section-label reveal">Servicios médicos</p>
-    <h2 class="section-title reveal">Nuestras especialidades</h2>
+    <p class="section-eyebrow reveal">Servicios médicos</p>
+    <h2 class="section-heading reveal">Especialidades</h2>
+    <p class="section-sub reveal">Un equipo multidisciplinario listo para atenderte con la más alta calidad.</p>
     <div class="esp-grid" id="espGrid">
-      <div class="esp-card reveal" data-esp="cardio"><span class="icon">🫀</span><h3>Cardiología</h3><p>Salud cardiovascular</p></div>
-      <div class="esp-card reveal" data-esp="lab"><span class="icon">🔬</span><h3>Laboratorio</h3><p>Análisis clínicos</p></div>
-      <div class="esp-card reveal" data-esp="imagen"><span class="icon">📷</span><h3>Imagenología</h3><p>Diagnóstico por imagen</p></div>
-      <div class="esp-card reveal" data-esp="fisio"><span class="icon">🦴</span><h3>Fisioterapia</h3><p>Rehabilitación física</p></div>
-      <div class="esp-card reveal" data-esp="quirofano"><span class="icon">🏥</span><h3>Quirófano</h3><p>Cirugías ambulatorias</p></div>
-      <div class="esp-card reveal" data-esp="general"><span class="icon">👁️</span><h3>Consultas</h3><p>Atención primaria</p></div>
+      <div class="esp-card reveal" data-esp="cardio">
+        <div class="esp-icon-wrap"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+        <h3>Cardiología</h3><p>Salud cardiovascular</p>
+      </div>
+      <div class="esp-card reveal" data-esp="lab">
+        <div class="esp-icon-wrap"><svg viewBox="0 0 24 24"><path d="M9 3h6v2H9zM10 5v4.5L6 16v3h12v-3l-4-6.5V5"/><circle cx="14" cy="16" r="1"/><circle cx="10" cy="14" r="1"/></svg></div>
+        <h3>Laboratorio</h3><p>Análisis clínicos</p>
+      </div>
+      <div class="esp-card reveal" data-esp="imagen">
+        <div class="esp-icon-wrap"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/><circle cx="12" cy="10" r="3"/></svg></div>
+        <h3>Imagenología</h3><p>Diagnóstico por imagen</p>
+      </div>
+      <div class="esp-card reveal" data-esp="fisio">
+        <div class="esp-icon-wrap"><svg viewBox="0 0 24 24"><circle cx="12" cy="5" r="3"/><path d="M12 8v4M8 14l4-2 4 2M8 14v4l4 4 4-4v-4"/></svg></div>
+        <h3>Fisioterapia</h3><p>Rehabilitación física</p>
+      </div>
+      <div class="esp-card reveal" data-esp="quirofano">
+        <div class="esp-icon-wrap"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
+        <h3>Quirófano</h3><p>Cirugías ambulatorias</p>
+      </div>
+      <div class="esp-card reveal" data-esp="general">
+        <div class="esp-icon-wrap"><svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+        <h3>Consultas</h3><p>Atención primaria</p>
+      </div>
     </div>
     <div class="esp-detail" id="espDetail">
       <h4 id="espDetailTitle"></h4>
-      <div class="doc-row"><div class="doc-avatar">👨‍⚕️</div><div class="doc-info"><span class="name">Dr. Juan Pérez</span><span class="spec">15 años de experiencia</span></div></div>
-      <div class="doc-row"><div class="doc-avatar">👩‍⚕️</div><div class="doc-info"><span class="name">Dra. María González</span><span class="spec">12 años de experiencia</span></div></div>
+      <div class="doc-row"><div class="doc-avatar"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><div class="doc-info"><span class="name">Dr. Juan Pérez</span><span class="spec">15 años de experiencia</span></div></div>
+      <div class="doc-row"><div class="doc-avatar"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><div class="doc-info"><span class="name">Dra. María González</span><span class="spec">12 años de experiencia</span></div></div>
       <a href="#cta" class="btn-primary">Agendar Cita →</a>
     </div>
   </div>
@@ -414,16 +489,17 @@ footer{background:#0d0d1a;padding:56px 0 28px}
 <!-- EQUIPO -->
 <section class="equipo grain" id="equipo">
   <div class="container">
-    <p class="section-label reveal">Profesionales de confianza</p>
-    <h2 class="section-title reveal">Nuestro equipo médico</h2>
+    <p class="section-eyebrow reveal">Profesionales de confianza</p>
+    <h2 class="section-heading reveal">Nuestro equipo</h2>
+    <p class="section-sub reveal">Cada especialista comparte una misión: tu bienestar.</p>
     <div class="carousel-wrapper" id="doctorCarousel">
       <div class="carousel-track" id="doctorTrack">
-        <div class="doctor-card"><div class="doctor-photo d1"><span>👨‍⚕️</span></div><div class="doctor-card-body"><h4>Dr. Carlos Rodríguez</h4><p class="specialty">Cardiología</p><p class="years">18 años de experiencia</p></div></div>
-        <div class="doctor-card"><div class="doctor-photo d2"><span>👩‍⚕️</span></div><div class="doctor-card-body"><h4>Dra. Ana Martínez</h4><p class="specialty">Imagenología</p><p class="years">15 años de experiencia</p></div></div>
-        <div class="doctor-card"><div class="doctor-photo d3"><span>👨‍⚕️</span></div><div class="doctor-card-body"><h4>Dr. Luis Hernández</h4><p class="specialty">Cirugía General</p><p class="years">20 años de experiencia</p></div></div>
-        <div class="doctor-card"><div class="doctor-photo d4"><span>👩‍⚕️</span></div><div class="doctor-card-body"><h4>Dra. Patricia Gómez</h4><p class="specialty">Fisioterapia</p><p class="years">10 años de experiencia</p></div></div>
-        <div class="doctor-card"><div class="doctor-photo d5"><span>👨‍⚕️</span></div><div class="doctor-card-body"><h4>Dr. Roberto Díaz</h4><p class="specialty">Laboratorio Clínico</p><p class="years">14 años de experiencia</p></div></div>
-        <div class="doctor-card"><div class="doctor-photo d6"><span>👩‍⚕️</span></div><div class="doctor-card-body"><h4>Dra. Carmen López</h4><p class="specialty">Medicina Interna</p><p class="years">12 años de experiencia</p></div></div>
+        <div class="doctor-card"><div class="doctor-photo doc-gradient-1"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><div class="doctor-card-body"><h4>Dr. Carlos Rodríguez</h4><p class="specialty">Cardiología</p><p class="years">18 años de experiencia</p></div></div>
+        <div class="doctor-card"><div class="doctor-photo doc-gradient-2"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><div class="doctor-card-body"><h4>Dra. Ana Martínez</h4><p class="specialty">Imagenología</p><p class="years">15 años de experiencia</p></div></div>
+        <div class="doctor-card"><div class="doctor-photo doc-gradient-3"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><div class="doctor-card-body"><h4>Dr. Luis Hernández</h4><p class="specialty">Cirugía General</p><p class="years">20 años de experiencia</p></div></div>
+        <div class="doctor-card"><div class="doctor-photo doc-gradient-4"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><div class="doctor-card-body"><h4>Dra. Patricia Gómez</h4><p class="specialty">Fisioterapia</p><p class="years">10 años de experiencia</p></div></div>
+        <div class="doctor-card"><div class="doctor-photo doc-gradient-5"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><div class="doctor-card-body"><h4>Dr. Roberto Díaz</h4><p class="specialty">Laboratorio Clínico</p><p class="years">14 años de experiencia</p></div></div>
+        <div class="doctor-card"><div class="doctor-photo doc-gradient-6"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><div class="doctor-card-body"><h4>Dra. Carmen López</h4><p class="specialty">Medicina Interna</p><p class="years">12 años de experiencia</p></div></div>
       </div>
     </div>
     <div class="carousel-nav"><button class="carousel-btn" id="docPrev" aria-label="Anterior">‹</button><button class="carousel-btn" id="docNext" aria-label="Siguiente">›</button></div>
@@ -433,33 +509,38 @@ footer{background:#0d0d1a;padding:56px 0 28px}
 <!-- TESTIMONIOS -->
 <section class="testimonios" id="testimonios">
   <div class="container">
-    <p class="section-label reveal">Lo que dicen nuestros pacientes</p>
-    <h2 class="section-title reveal">Testimonios</h2>
+    <p class="section-eyebrow reveal">Lo que dicen nuestros pacientes</p>
+    <h2 class="section-heading reveal">Testimonios</h2>
+    <p class="section-sub reveal">Miles de familias confían en nosotros. Estas son sus experiencias.</p>
     <div class="carousel-wrapper" id="testCarousel">
       <div class="carousel-track test-track" id="testTrack">
-        <div class="test-card"><div class="test-stars">★★★★★</div><p class="test-quote">"Excelente atención desde que llegas. El personal es muy amable y los doctores son de primera. Totalmente recomendado."</p><div class="test-author"><div class="test-avatar">MR</div><div><div class="test-name">María Rodríguez</div><div class="test-loc">Porlamar</div></div></div></div>
-        <div class="test-card"><div class="test-stars">★★★★★</div><p class="test-quote">"Me operaron en el quirófano de Valencia y todo salió perfecto. Las instalaciones son modernas y muy limpias."</p><div class="test-author"><div class="test-avatar">JG</div><div><div class="test-name">José García</div><div class="test-loc">Valencia</div></div></div></div>
-        <div class="test-card"><div class="test-stars">★★★★★</div><p class="test-quote">"El laboratorio entrega resultados muy rápido. Ya no tengo que esperar días. Muy eficientes."</p><div class="test-author"><div class="test-avatar">LP</div><div><div class="test-name">Laura Pérez</div><div class="test-loc">Maracay</div></div></div></div>
-        <div class="test-card"><div class="test-stars">★★★★★</div><p class="test-quote">"La fisioterapia me ayudó muchísimo con mi recuperación. Profesionales de verdad. Gracias Prevaler."</p><div class="test-author"><div class="test-avatar">CF</div><div><div class="test-name">Carlos Fuentes</div><div class="test-loc">Porlamar</div></div></div></div>
-        <div class="test-card"><div class="test-stars">★★★★★</div><p class="test-quote">"Llevo años atendiéndome aquí. Mi familia entera va a Prevaler. La calidad siempre constante."</p><div class="test-author"><div class="test-avatar">AS</div><div><div class="test-name">Andrea Sánchez</div><div class="test-loc">Valencia</div></div></div></div>
+        <div class="test-card"><div class="test-stars"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div><p class="test-quote">"Excelente atención desde que llegas. El personal es muy amable y los doctores son de primera. Totalmente recomendado."</p><div class="test-author"><div class="test-avatar">MR</div><div><div class="test-name">María Rodríguez</div><div class="test-loc">Porlamar</div></div></div></div>
+        <div class="test-card"><div class="test-stars"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div><p class="test-quote">"Me operaron en el quirófano de Valencia y todo salió perfecto. Las instalaciones son modernas y muy limpias."</p><div class="test-author"><div class="test-avatar">JG</div><div><div class="test-name">José García</div><div class="test-loc">Valencia</div></div></div></div>
+        <div class="test-card"><div class="test-stars"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div><p class="test-quote">"El laboratorio entrega resultados muy rápido. Ya no tengo que esperar días. Muy eficientes."</p><div class="test-author"><div class="test-avatar">LP</div><div><div class="test-name">Laura Pérez</div><div class="test-loc">Maracay</div></div></div></div>
+        <div class="test-card"><div class="test-stars"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div><p class="test-quote">"La fisioterapia me ayudó muchísimo con mi recuperación. Profesionales de verdad. Gracias Prevaler."</p><div class="test-author"><div class="test-avatar">CF</div><div><div class="test-name">Carlos Fuentes</div><div class="test-loc">Porlamar</div></div></div></div>
+        <div class="test-card"><div class="test-stars"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div><p class="test-quote">"Llevo años atendiéndome aquí. Mi familia entera va a Prevaler. La calidad siempre constante."</p><div class="test-author"><div class="test-avatar">AS</div><div><div class="test-name">Andrea Sánchez</div><div class="test-loc">Valencia</div></div></div></div>
       </div>
     </div>
     <div class="carousel-nav"><button class="carousel-btn" id="testPrev" aria-label="Anterior">‹</button><button class="carousel-btn" id="testNext" aria-label="Siguiente">›</button></div>
   </div>
 </section>
 
-<!-- CTA FINAL -->
+<!-- CTA -->
 <section class="cta-final grain" id="cta">
   <div class="container">
+    <div class="hero-orb o1" style="width:400px;height:400px;top:-20%;right:-5%"></div>
     <h2 class="reveal">Agenda tu cita hoy</h2>
-    <p class="reveal">Tu salud no puede esperar. Reserva tu consulta en minutos.</p>
-    <a href="https://wa.me/582950000000" class="btn-pulse reveal" target="_blank" rel="noopener">Agendar por WhatsApp</a>
+    <p class="reveal">Tu salud no puede esperar. Reserva tu consulta en minutos y recibe atención de primer nivel.</p>
+    <a href="https://wa.me/582950000000" class="btn-cta-main reveal" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.832-1.438A9.955 9.955 0 0 0 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg>
+      Agendar por WhatsApp
+    </a>
     <div class="cta-phones reveal">
-      <div class="cta-phone"><strong>Porlamar</strong>+58 295-000-0000</div>
-      <div class="cta-phone"><strong>Valencia</strong>+58 241-000-0000</div>
-      <div class="cta-phone"><strong>Maracay</strong>+58 243-000-0000</div>
+      <div class="cta-phone"><strong>Porlamar</strong><span>+58 295-000-0000</span></div>
+      <div class="cta-phone"><strong>Valencia</strong><span>+58 241-000-0000</span></div>
+      <div class="cta-phone"><strong>Maracay</strong><span>+58 243-000-0000</span></div>
     </div>
-    <div class="map-embed reveal">📍 Google Maps — Nuestras 3 sedes</div>
+    <div class="cta-divider"></div>
   </div>
 </section>
 
@@ -471,9 +552,8 @@ footer{background:#0d0d1a;padding:56px 0 28px}
         <div class="footer-logo">PREVALER</div>
         <p>Centro Médico con más de 20 años cuidando la salud de los venezolanos. Sedes en Porlamar, Valencia y Maracay.</p>
         <div class="footer-social">
-          <a href="https://www.instagram.com/clinicaprevaler" target="_blank" rel="noopener" aria-label="Instagram">📷</a>
-          <a href="#" aria-label="Facebook">👥</a>
-          <a href="https://wa.me/582950000000" target="_blank" rel="noopener" aria-label="WhatsApp">💬</a>
+          <a href="https://www.instagram.com/clinicaprevaler" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.5"/></svg></a>
+          <a href="https://wa.me/582950000000" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.832-1.438A9.955 9.955 0 0 0 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg></a>
         </div>
       </div>
       <div class="footer-links">
@@ -485,40 +565,31 @@ footer{background:#0d0d1a;padding:56px 0 28px}
       </div>
       <div class="footer-links">
         <h4>Contacto</h4>
-        <a href="https://wa.me/582950000000" target="_blank" rel="noopener">WhatsApp Porlamar</a>
-        <a href="https://wa.me/582410000000" target="_blank" rel="noopener">WhatsApp Valencia</a>
-        <a href="https://wa.me/582430000000" target="_blank" rel="noopener">WhatsApp Maracay</a>
-        <a href="https://www.instagram.com/clinicaprevaler" target="_blank" rel="noopener">@clinicaprevaler</a>
+        <a href="https://wa.me/582950000000" target="_blank">WhatsApp Porlamar</a>
+        <a href="https://wa.me/582410000000" target="_blank">WhatsApp Valencia</a>
+        <a href="https://wa.me/582430000000" target="_blank">WhatsApp Maracay</a>
+        <a href="https://www.instagram.com/clinicaprevaler" target="_blank">@clinicaprevaler</a>
       </div>
     </div>
-    <div class="footer-bottom">© 2025 Prevaler Centro Médico. Todos los derechos reservados.</div>
+    <div class="footer-bottom">
+      <span>© 2025 Prevaler Centro Médico. Todos los derechos reservados.</span>
+      <span>Diseñado con ❤️</span>
+    </div>
   </div>
 </footer>
 
-<!-- STICKY BAR -->
-<div class="sticky-bar" id="stickyBar">
-  <div class="container">
-    <span class="sticky-logo">PREVALER</span>
-    <span class="sticky-phone">📞 +58 295-000-0000</span>
-    <a href="#cta" class="nav-cta">Agendar Cita</a>
-  </div>
-</div>
+<!-- FLOATING WA -->
+<a href="https://wa.me/582950000000" class="wa-float" id="waFloat" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.832-1.438A9.955 9.955 0 0 0 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg>
+</a>
 
 <script>
 (function(){
 'use strict';
 
-// === NAV SCROLL ===
-var nav=document.getElementById('mainNav'),sticky=document.getElementById('stickyBar');
-var ticking=false;
-window.addEventListener('scroll',function(){
-  if(!ticking){requestAnimationFrame(function(){
-    var s=window.scrollY;
-    nav.classList.toggle('scrolled',s>50);
-    sticky.classList.toggle('show',s>window.innerHeight*.55);
-    ticking=false;
-  });ticking=true;}
-},{passive:true});
+// === SCROLL NAV + WA FLOAT ===
+var nav=document.getElementById('mainNav'),waFloat=document.getElementById('waFloat'),ticking=false;
+window.addEventListener('scroll',function(){if(!ticking){requestAnimationFrame(function(){var s=window.scrollY;nav.classList.toggle('scrolled',s>50);waFloat.classList.toggle('show',s>window.innerHeight*.5);ticking=false});ticking=true}},{passive:true});
 
 // === HAMBURGER ===
 var hBtn=document.getElementById('hamburgerBtn'),mMenu=document.getElementById('mobileMenu'),mOver=document.getElementById('mobileOverlay');
@@ -528,100 +599,26 @@ mOver.addEventListener('click',toggleMenu);
 mMenu.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){if(mMenu.classList.contains('open'))toggleMenu()})});
 
 // === REVEAL ===
-var ro=new IntersectionObserver(function(entries){
-  entries.forEach(function(e){
-    if(e.isIntersecting){
-      var siblings=e.target.parentElement.querySelectorAll('.reveal');
-      var idx=Array.from(siblings).indexOf(e.target);
-      setTimeout(function(){e.target.classList.add('visible')},idx*120);
-      ro.unobserve(e.target);
-    }
-  });
-},{threshold:0.12,rootMargin:'0px 0px -40px 0px'});
+var ro=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){var siblings=e.target.parentElement.querySelectorAll('.reveal');var idx=Array.from(siblings).indexOf(e.target);setTimeout(function(){e.target.classList.add('visible')},idx*100);ro.unobserve(e.target)}})},{threshold:0.1,rootMargin:'0px 0px -30px 0px'});
 document.querySelectorAll('.reveal').forEach(function(el){ro.observe(el)});
 
 // === COUNTERS ===
 var counted=false;
-var cObs=new IntersectionObserver(function(entries){
-  if(entries[0].isIntersecting&&!counted){
-    counted=true;
-    document.querySelectorAll('.counter').forEach(function(c){
-      var target=+c.dataset.target,dur=2000,start=performance.now();
-      function upd(now){
-        var p=Math.min((now-start)/dur,1),ease=1-Math.pow(1-p,3);
-        c.textContent=target>=1000?Math.floor(ease*target).toLocaleString('es'):Math.floor(ease*target);
-        if(p<1)requestAnimationFrame(upd);
-      }
-      requestAnimationFrame(upd);
-    });
-  }
-},{threshold:0.25});
+var cObs=new IntersectionObserver(function(entries){if(entries[0].isIntersecting&&!counted){counted=true;document.querySelectorAll('.counter').forEach(function(c){var target=+c.dataset.target,dur=2200,start=performance.now();function upd(now){var p=Math.min((now-start)/dur,1),ease=1-Math.pow(1-p,3);c.textContent=target>=1000?Math.floor(ease*target).toLocaleString('es'):Math.floor(ease*target);if(p<1)requestAnimationFrame(upd)}requestAnimationFrame(upd)})}},{threshold:0.25});
 cObs.observe(document.getElementById('stats'));
 
 // === ESPECIALIDADES ===
 var espGrid=document.getElementById('espGrid'),espDetail=document.getElementById('espDetail'),espTitle=document.getElementById('espDetailTitle');
-var espNames={cardio:'Cardiología',lab:'Laboratorio',imagen:'Imagenología',fisio:'Fisioterapia',quirofano:'Quirófano',general:'Consultas Generales'};
-espGrid.addEventListener('click',function(e){
-  var card=e.target.closest('.esp-card');
-  if(!card)return;
-  var esp=card.dataset.esp;
-  var wasActive=card.classList.contains('active');
-  espGrid.querySelectorAll('.esp-card').forEach(function(c){c.classList.remove('active')});
-  if(wasActive){espDetail.classList.remove('show');return}
-  card.classList.add('active');
-  espTitle.textContent=espNames[esp]||'';
-  espDetail.classList.remove('show');
-  // Position detail after correct row
-  var cards=Array.from(espGrid.querySelectorAll('.esp-card'));
-  var idx=cards.indexOf(card);
-  var cols=window.innerWidth>860?3:2;
-  var rowEnd=Math.min(Math.ceil((idx+1)/cols)*cols-1,cards.length-1);
-  cards[rowEnd].after(espDetail);
-  // Force reflow then show
-  void espDetail.offsetHeight;
-  espDetail.classList.add('show');
-  setTimeout(function(){espDetail.scrollIntoView({behavior:'smooth',block:'nearest'})},100);
-});
+var espNames={cardio:'Cardiología',lab:'Laboratorio Clínico',imagen:'Imagenología',fisio:'Fisioterapia y Rehabilitación',quirofano:'Quirófano',general:'Consultas Generales'};
+espGrid.addEventListener('click',function(e){var card=e.target.closest('.esp-card');if(!card)return;var esp=card.dataset.esp,wasActive=card.classList.contains('active');espGrid.querySelectorAll('.esp-card').forEach(function(c){c.classList.remove('active')});if(wasActive){espDetail.classList.remove('show');return}card.classList.add('active');espTitle.textContent=espNames[esp]||'';espDetail.classList.remove('show');var cards=Array.from(espGrid.querySelectorAll('.esp-card'));var idx=cards.indexOf(card);var cols=window.innerWidth>860?3:2;var rowEnd=Math.min(Math.ceil((idx+1)/cols)*cols-1,cards.length-1);cards[rowEnd].after(espDetail);void espDetail.offsetHeight;espDetail.classList.add('show');setTimeout(function(){espDetail.scrollIntoView({behavior:'smooth',block:'nearest'})},80)});
 
-// === CAROUSEL WITH TOUCH ===
-function setupCarousel(trackId,prevId,nextId,autoMs){
-  var track=document.getElementById(trackId),prev=document.getElementById(prevId),next=document.getElementById(nextId);
-  var pos=0,startX=0,startPos=0,isDragging=false,iv=null;
-  function getStep(){return track.firstElementChild.offsetWidth+20}
-  function maxPos(){return Math.max(0,track.scrollWidth-track.parentElement.offsetWidth)}
-  function clamp(v){return Math.max(0,Math.min(v,maxPos()))}
-  function go(dir){pos=clamp(pos+dir*getStep());track.style.transform='translateX(-'+pos+'px)'}
-  function goTo(p){pos=clamp(p);track.style.transform='translateX(-'+pos+'px)'}
-  prev.addEventListener('click',function(){go(-1)});
-  next.addEventListener('click',function(){go(1)});
-  // Touch
-  track.addEventListener('touchstart',function(e){isDragging=true;startX=e.touches[0].clientX;startPos=pos;track.style.transition='none';clearAuto()},{passive:true});
-  track.addEventListener('touchmove',function(e){if(!isDragging)return;var dx=startX-e.touches[0].clientX;goTo(startPos+dx);track.style.transition='none'},{passive:true});
-  track.addEventListener('touchend',function(e){if(!isDragging)return;isDragging=false;track.style.transition='';var dx=pos-startPos;if(Math.abs(dx)>40){go(dx>0?0:0);pos=clamp(pos)}else{goTo(startPos)}startAuto()});
-  // Mouse drag
-  track.addEventListener('mousedown',function(e){isDragging=true;startX=e.clientX;startPos=pos;track.style.transition='none';track.style.cursor='grabbing';clearAuto();e.preventDefault()});
-  window.addEventListener('mousemove',function(e){if(!isDragging)return;var dx=startX-e.clientX;goTo(startPos+dx);track.style.transition='none'});
-  window.addEventListener('mouseup',function(){if(!isDragging)return;isDragging=false;track.style.transition='';track.style.cursor='';startAuto()});
-  // Auto-scroll
-  function clearAuto(){if(iv){clearInterval(iv);iv=null}}
-  function startAuto(){if(!autoMs)return;clearAuto();iv=setInterval(function(){if(pos>=maxPos()){pos=0;track.style.transform='translateX(0)'}else{go(1)}},autoMs)}
-  track.parentElement.addEventListener('mouseenter',clearAuto);
-  track.parentElement.addEventListener('mouseleave',startAuto);
-  startAuto();
-  // Recalc on resize
-  var resizeTimer;
-  window.addEventListener('resize',function(){clearTimeout(resizeTimer);resizeTimer=setTimeout(function(){pos=clamp(pos);track.style.transform='translateX(-'+pos+'px)'},150)});
-}
+// === CAROUSEL ===
+function setupCarousel(trackId,prevId,nextId,autoMs){var track=document.getElementById(trackId),prev=document.getElementById(prevId),next=document.getElementById(nextId);var pos=0,startX=0,startPos=0,isDragging=false,iv=null;function getStep(){return track.firstElementChild.offsetWidth+20}function maxPos(){return Math.max(0,track.scrollWidth-track.parentElement.offsetWidth)}function clamp(v){return Math.max(0,Math.min(v,maxPos()))}function go(dir){pos=clamp(pos+dir*getStep());track.style.transform='translateX(-'+pos+'px)'}function goTo(p){pos=clamp(p);track.style.transform='translateX(-'+pos+'px)'}prev.addEventListener('click',function(){go(-1)});next.addEventListener('click',function(){go(1)});track.addEventListener('touchstart',function(e){isDragging=true;startX=e.touches[0].clientX;startPos=pos;track.style.transition='none';clearAuto()},{passive:true});track.addEventListener('touchmove',function(e){if(!isDragging)return;goTo(startPos+(startX-e.touches[0].clientX));track.style.transition='none'},{passive:true});track.addEventListener('touchend',function(){isDragging=false;track.style.transition='';startAuto()});track.addEventListener('mousedown',function(e){isDragging=true;startX=e.clientX;startPos=pos;track.style.transition='none';track.style.cursor='grabbing';clearAuto();e.preventDefault()});window.addEventListener('mousemove',function(e){if(!isDragging)return;goTo(startPos+(startX-e.clientX));track.style.transition='none'});window.addEventListener('mouseup',function(){if(!isDragging)return;isDragging=false;track.style.transition='';track.style.cursor='';startAuto()});function clearAuto(){if(iv){clearInterval(iv);iv=null}}function startAuto(){if(!autoMs)return;clearAuto();iv=setInterval(function(){pos>=maxPos()?goTo(0):go(1)},autoMs)}track.parentElement.addEventListener('mouseenter',clearAuto);track.parentElement.addEventListener('mouseleave',startAuto);startAuto();var rt;window.addEventListener('resize',function(){clearTimeout(rt);rt=setTimeout(function(){pos=clamp(pos);track.style.transform='translateX(-'+pos+'px)'},150)})}
 setupCarousel('doctorTrack','docPrev','docNext',3500);
 setupCarousel('testTrack','testPrev','testNext',4500);
 
-// === SMOOTH SCROLL for anchor links ===
-document.querySelectorAll('a[href^="#"]').forEach(function(a){
-  a.addEventListener('click',function(e){
-    var target=document.querySelector(this.getAttribute('href'));
-    if(target){e.preventDefault();target.scrollIntoView({behavior:'smooth',block:'start'})}
-  });
-});
+// === SMOOTH SCROLL ===
+document.querySelectorAll('a[href^="#"]').forEach(function(a){a.addEventListener('click',function(e){var t=document.querySelector(this.getAttribute('href'));if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'})}})});
 
 })();
 </script>
