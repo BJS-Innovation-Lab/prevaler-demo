@@ -18,18 +18,10 @@ body{
   overflow:hidden;
 }
 
-/* ===== FULL BG IMAGE ===== */
+/* ===== BG ===== */
 .bg{
   position:fixed;inset:0;z-index:0;
-  background:
-    linear-gradient(175deg,rgba(0,0,50,.82) 0%,rgba(0,0,40,.7) 40%,rgba(0,0,60,.85) 100%),
-    url('https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=800&q=80') center/cover no-repeat;
-}
-/* Fallback if image doesn't load */
-.bg::after{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(175deg,#00004a,#000038,#00005c);
-  z-index:-1;
+  background:linear-gradient(175deg,#00003a 0%,#000028 40%,#00004e 100%);
 }
 
 /* ===== LAYOUT ===== */
