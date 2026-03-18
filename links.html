@@ -4,149 +4,257 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
 <title>CMD Prevaler</title>
-<meta name="theme-color" content="#0a0a1a">
+<meta name="theme-color" content="#080818">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 html,body{height:100%;width:100%}
-body{font-family:'Inter',system-ui,sans-serif;background:#0a0a1a;color:#fff;display:flex;align-items:center;justify-content:center;overflow:hidden;-webkit-font-smoothing:antialiased}
+body{
+  font-family:'Inter',system-ui,sans-serif;
+  background:#080818;
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
 
-/* BG */
-.bg{position:fixed;inset:0;z-index:0;overflow:hidden}
-.bg::before{content:'';position:absolute;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(255,120,0,.06) 0%,transparent 70%);top:-20%;right:-15%;animation:drift 12s ease-in-out infinite alternate}
-.bg::after{content:'';position:absolute;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(100,80,200,.04) 0%,transparent 70%);bottom:-20%;left:-10%;animation:drift 15s ease-in-out infinite alternate-reverse}
-@keyframes drift{0%{transform:translate(0,0)}100%{transform:translate(15px,-10px)}}
+/* ===== BACKGROUND ===== */
+.scene{position:fixed;inset:0;z-index:0;overflow:hidden}
+.scene .glow{position:absolute;border-radius:50%;filter:blur(60px);pointer-events:none}
+.scene .g1{width:300px;height:300px;background:rgba(255,120,0,.07);top:-5%;right:-8%;animation:float 10s ease-in-out infinite alternate}
+.scene .g2{width:250px;height:250px;background:rgba(60,60,180,.05);bottom:-8%;left:-5%;animation:float 13s ease-in-out infinite alternate-reverse}
+@keyframes float{0%{transform:translate(0,0) scale(1)}100%{transform:translate(12px,-8px) scale(1.05)}}
 
-.page{position:relative;z-index:1;width:100%;max-width:380px;padding:0 24px;text-align:center}
+/* ===== CONTAINER ===== */
+.wrap{position:relative;z-index:1;width:100%;max-width:380px;padding:0 24px;text-align:center}
 
-/* AVATAR */
-.avatar{width:80px;height:80px;margin:0 auto 20px;border-radius:50%;background:linear-gradient(135deg,#1a1a3e,#2a2a5e);border:2px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;animation:pop .5s cubic-bezier(.175,.885,.32,1.275) both}
-.avatar svg{width:36px;height:36px}
-@keyframes pop{from{opacity:0;transform:scale(.6)}to{opacity:1;transform:scale(1)}}
+/* ===== AVATAR ===== */
+.avatar{
+  width:96px;height:96px;margin:0 auto 22px;
+  border-radius:50%;
+  overflow:hidden;
+  border:2.5px solid rgba(255,255,255,.1);
+  box-shadow:0 0 0 4px rgba(255,120,0,.08),0 12px 40px rgba(0,0,0,.4);
+  animation:avatarIn .6s cubic-bezier(.175,.885,.32,1.275) both;
+  background:#1a1a2e;
+}
+.avatar img{width:100%;height:100%;object-fit:cover;display:block}
+@keyframes avatarIn{from{opacity:0;transform:scale(.5) translateY(20px)}to{opacity:1;transform:scale(1) translateY(0)}}
 
-.name{font-size:1.1rem;font-weight:700;letter-spacing:1px;margin-bottom:3px;animation:fadeIn .5s ease .15s both}
-.subtitle{font-size:.7rem;color:rgba(255,255,255,.35);font-weight:500;letter-spacing:2px;text-transform:uppercase;margin-bottom:36px;animation:fadeIn .5s ease .25s both}
-@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+/* ===== NAME ===== */
+.name{font-size:1.2rem;font-weight:800;letter-spacing:1.5px;margin-bottom:4px;animation:slideUp .5s ease .1s both}
+.tagline{font-size:.68rem;color:rgba(255,255,255,.3);font-weight:500;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:40px;animation:slideUp .5s ease .2s both}
+@keyframes slideUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
 
-/* WA BUTTONS */
-.wa-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
-.wa-card{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:24px 16px;border-radius:20px;text-decoration:none;color:#fff;transition:all .3s ease;position:relative;overflow:hidden}
-.wa-card::before{content:'';position:absolute;inset:0;border-radius:20px;border:1px solid transparent;transition:border-color .3s}
+/* ===== 3D BUTTONS ===== */
+.btn-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:18px}
 
-.wa-card.msg{background:linear-gradient(160deg,rgba(37,211,102,.12) 0%,rgba(37,211,102,.04) 100%)}
-.wa-card.msg::before{border-color:rgba(37,211,102,.2)}
-.wa-card.msg:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(37,211,102,.12)}
-.wa-card.msg:hover::before{border-color:rgba(37,211,102,.4)}
+.btn3d{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;
+  padding:28px 16px 22px;
+  border-radius:22px;
+  text-decoration:none;color:#fff;
+  position:relative;
+  transition:transform .25s cubic-bezier(.25,.46,.45,.94),box-shadow .25s;
+  cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+  /* 3D depth */
+  transform-style:preserve-3d;
+  perspective:600px;
+}
+.btn3d:active{transform:translateY(2px) scale(.97)!important;box-shadow:none!important;transition-duration:.08s}
 
-.wa-card.call{background:linear-gradient(160deg,rgba(37,211,102,.12) 0%,rgba(37,211,102,.04) 100%)}
-.wa-card.call::before{border-color:rgba(37,211,102,.2)}
-.wa-card.call:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(37,211,102,.12)}
-.wa-card.call:hover::before{border-color:rgba(37,211,102,.4)}
+/* WhatsApp Message */
+.btn3d.wa-msg{
+  background:linear-gradient(165deg,#1a3d2a 0%,#0d2218 100%);
+  border:1px solid rgba(37,211,102,.2);
+  box-shadow:
+    0 6px 0 0 #0a1a10,
+    0 8px 24px rgba(37,211,102,.1),
+    inset 0 1px 0 rgba(255,255,255,.06);
+}
+.btn3d.wa-msg:hover{
+  transform:translateY(-3px);
+  box-shadow:
+    0 10px 0 0 #0a1a10,
+    0 16px 40px rgba(37,211,102,.18),
+    inset 0 1px 0 rgba(255,255,255,.08);
+}
 
-.wa-card:active{transform:translateY(0)!important;transition-duration:.1s}
+/* WhatsApp Call */
+.btn3d.wa-call{
+  background:linear-gradient(165deg,#1a3d2a 0%,#0d2218 100%);
+  border:1px solid rgba(37,211,102,.2);
+  box-shadow:
+    0 6px 0 0 #0a1a10,
+    0 8px 24px rgba(37,211,102,.1),
+    inset 0 1px 0 rgba(255,255,255,.06);
+}
+.btn3d.wa-call:hover{
+  transform:translateY(-3px);
+  box-shadow:
+    0 10px 0 0 #0a1a10,
+    0 16px 40px rgba(37,211,102,.18),
+    inset 0 1px 0 rgba(255,255,255,.08);
+}
 
-.wa-icon{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center}
-.wa-card.msg .wa-icon{background:rgba(37,211,102,.15)}
-.wa-card.call .wa-icon{background:rgba(37,211,102,.15)}
-.wa-icon svg{width:22px;height:22px}
+/* Icon circle */
+.btn-icon{
+  width:48px;height:48px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  position:relative;
+}
+.btn-icon.green{background:radial-gradient(circle at 40% 35%,#34e06a,#1fba52)}
+.btn-icon.green::after{
+  content:'';position:absolute;
+  width:20px;height:8px;border-radius:50%;
+  background:rgba(255,255,255,.25);
+  top:10px;left:50%;transform:translateX(-50%);
+  filter:blur(2px);
+}
+.btn-icon svg{width:22px;height:22px;position:relative;z-index:1}
 
-.wa-card .label{font-size:.9rem;font-weight:600;letter-spacing:.3px}
-.wa-card .meta{font-size:.65rem;color:rgba(255,255,255,.3);font-weight:400}
+.btn3d .lbl{font-size:.95rem;font-weight:700;letter-spacing:.3px}
+.btn3d .sub{font-size:.62rem;color:rgba(255,255,255,.3);font-weight:400;letter-spacing:.3px}
 
 /* Stagger */
-.wa-card.msg{animation:fadeIn .4s ease .35s both}
-.wa-card.call{animation:fadeIn .4s ease .45s both}
+.btn3d.wa-msg{animation:slideUp .45s ease .3s both}
+.btn3d.wa-call{animation:slideUp .45s ease .42s both}
 
-/* IG BUTTON */
-.ig-link{display:flex;align-items:center;gap:14px;padding:16px 20px;border-radius:16px;text-decoration:none;color:#fff;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);transition:all .3s ease;animation:fadeIn .4s ease .55s both}
-.ig-link:hover{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.12);transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.15)}
-.ig-link:active{transform:translateY(0);transition-duration:.1s}
+/* ===== INSTAGRAM 3D ===== */
+.ig-btn{
+  display:flex;align-items:center;gap:16px;
+  padding:18px 22px;
+  border-radius:18px;
+  text-decoration:none;color:#fff;
+  position:relative;
+  transition:transform .25s cubic-bezier(.25,.46,.45,.94),box-shadow .25s;
+  cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+  background:linear-gradient(165deg,#2a1835 0%,#18101e 100%);
+  border:1px solid rgba(221,42,123,.15);
+  box-shadow:
+    0 6px 0 0 #0e0812,
+    0 8px 24px rgba(221,42,123,.08),
+    inset 0 1px 0 rgba(255,255,255,.04);
+  animation:slideUp .45s ease .54s both;
+}
+.ig-btn:hover{
+  transform:translateY(-3px);
+  box-shadow:
+    0 10px 0 0 #0e0812,
+    0 16px 40px rgba(221,42,123,.15),
+    inset 0 1px 0 rgba(255,255,255,.06);
+}
+.ig-btn:active{transform:translateY(2px) scale(.97)!important;box-shadow:none!important;transition-duration:.08s}
 
-.ig-icon{width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,#f58529,#dd2a7b,#8134af);display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.ig-icon svg{width:20px;height:20px;fill:#fff}
+.ig-icon{
+  width:44px;height:44px;border-radius:13px;
+  background:linear-gradient(135deg,#f58529 0%,#dd2a7b 50%,#8134af 100%);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  position:relative;
+  box-shadow:0 4px 12px rgba(221,42,123,.25);
+}
+.ig-icon::after{
+  content:'';position:absolute;
+  width:18px;height:6px;border-radius:50%;
+  background:rgba(255,255,255,.2);
+  top:8px;left:50%;transform:translateX(-50%);
+  filter:blur(2px);
+}
+.ig-icon svg{width:22px;height:22px;position:relative;z-index:1}
 
 .ig-info{flex:1;text-align:left}
-.ig-handle{font-size:.88rem;font-weight:600}
-.ig-sub{font-size:.65rem;color:rgba(255,255,255,.3);font-weight:400;margin-top:1px}
+.ig-handle{font-size:.92rem;font-weight:700;letter-spacing:.2px}
+.ig-sub{font-size:.62rem;color:rgba(255,255,255,.3);margin-top:2px}
 
-.ig-arrow{width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.04);display:flex;align-items:center;justify-content:center;transition:all .3s}
-.ig-link:hover .ig-arrow{background:rgba(255,255,255,.08);transform:translateX(2px)}
-.ig-arrow svg{width:12px;height:12px;stroke:rgba(255,255,255,.3);fill:none;stroke-width:2.5}
-
-/* FOOTER */
-.foot{margin-top:32px;font-size:.6rem;color:rgba(255,255,255,.12);letter-spacing:1.5px;text-transform:uppercase;animation:fadeIn .4s ease .65s both}
-
-/* RESPONSIVE */
-@media(max-width:400px){
-  .page{padding:0 20px}
-  .avatar{width:68px;height:68px}
-  .avatar svg{width:30px;height:30px}
-  .name{font-size:1rem}
-  .subtitle{margin-bottom:28px}
-  .wa-card{padding:20px 12px;border-radius:16px}
-  .wa-icon{width:38px;height:38px}
-  .wa-icon svg{width:18px;height:18px}
-  .wa-card .label{font-size:.84rem}
-  .ig-link{padding:14px 16px}
-  .ig-icon{width:36px;height:36px;border-radius:10px}
+.ig-chevron{
+  width:30px;height:30px;border-radius:50%;
+  background:rgba(255,255,255,.04);
+  display:flex;align-items:center;justify-content:center;
+  transition:all .3s;
 }
-@media(max-width:340px){
-  .wa-row{gap:8px}
-  .wa-card{padding:16px 10px;border-radius:14px}
-  .name{font-size:.92rem}
-  .ig-link{gap:10px;padding:12px 14px}
+.ig-btn:hover .ig-chevron{background:rgba(255,255,255,.08);transform:translateX(3px)}
+.ig-chevron svg{width:12px;height:12px;stroke:rgba(255,255,255,.3);fill:none;stroke-width:2.5}
+
+/* ===== FOOTER ===== */
+.foot{margin-top:36px;font-size:.58rem;color:rgba(255,255,255,.1);letter-spacing:2px;text-transform:uppercase;animation:slideUp .4s ease .66s both}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:420px){
+  .wrap{padding:0 20px}
+  .avatar{width:84px;height:84px}
+  .name{font-size:1.1rem}
+  .tagline{margin-bottom:32px}
+  .btn3d{padding:24px 12px 18px;border-radius:18px}
+  .btn-icon{width:42px;height:42px}
+  .btn-icon svg{width:20px;height:20px}
+  .btn3d .lbl{font-size:.88rem}
+  .ig-btn{padding:16px 18px;border-radius:16px}
+  .ig-icon{width:40px;height:40px;border-radius:11px}
+}
+@media(max-width:360px){
+  .wrap{padding:0 16px}
+  .avatar{width:72px;height:72px}
+  .name{font-size:1rem;letter-spacing:1px}
+  .tagline{margin-bottom:26px;font-size:.6rem}
+  .btn-row{gap:10px}
+  .btn3d{padding:20px 10px 16px;border-radius:16px}
+  .btn-icon{width:38px;height:38px}
+  .btn3d .lbl{font-size:.82rem}
+  .ig-btn{gap:12px;padding:14px 16px}
 }
 </style>
 </head>
 <body>
 
-<div class="bg"></div>
+<div class="scene">
+  <div class="glow g1"></div>
+  <div class="glow g2"></div>
+</div>
 
-<div class="page">
-  <!-- Avatar -->
+<div class="wrap">
+  <!-- Avatar with REAL logo -->
   <div class="avatar">
-    <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="60" cy="32" r="16" fill="none" stroke="#ff7800" stroke-width="3" opacity=".7"/>
-      <ellipse cx="60" cy="26" rx="7" ry="4" fill="#ff7800" opacity=".5"/>
-      <path d="M32 42 L60 100 L88 42" fill="none" stroke="rgba(255,255,255,.5)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-      <path d="M44 60 L60 100 L76 60" fill="none" stroke="#ff7800" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity=".6"/>
-    </svg>
+    <img src="https://ugc.production.linktr.ee/y5ylGyXTtaFf3ebFkIQC_CmrdAYCbL3KPD5Re?io=true&size=avatar-v3_0" alt="CMD Prevaler" width="96" height="96">
   </div>
 
-  <!-- Name -->
   <h1 class="name">CMD Prevaler</h1>
-  <p class="subtitle">Centro Médico</p>
+  <p class="tagline">Centro Médico</p>
 
-  <!-- WhatsApp Split -->
-  <div class="wa-row">
-    <a href="https://wa.me/15855222431" class="wa-card msg" target="_blank" rel="noopener">
-      <div class="wa-icon">
-        <svg viewBox="0 0 24 24" fill="#25d366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.832-1.438A9.955 9.955 0 0 0 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg>
+  <!-- 3D WhatsApp Split -->
+  <div class="btn-row">
+    <a href="https://wa.me/15855222431" class="btn3d wa-msg" target="_blank" rel="noopener">
+      <div class="btn-icon green">
+        <svg viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.832-1.438A9.955 9.955 0 0 0 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg>
       </div>
-      <div class="label">Escribir</div>
-      <div class="meta">Mensaje directo</div>
+      <div class="lbl">Escribir</div>
+      <div class="sub">Mensaje directo</div>
     </a>
-    <a href="tel:+15855222431" class="wa-card call">
-      <div class="wa-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#25d366" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+    <a href="tel:+15855222431" class="btn3d wa-call">
+      <div class="btn-icon green">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
       </div>
-      <div class="label">Llamar</div>
-      <div class="meta">+1 (585) 522-2431</div>
+      <div class="lbl">Llamar</div>
+      <div class="sub">+1 (585) 522-2431</div>
     </a>
   </div>
 
-  <!-- Instagram -->
-  <a href="https://www.instagram.com/clinicaprevaler" class="ig-link" target="_blank" rel="noopener">
+  <!-- 3D Instagram -->
+  <a href="https://www.instagram.com/clinicaprevaler" class="ig-btn" target="_blank" rel="noopener">
     <div class="ig-icon">
-      <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" fill="none" stroke="#fff" stroke-width="1.5"/><circle cx="12" cy="12" r="5" fill="none" stroke="#fff" stroke-width="1.5"/><circle cx="17.5" cy="6.5" r="1.2" fill="#fff"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.2" fill="#fff" stroke="none"/></svg>
     </div>
     <div class="ig-info">
       <div class="ig-handle">@clinicaprevaler</div>
       <div class="ig-sub">Síguenos en Instagram</div>
     </div>
-    <div class="ig-arrow"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <div class="ig-chevron"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
   </a>
 
   <p class="foot">Prevaler © 2025</p>
