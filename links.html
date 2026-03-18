@@ -4,251 +4,261 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
 <title>CMD Prevaler</title>
-<meta name="theme-color" content="#00005c">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<meta name="theme-color" content="#f0f4f8">
 <style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&display=swap');
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-html,body{height:100%;width:100%}
+html,body{height:100%;width:100%;overflow:hidden}
 body{
-  font-family:'DM Sans',system-ui,sans-serif;
-  color:#fff;
-  -webkit-font-smoothing:antialiased;
-  overflow:hidden;
-}
-
-/* ===== BG ===== */
-.bg{
-  position:fixed;inset:0;z-index:0;
-  background:linear-gradient(175deg,#00003a 0%,#000028 40%,#00004e 100%);
-}
-
-/* ===== LAYOUT ===== */
-.page{
-  position:relative;z-index:1;
-  width:100%;height:100vh;height:100dvh;
+  font-family:'DM Sans',system-ui,-apple-system,sans-serif;
+  background:#f0f4f8;
+  color:#1a1a2e;
   display:flex;align-items:center;justify-content:center;
-  padding:24px;
+  -webkit-font-smoothing:antialiased;
 }
+
+/* ===== ANIMATED BACKGROUND ===== */
+.scene{position:fixed;inset:0;z-index:0;overflow:hidden;background:linear-gradient(160deg,#f0f4f8 0%,#e8eef5 50%,#f5f7fa 100%)}
+
+/* Floating medical crosses */
+.float-el{position:absolute;opacity:.06;animation:floatUp linear infinite}
+.float-el svg{width:100%;height:100%}
+.f1{width:30px;height:30px;left:10%;animation-duration:18s;animation-delay:0s}
+.f2{width:22px;height:22px;left:25%;animation-duration:22s;animation-delay:-4s}
+.f3{width:36px;height:36px;left:45%;animation-duration:20s;animation-delay:-8s}
+.f4{width:26px;height:26px;left:65%;animation-duration:24s;animation-delay:-2s}
+.f5{width:20px;height:20px;left:80%;animation-duration:19s;animation-delay:-10s}
+.f6{width:32px;height:32px;left:35%;animation-duration:21s;animation-delay:-14s}
+.f7{width:24px;height:24px;left:55%;animation-duration:23s;animation-delay:-6s}
+.f8{width:28px;height:28px;left:90%;animation-duration:17s;animation-delay:-12s}
+@keyframes floatUp{
+  0%{transform:translateY(110vh) rotate(0deg);opacity:.04}
+  50%{opacity:.08}
+  100%{transform:translateY(-10vh) rotate(180deg);opacity:.04}
+}
+
+/* Heartbeat line */
+.heartbeat{position:absolute;bottom:30%;left:0;width:200%;height:60px;opacity:.04;animation:slideLeft 8s linear infinite}
+@keyframes slideLeft{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* Walking silhouettes */
+.walker{position:absolute;bottom:12%;opacity:.035;animation:walk linear infinite}
+.w1{animation-duration:25s;animation-delay:0s}
+.w2{animation-duration:30s;animation-delay:-12s}
+.w3{animation-duration:22s;animation-delay:-6s}
+@keyframes walk{0%{transform:translateX(-80px)}100%{transform:translateX(calc(100vw + 80px))}}
+.walker svg{width:40px;height:80px}
+
+/* ===== CARD ===== */
+.page{position:relative;z-index:1;width:100%;max-width:380px;padding:0 24px}
 
 .card{
-  width:100%;max-width:360px;
   padding:40px 28px 32px;
   border-radius:28px;
-  background:rgba(255,255,255,.08);
-  backdrop-filter:blur(40px) saturate(150%);
-  -webkit-backdrop-filter:blur(40px) saturate(150%);
-  border:1px solid rgba(255,255,255,.12);
-  box-shadow:0 24px 80px rgba(0,0,0,.3);
+  background:rgba(255,255,255,.85);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border:1px solid rgba(255,255,255,.9);
+  box-shadow:0 4px 40px rgba(0,0,60,.06),0 1px 3px rgba(0,0,60,.04);
   text-align:center;
-  animation:cardIn .6s cubic-bezier(.22,1,.36,1) both;
+  animation:cardIn .55s cubic-bezier(.22,1,.36,1) both;
+  position:relative;
 }
-@keyframes cardIn{from{opacity:0;transform:translateY(30px) scale(.96)}to{opacity:1;transform:none}}
+@keyframes cardIn{from{opacity:0;transform:translateY(24px) scale(.97)}to{opacity:1;transform:none}}
+
+/* Top accent line */
+.card::before{
+  content:'';position:absolute;
+  top:-1px;left:15%;right:15%;height:3px;
+  background:linear-gradient(90deg,transparent,#ff7800,transparent);
+  border-radius:0 0 3px 3px;
+}
 
 /* ===== AVATAR ===== */
 .avatar{
-  width:88px;height:88px;margin:0 auto 20px;
+  width:88px;height:88px;margin:0 auto 18px;
   border-radius:50%;overflow:hidden;
-  border:3px solid rgba(255,255,255,.15);
-  box-shadow:0 4px 20px rgba(0,0,0,.2);
-  animation:popIn .5s cubic-bezier(.175,.885,.32,1.275) .15s both;
+  border:3px solid #fff;
+  box-shadow:0 4px 20px rgba(0,0,60,.08);
+  animation:popIn .5s cubic-bezier(.175,.885,.32,1.275) .1s both;
 }
-.avatar img{width:100%;height:100%;object-fit:cover}
-@keyframes popIn{from{opacity:0;transform:scale(.6)}to{opacity:1;transform:scale(1)}}
+.avatar img{width:100%;height:100%;object-fit:cover;display:block}
+@keyframes popIn{from{opacity:0;transform:scale(.5)}to{opacity:1;transform:scale(1)}}
 
 /* ===== TEXT ===== */
 .name{
-  font-family:'DM Serif Display',serif;
-  font-size:1.45rem;font-weight:400;
-  letter-spacing:.5px;
+  font-family:'DM Serif Display',Georgia,'Times New Roman',serif;
+  font-size:1.4rem;font-weight:400;
+  color:#00005c;letter-spacing:.5px;
   margin-bottom:3px;
-  animation:fadeUp .45s ease .25s both;
+  animation:up .45s ease .2s both;
 }
 .sub{
-  font-size:.68rem;color:rgba(255,255,255,.45);
+  font-size:.68rem;color:#8a8aa0;
   font-weight:500;letter-spacing:2px;text-transform:uppercase;
-  animation:fadeUp .45s ease .32s both;
+  animation:up .45s ease .28s both;
 }
-.line{
-  width:28px;height:1.5px;margin:16px auto 28px;
-  background:linear-gradient(90deg,transparent,#ff7800,transparent);
-  border-radius:1px;
-  animation:fadeUp .45s ease .38s both;
+.accent{
+  width:28px;height:2px;margin:14px auto 26px;
+  background:#ff7800;border-radius:2px;
+  animation:up .45s ease .35s both;
 }
-@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@keyframes up{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 
 /* ===== BUTTONS ===== */
 .btns{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
-
 .b{
   display:flex;flex-direction:column;align-items:center;gap:10px;
   padding:24px 12px 18px;
   border-radius:18px;
-  background:rgba(255,255,255,.06);
-  border:1px solid rgba(255,255,255,.1);
-  text-decoration:none;color:#fff;
-  transition:all .3s ease;
+  background:#fff;
+  border:1.5px solid #eaedf2;
+  text-decoration:none;color:#1a1a2e;
+  transition:all .25s ease;
   -webkit-tap-highlight-color:transparent;
 }
-.b:hover{
-  background:rgba(255,255,255,.12);
-  border-color:rgba(255,255,255,.2);
-  transform:translateY(-3px);
-  box-shadow:0 8px 24px rgba(0,0,0,.15);
-}
+.b:hover{border-color:#00005c;transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,60,.07)}
 .b:active{transform:translateY(0);box-shadow:none;transition-duration:.08s}
 
 .b .ic{
   width:48px;height:48px;border-radius:50%;
   display:flex;align-items:center;justify-content:center;
-  transition:transform .3s;
+  transition:transform .25s;
 }
-.b:hover .ic{transform:scale(1.05)}
-.b .ic.green{background:#25d366;box-shadow:0 4px 16px rgba(37,211,102,.25)}
-.b .ic.navy{background:#ff7800;box-shadow:0 4px 16px rgba(255,120,0,.2)}
+.b:hover .ic{transform:scale(1.06)}
 .b .ic svg{width:22px;height:22px}
+.ic.green{background:#25d366;box-shadow:0 4px 12px rgba(37,211,102,.2)}
+.ic.orange{background:#ff7800;box-shadow:0 4px 12px rgba(255,120,0,.2)}
 
-.b .lbl{font-size:.88rem;font-weight:700}
-.b .mt{font-size:.6rem;color:rgba(255,255,255,.35);font-weight:500}
-
-.b:nth-child(1){animation:fadeUp .4s ease .44s both}
-.b:nth-child(2){animation:fadeUp .4s ease .52s both}
+.b .lbl{font-size:.88rem;font-weight:700;color:#1a1a2e}
+.b .mt{font-size:.6rem;color:#aaa;font-weight:500}
+.b:nth-child(1){animation:up .4s ease .42s both}
+.b:nth-child(2){animation:up .4s ease .5s both}
 
 /* ===== INSTAGRAM ===== */
 .ig{
   display:flex;align-items:center;gap:14px;
-  padding:16px 20px;
-  border-radius:16px;
-  background:rgba(255,255,255,.06);
-  border:1px solid rgba(255,255,255,.1);
-  text-decoration:none;color:#fff;
-  transition:all .3s ease;
-  animation:fadeUp .4s ease .6s both;
+  padding:16px 20px;border-radius:16px;
+  background:#fff;border:1.5px solid #eaedf2;
+  text-decoration:none;color:#1a1a2e;
+  transition:all .25s ease;
+  animation:up .4s ease .58s both;
   -webkit-tap-highlight-color:transparent;
 }
-.ig:hover{
-  background:rgba(255,255,255,.12);
-  border-color:rgba(255,255,255,.2);
-  transform:translateY(-3px);
-  box-shadow:0 8px 24px rgba(0,0,0,.15);
-}
+.ig:hover{border-color:#dd2a7b;transform:translateY(-3px);box-shadow:0 8px 24px rgba(221,42,123,.06)}
 .ig:active{transform:translateY(0);box-shadow:none;transition-duration:.08s}
 
 .ig-ic{
   width:42px;height:42px;border-radius:12px;flex-shrink:0;
   background:linear-gradient(135deg,#f58529,#dd2a7b,#8134af);
   display:flex;align-items:center;justify-content:center;
-  box-shadow:0 4px 14px rgba(221,42,123,.2);
-  transition:transform .3s;
+  box-shadow:0 4px 12px rgba(221,42,123,.15);
+  transition:transform .25s;
 }
-.ig:hover .ig-ic{transform:scale(1.05)}
+.ig:hover .ig-ic{transform:scale(1.06)}
 .ig-ic svg{width:20px;height:20px}
 
 .ig-t{flex:1;text-align:left}
 .ig-h{font-size:.88rem;font-weight:700}
-.ig-s{font-size:.6rem;color:rgba(255,255,255,.35);margin-top:1px;font-weight:500}
+.ig-s{font-size:.6rem;color:#aaa;margin-top:1px;font-weight:500}
 
-.ig .arr{
-  width:26px;height:26px;border-radius:50%;
-  background:rgba(255,255,255,.06);
-  display:flex;align-items:center;justify-content:center;
-  transition:all .3s;
+.ig .chv{
+  width:26px;height:26px;border-radius:50%;background:#f5f5f8;
+  display:flex;align-items:center;justify-content:center;transition:all .25s;
 }
-.ig:hover .arr{background:rgba(255,255,255,.12);transform:translateX(2px)}
-.arr svg{width:10px;height:10px;stroke:rgba(255,255,255,.35);fill:none;stroke-width:2.5}
+.ig:hover .chv{background:#fce8f2;transform:translateX(2px)}
+.chv svg{width:10px;height:10px;stroke:#bbb;fill:none;stroke-width:2.5}
+.ig:hover .chv svg{stroke:#dd2a7b}
 
 /* ===== FOOTER ===== */
-.ft{
-  margin-top:24px;
-  font-size:.55rem;color:rgba(255,255,255,.2);
-  letter-spacing:2px;text-transform:uppercase;
-  animation:fadeUp .4s ease .68s both;
-}
+.ft{margin-top:22px;font-size:.55rem;color:#ccc;letter-spacing:2px;text-transform:uppercase;animation:up .4s ease .66s both}
 
 /* ===== RESPONSIVE ===== */
 @media(max-width:420px){
   .card{padding:32px 22px 26px;border-radius:24px}
-  .avatar{width:76px;height:76px;margin-bottom:16px}
-  .name{font-size:1.3rem}
-  .line{margin:14px auto 22px}
+  .avatar{width:76px;height:76px}
+  .name{font-size:1.25rem}
+  .accent{margin:12px auto 22px}
   .b{padding:20px 10px 16px;border-radius:16px}
   .b .ic{width:44px;height:44px}
-  .b .ic svg{width:20px;height:20px}
   .b .lbl{font-size:.84rem}
   .ig{padding:14px 16px;border-radius:14px}
-  .ig-ic{width:38px;height:38px;border-radius:11px}
+  .ig-ic{width:38px;height:38px;border-radius:10px}
 }
 @media(max-width:360px){
-  .page{padding:16px}
-  .card{padding:28px 18px 22px;border-radius:22px}
+  .page{padding:0 18px}
+  .card{padding:26px 18px 22px;border-radius:22px}
   .avatar{width:68px;height:68px}
   .name{font-size:1.15rem}
   .btns{gap:10px}
   .b{padding:18px 8px 14px;border-radius:14px}
   .b .ic{width:40px;height:40px}
-  .b .lbl{font-size:.8rem}
   .ig{gap:10px;padding:12px 14px;border-radius:12px}
-  .ig-ic{width:36px;height:36px;border-radius:10px}
+  .ig-ic{width:36px;height:36px}
 }
-
-/* ===== SUBTLE AMBIENT ANIMATION ===== */
-@keyframes breathe{0%,100%{opacity:.08}50%{opacity:.12}}
-.card::before{
-  content:'';position:absolute;
-  top:-1px;left:20%;right:20%;height:1px;
-  background:linear-gradient(90deg,transparent,rgba(255,255,255,.3),transparent);
-  border-radius:1px;
-  animation:breathe 4s ease-in-out infinite;
-}
-.card{position:relative;overflow:hidden}
 </style>
 </head>
 <body>
 
-<div class="bg"></div>
+<!-- ANIMATED BACKGROUND -->
+<div class="scene">
+  <!-- Floating medical crosses -->
+  <div class="float-el f1"><svg viewBox="0 0 24 24" fill="#00005c"><path d="M9 2h6v7h7v6h-7v7H9v-7H2V9h7z"/></svg></div>
+  <div class="float-el f2"><svg viewBox="0 0 24 24" fill="#ff7800"><circle cx="12" cy="12" r="10"/></svg></div>
+  <div class="float-el f3"><svg viewBox="0 0 24 24" fill="#00005c"><path d="M9 2h6v7h7v6h-7v7H9v-7H2V9h7z"/></svg></div>
+  <div class="float-el f4"><svg viewBox="0 0 24 24" fill="#ff7800"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+  <div class="float-el f5"><svg viewBox="0 0 24 24" fill="#00005c"><path d="M9 2h6v7h7v6h-7v7H9v-7H2V9h7z"/></svg></div>
+  <div class="float-el f6"><svg viewBox="0 0 24 24" fill="#ff7800"><circle cx="12" cy="12" r="10"/></svg></div>
+  <div class="float-el f7"><svg viewBox="0 0 24 24" fill="#00005c"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+  <div class="float-el f8"><svg viewBox="0 0 24 24" fill="#00005c"><path d="M9 2h6v7h7v6h-7v7H9v-7H2V9h7z"/></svg></div>
 
+  <!-- Heartbeat line -->
+  <svg class="heartbeat" viewBox="0 0 1200 60" fill="none" stroke="#00005c" stroke-width="2">
+    <polyline points="0,30 100,30 120,30 130,10 140,50 150,20 160,40 170,30 300,30 400,30 420,30 430,10 440,50 450,20 460,40 470,30 600,30 700,30 720,30 730,10 740,50 750,20 760,40 770,30 900,30 1000,30 1020,30 1030,10 1040,50 1050,20 1060,40 1070,30 1200,30"/>
+  </svg>
+
+  <!-- Walking doctor silhouettes -->
+  <div class="walker w1">
+    <svg viewBox="0 0 40 80" fill="#00005c"><circle cx="20" cy="10" r="7"/><rect x="14" y="18" width="12" height="28" rx="4"/><rect x="10" y="22" width="8" height="3" rx="1.5"/><rect x="22" y="22" width="8" height="3" rx="1.5"/><rect x="14" y="46" width="5" height="22" rx="2.5"/><rect x="21" y="46" width="5" height="22" rx="2.5"/></svg>
+  </div>
+  <div class="walker w2">
+    <svg viewBox="0 0 40 80" fill="#00005c"><circle cx="20" cy="10" r="7"/><rect x="14" y="18" width="12" height="28" rx="4"/><rect x="10" y="22" width="8" height="3" rx="1.5"/><rect x="22" y="22" width="8" height="3" rx="1.5"/><rect x="14" y="46" width="5" height="22" rx="2.5"/><rect x="21" y="46" width="5" height="22" rx="2.5"/></svg>
+  </div>
+  <div class="walker w3">
+    <svg viewBox="0 0 40 80" fill="#ff7800"><circle cx="20" cy="10" r="7"/><rect x="14" y="18" width="12" height="28" rx="4"/><rect x="10" y="22" width="8" height="3" rx="1.5"/><rect x="22" y="22" width="8" height="3" rx="1.5"/><rect x="14" y="46" width="5" height="22" rx="2.5"/><rect x="21" y="46" width="5" height="22" rx="2.5"/></svg>
+  </div>
+</div>
+
+<!-- CARD -->
 <div class="page">
   <div class="card">
-
     <div class="avatar">
       <img src="https://ugc.production.linktr.ee/y5ylGyXTtaFf3ebFkIQC_CmrdAYCbL3KPD5Re?io=true&size=avatar-v3_0" alt="CMD Prevaler" width="88" height="88">
     </div>
 
     <h1 class="name">CMD Prevaler</h1>
     <p class="sub">Centro Médico</p>
-    <div class="line"></div>
+    <div class="accent"></div>
 
     <div class="btns">
       <a href="https://wa.me/15855222431" class="b" target="_blank" rel="noopener">
-        <div class="ic green">
-          <svg viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.832-1.438A9.955 9.955 0 0 0 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg>
-        </div>
+        <div class="ic green"><svg viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.832-1.438A9.955 9.955 0 0 0 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg></div>
         <div class="lbl">Escribir</div>
         <div class="mt">WhatsApp</div>
       </a>
       <a href="tel:+15855222431" class="b">
-        <div class="ic navy">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-        </div>
+        <div class="ic orange"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
         <div class="lbl">Llamar</div>
         <div class="mt">+1 (585) 522-2431</div>
       </a>
     </div>
 
     <a href="https://www.instagram.com/clinicaprevaler" class="ig" target="_blank" rel="noopener">
-      <div class="ig-ic">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.2" fill="#fff" stroke="none"/></svg>
-      </div>
-      <div class="ig-t">
-        <div class="ig-h">@clinicaprevaler</div>
-        <div class="ig-s">Síguenos en Instagram</div>
-      </div>
-      <div class="arr"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="ig-ic"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.2" fill="#fff" stroke="none"/></svg></div>
+      <div class="ig-t"><div class="ig-h">@clinicaprevaler</div><div class="ig-s">Síguenos en Instagram</div></div>
+      <div class="chv"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
     </a>
 
     <p class="ft">Prevaler © 2025</p>
-
   </div>
 </div>
 
