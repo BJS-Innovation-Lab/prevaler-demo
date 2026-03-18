@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prevaler — Centro Médico | Tu salud, sin esperas</title>
+<meta name="description" content="Prevaler Centro Médico. Más de 20 años cuidando tu salud en Porlamar, Valencia y Maracay.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@700;900&display=swap');
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { font-family:'Inter',sans-serif; color:#333; background:#fff; overflow-x:hidden; -webkit-font-smoothing:antialiased; }
+h1,h2,h3,h4 { font-family:'Montserrat',sans-serif; }
+a { text-decoration:none; color:inherit; }
+button { font-family:'Inter',sans-serif; cursor:pointer; border:none; }
+.container { max-width:1080px; margin:0 auto; padding:0 24px; }
+
+/* ===== REVEAL ANIMATIONS ===== */
+.reveal { opacity:0; transform:translateY(30px); transition:opacity .7s ease, transform .7s ease; }
+.reveal.visible { opacity:1; transform:translateY(0); }
+
+/* ===== NAV ===== */
+nav { position:fixed; top:0; left:0; width:100%; z-index:1000; padding:18px 0; transition:all .4s ease; }
+nav.scrolled { background:rgba(0,0,90,.92); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px); padding:10px 0; box-shadow:0 2px 30px rgba(0,0,0,.2); }
+nav .container { display:flex; align-items:center; justify-content:space-between; }
+.nav-logo { font-family:'Montserrat',sans-serif; font-weight:900; font-size:1.4rem; color:#fff; letter-spacing:3px; }
+.nav-links { display:flex; gap:28px; list-style:none; }
+.nav-links a { color:rgba(255,255,255,.85); font-size:.9rem; font-weight:500; transition:color .3s; }
+.nav-links a:hover { color:#ff7800; }
+.nav-cta { background:#ff7800; color:#fff; padding:10px 24px; border-radius:50px; font-weight:600; font-size:.85rem; transition:transform .3s, box-shadow .3s; }
+.nav-cta:hover { transform:translateY(-2px); box-shadow:0 6px 20px rgba(255,120,0,.4); }
+.hamburger { display:none; flex-direction:column; gap:5px; background:none; padding:8px; }
+.hamburger span { width:24px; height:2px; background:#fff; border-radius:2px; transition:all .3s; }
+.hamburger.active span:nth-child(1) { transform:rotate(45deg) translate(5px,5px); }
+.hamburger.active span:nth-child(2) { opacity:0; }
+.hamburger.active span:nth-child(3) { transform:rotate(-45deg) translate(5px,-5px); }
+.mobile-menu { position:fixed; top:0; right:-100%; width:280px; height:100vh; background:#00005c; z-index:999; padding:80px 32px 32px; transition:right .4s ease; }
+.mobile-menu.open { right:0; }
+.mobile-menu a { display:block; color:#fff; font-size:1.1rem; padding:14px 0; border-bottom:1px solid rgba(255,255,255,.1); }
+.mobile-overlay { position:fixed; inset:0; background:rgba(0,0,0,.5); z-index:998; opacity:0; pointer-events:none; transition:opacity .3s; }
+.mobile-overlay.open { opacity:1; pointer-events:all; }
+
+/* ===== HERO ===== */
+.hero { min-height:100vh; background:linear-gradient(160deg,#00005c 0%,#0a0a3e 100%); display:flex; flex-direction:column; align-items:center; justify-content:center; position:relative; overflow:hidden; padding:120px 24px 60px; }
+.hero::before { content:''; position:absolute; inset:0; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.06'/%3E%3C/svg%3E"); background-size:128px 128px; opacity:.5; pointer-events:none; }
+.hero-content { position:relative; z-index:1; text-align:center; max-width:700px; }
+.hero-badge { display:inline-block; background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.15); padding:8px 20px; border-radius:50px; color:rgba(255,255,255,.8); font-size:.8rem; font-weight:500; margin-bottom:28px; letter-spacing:1px; }
+.hero h1 { font-size:clamp(2.8rem,6vw,4.5rem); font-weight:900; color:#fff; letter-spacing:8px; margin-bottom:16px; line-height:1.1; }
+.hero .tagline { font-size:clamp(1.1rem,2.5vw,1.5rem); color:rgba(255,255,255,.75); font-weight:400; margin-bottom:48px; }
+
+/* Search bar */
+.search-bar { display:flex; gap:0; background:#fff; border-radius:16px; overflow:hidden; box-shadow:0 20px 60px rgba(0,0,0,.3); max-width:620px; margin:0 auto 40px; }
+.search-bar select, .search-bar button { border:none; padding:18px 20px; font-size:.95rem; font-family:'Inter',sans-serif; outline:none; }
+.search-bar select { flex:1; color:#333; background:#fff; border-right:1px solid #eee; cursor:pointer; min-width:0; }
+.search-bar select option { color:#333; }
+.search-bar .btn-agendar { background:#ff7800; color:#fff; font-weight:600; padding:18px 32px; white-space:nowrap; transition:background .3s; }
+.search-bar .btn-agendar:hover { background:#e66d00; }
+
+/* Insurance */
+.insurance-row { display:flex; align-items:center; gap:24px; justify-content:center; flex-wrap:wrap; margin-top:8px; opacity:.5; }
+.insurance-row span { color:rgba(255,255,255,.6); font-size:.75rem; font-weight:500; letter-spacing:1px; text-transform:uppercase; }
+.insurance-logo { width:60px; height:28px; background:rgba(255,255,255,.15); border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:.55rem; color:rgba(255,255,255,.5); font-weight:600; }
+
+/* Scroll indicator */
+.scroll-indicator { position:absolute; bottom:30px; left:50%; transform:translateX(-50%); z-index:2; animation:bounce 2s infinite; }
+.scroll-indicator svg { width:28px; height:28px; stroke:rgba(255,255,255,.4); fill:none; stroke-width:2; }
+@keyframes bounce { 0%,100%{ transform:translateX(-50%) translateY(0); } 50%{ transform:translateX(-50%) translateY(10px); } }
+
+/* ===== STATS ===== */
+.stats { padding:80px 0; background:#fff; }
+.stats-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:32px; text-align:center; }
+.stat-item h3 { font-size:clamp(2rem,4vw,3.2rem); font-weight:900; color:#00005c; margin-bottom:8px; }
+.stat-item p { color:#666; font-size:.9rem; font-weight:500; }
+
+/* ===== SEDES ===== */
+.sedes { padding:100px 0; background:#f8f9fa; }
+.section-label { text-align:center; color:#504c6a; font-size:.8rem; font-weight:600; letter-spacing:3px; text-transform:uppercase; margin-bottom:12px; }
+.section-title { text-align:center; font-size:clamp(1.8rem,3.5vw,2.6rem); font-weight:900; color:#00005c; margin-bottom:56px; }
+.sedes-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:28px; }
+.sede-card { background:#fff; border-radius:20px; overflow:hidden; transition:transform .5s ease, box-shadow .5s ease; perspective:1000px; }
+.sede-card:hover { transform:rotateY(2deg) translateZ(10px); box-shadow:0 25px 60px rgba(0,0,92,.12); }
+.sede-img { height:200px; display:flex; align-items:center; justify-content:center; font-size:3rem; position:relative; overflow:hidden; }
+.sede-img.porlamar { background:linear-gradient(135deg,#00005c,#1a1a6e); }
+.sede-img.valencia { background:linear-gradient(135deg,#0a0a3e,#2a1a5e); }
+.sede-img.maracay { background:linear-gradient(135deg,#1a0a4e,#00005c); }
+.sede-img span { color:rgba(255,255,255,.3); font-size:4rem; transition:transform .5s; }
+.sede-card:hover .sede-img span { transform:scale(1.05); }
+.sede-body { padding:28px; }
+.sede-body h3 { font-size:1.2rem; font-weight:900; color:#00005c; margin-bottom:12px; }
+.sede-body .sede-info { color:#666; font-size:.85rem; line-height:1.8; margin-bottom:20px; }
+.sede-body .sede-info strong { color:#333; }
+.btn-whatsapp { display:inline-flex; align-items:center; gap:8px; background:#25d366; color:#fff; padding:12px 24px; border-radius:50px; font-weight:600; font-size:.85rem; transition:transform .3s, box-shadow .3s; }
+.btn-whatsapp:hover { transform:translateY(-2px); box-shadow:0 8px 20px rgba(37,211,102,.3); }
+
+/* ===== ESPECIALIDADES ===== */
+.especialidades { padding:100px 0; background:#fff; }
+.esp-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+.esp-card { background:#f8f9fa; border-radius:16px; padding:32px 24px; text-align:center; cursor:pointer; transition:all .3s ease; border:2px solid transparent; }
+.esp-card:hover, .esp-card.active { border-color:#ff7800; background:#fff; box-shadow:0 10px 40px rgba(0,0,92,.08); }
+.esp-card .icon { font-size:2.5rem; margin-bottom:12px; display:block; }
+.esp-card h3 { font-size:1rem; font-weight:700; color:#00005c; margin-bottom:4px; }
+.esp-card p { font-size:.8rem; color:#666; }
+.esp-detail { display:none; grid-column:1/-1; background:#fff; border-radius:16px; padding:32px; box-shadow:0 10px 40px rgba(0,0,92,.08); border:1px solid #eee; animation:fadeIn .4s ease; }
+.esp-detail.show { display:block; }
+@keyframes fadeIn { from { opacity:0; transform:translateY(-10px); } to { opacity:1; transform:translateY(0); } }
+.esp-detail h4 { font-size:1.2rem; color:#00005c; margin-bottom:16px; }
+.esp-detail .doctor-placeholder { display:flex; gap:16px; align-items:center; padding:12px 0; border-bottom:1px solid #f0f0f0; }
+.esp-detail .doctor-avatar { width:48px; height:48px; border-radius:50%; background:linear-gradient(135deg,#00005c,#504c6a); display:flex; align-items:center; justify-content:center; color:#fff; font-size:1.2rem; flex-shrink:0; }
+.esp-detail .doctor-info span { display:block; }
+.esp-detail .doctor-info .name { font-weight:600; color:#333; }
+.esp-detail .doctor-info .spec { font-size:.85rem; color:#666; }
+.btn-primary { display:inline-block; background:#ff7800; color:#fff; padding:12px 28px; border-radius:50px; font-weight:600; font-size:.9rem; margin-top:16px; transition:transform .3s, box-shadow .3s; }
+.btn-primary:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(255,120,0,.3); }
+
+/* ===== EQUIPO ===== */
+.equipo { padding:100px 0; background:#00005c; overflow:hidden; }
+.equipo .section-label { color:rgba(255,255,255,.5); }
+.equipo .section-title { color:#fff; }
+.carousel-wrapper { position:relative; overflow:hidden; }
+.carousel-track { display:flex; gap:24px; transition:transform .5s ease; padding:8px 0; }
+.doctor-card { min-width:260px; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.1); border-radius:20px; overflow:hidden; flex-shrink:0; transition:transform .3s, box-shadow .3s; }
+.doctor-card:hover { transform:translateY(-6px); box-shadow:0 20px 40px rgba(0,0,0,.3); }
+.doctor-photo { height:200px; display:flex; align-items:center; justify-content:center; font-size:4rem; }
+.doctor-photo.d1 { background:linear-gradient(135deg,#1a1a6e,#2a2a8e); }
+.doctor-photo.d2 { background:linear-gradient(135deg,#2a1a5e,#3a2a7e); }
+.doctor-photo.d3 { background:linear-gradient(135deg,#0a2a5e,#1a3a7e); }
+.doctor-photo.d4 { background:linear-gradient(135deg,#1a0a4e,#2a1a6e); }
+.doctor-photo.d5 { background:linear-gradient(135deg,#0a1a5e,#1a2a7e); }
+.doctor-photo.d6 { background:linear-gradient(135deg,#2a0a4e,#3a1a6e); }
+.doctor-photo span { color:rgba(255,255,255,.2); }
+.doctor-card-body { padding:24px; }
+.doctor-card-body h4 { color:#fff; font-size:1rem; margin-bottom:4px; }
+.doctor-card-body .specialty { color:rgba(255,255,255,.6); font-size:.85rem; margin-bottom:8px; }
+.doctor-card-body .years { color:#ff7800; font-size:.8rem; font-weight:600; }
+.carousel-nav { display:flex; justify-content:center; gap:12px; margin-top:32px; }
+.carousel-btn { width:44px; height:44px; border-radius:50%; background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.2); color:#fff; font-size:1.2rem; display:flex; align-items:center; justify-content:center; transition:background .3s; }
+.carousel-btn:hover { background:rgba(255,255,255,.2); }
+
+/* ===== TESTIMONIOS ===== */
+.testimonios { padding:100px 0; background:#f8f9fa; overflow:hidden; }
+.test-track { display:flex; gap:24px; padding:8px 0; }
+.test-card { min-width:320px; background:rgba(255,255,255,.7); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px); border:1px solid rgba(255,255,255,.8); border-radius:20px; padding:32px; flex-shrink:0; transition:transform .3s; box-shadow:0 8px 32px rgba(0,0,92,.06); }
+.test-card:hover { transform:translateY(-4px); }
+.test-stars { color:#ff7800; font-size:1rem; margin-bottom:16px; letter-spacing:2px; }
+.test-quote { color:#333; font-size:.95rem; line-height:1.7; margin-bottom:20px; font-style:italic; }
+.test-author { display:flex; align-items:center; gap:12px; }
+.test-avatar { width:40px; height:40px; border-radius:50%; background:linear-gradient(135deg,#00005c,#504c6a); display:flex; align-items:center; justify-content:center; color:#fff; font-size:.85rem; font-weight:700; }
+.test-name { font-weight:600; color:#333; font-size:.9rem; }
+.test-loc { font-size:.8rem; color:#666; }
+
+/* ===== CTA FINAL ===== */
+.cta-final { padding:100px 0; background:linear-gradient(160deg,#00005c,#0a0a3e); text-align:center; position:relative; overflow:hidden; }
+.cta-final::before { content:''; position:absolute; inset:0; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.06'/%3E%3C/svg%3E"); background-size:128px; opacity:.4; pointer-events:none; }
+.cta-final .container { position:relative; z-index:1; }
+.cta-final h2 { font-size:clamp(2rem,4vw,3rem); font-weight:900; color:#fff; margin-bottom:20px; }
+.cta-final p { color:rgba(255,255,255,.7); font-size:1.1rem; margin-bottom:40px; max-width:500px; margin-left:auto; margin-right:auto; }
+.btn-pulse { display:inline-block; background:#ff7800; color:#fff; padding:18px 48px; border-radius:50px; font-weight:700; font-size:1.1rem; animation:pulse 2.5s infinite; transition:transform .3s; }
+.btn-pulse:hover { transform:scale(1.05); }
+@keyframes pulse { 0%{ box-shadow:0 0 0 0 rgba(255,120,0,.5); } 70%{ box-shadow:0 0 0 20px rgba(255,120,0,0); } 100%{ box-shadow:0 0 0 0 rgba(255,120,0,0); } }
+.cta-phones { display:flex; justify-content:center; gap:40px; margin-top:48px; flex-wrap:wrap; }
+.cta-phone { color:rgba(255,255,255,.8); font-size:.9rem; }
+.cta-phone strong { display:block; color:#fff; font-size:1rem; margin-bottom:4px; }
+.map-placeholder { margin-top:56px; height:300px; background:linear-gradient(135deg,#1a1a2e,#0a0a3e); border-radius:20px; display:flex; align-items:center; justify-content:center; color:rgba(255,255,255,.2); font-size:1rem; border:1px solid rgba(255,255,255,.1); }
+
+/* ===== FOOTER ===== */
+footer { background:#1a1a2e; padding:60px 0 30px; }
+.footer-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:40px; margin-bottom:40px; }
+.footer-brand .footer-logo { font-family:'Montserrat',sans-serif; font-weight:900; font-size:1.3rem; color:#fff; letter-spacing:3px; margin-bottom:12px; }
+.footer-brand p { color:rgba(255,255,255,.5); font-size:.85rem; line-height:1.7; }
+.footer-links h4 { color:#fff; font-size:.85rem; font-weight:700; margin-bottom:16px; text-transform:uppercase; letter-spacing:1px; }
+.footer-links a { display:block; color:rgba(255,255,255,.5); font-size:.85rem; padding:4px 0; transition:color .3s; }
+.footer-links a:hover { color:#ff7800; }
+.footer-social { display:flex; gap:12px; margin-top:20px; }
+.footer-social a { width:40px; height:40px; border-radius:50%; background:rgba(255,255,255,.08); display:flex; align-items:center; justify-content:center; color:rgba(255,255,255,.6); font-size:1.1rem; transition:background .3s, color .3s; }
+.footer-social a:hover { background:#ff7800; color:#fff; }
+.footer-bottom { border-top:1px solid rgba(255,255,255,.08); padding-top:24px; text-align:center; color:rgba(255,255,255,.3); font-size:.8rem; }
+
+/* ===== STICKY BAR ===== */
+.sticky-bar { position:fixed; bottom:-80px; left:0; width:100%; background:rgba(0,0,90,.92); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px); z-index:900; padding:12px 0; transition:bottom .4s ease; box-shadow:0 -4px 30px rgba(0,0,0,.2); }
+.sticky-bar.show { bottom:0; }
+.sticky-bar .container { display:flex; align-items:center; justify-content:space-between; }
+.sticky-bar .sticky-logo { font-family:'Montserrat',sans-serif; font-weight:900; color:#fff; letter-spacing:2px; font-size:1rem; }
+.sticky-bar .sticky-phone { color:rgba(255,255,255,.7); font-size:.85rem; }
+.sticky-bar .nav-cta { padding:10px 20px; font-size:.8rem; }
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:980px){
+  .sedes-grid { grid-template-columns:repeat(2,1fr); }
+  .esp-grid { grid-template-columns:repeat(2,1fr); }
+  .footer-grid { grid-template-columns:1fr 1fr; gap:32px; }
+  .stats-grid { grid-template-columns:repeat(2,1fr); gap:24px; }
+}
+@media(max-width:767px){
+  .nav-links, .nav .nav-cta-wrap { display:none; }
+  .hamburger { display:flex; }
+  .sedes-grid, .esp-grid, .stats-grid { grid-template-columns:1fr; }
+  .search-bar { flex-direction:column; border-radius:12px; }
+  .search-bar select { border-right:none; border-bottom:1px solid #eee; }
+  .footer-grid { grid-template-columns:1fr; }
+  .cta-phones { flex-direction:column; gap:20px; }
+  .test-card { min-width:280px; }
+  .doctor-card { min-width:220px; }
+  .sticky-bar .sticky-phone { display:none; }
+}
+@media(max-width:479px){
+  .hero h1 { letter-spacing:4px; }
+  .hero { padding:100px 16px 50px; }
+  .insurance-row { gap:12px; }
+  section { padding:60px 0; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="mainNav" aria-label="Navegación principal">
+  <div class="container">
+    <a href="#" class="nav-logo">PREVALER</a>
+    <ul class="nav-links">
+      <li><a href="#sedes">Sedes</a></li>
+      <li><a href="#especialidades">Especialidades</a></li>
+      <li><a href="#equipo">Equipo</a></li>
+      <li><a href="#testimonios">Testimonios</a></li>
+    </ul>
+    <span class="nav-cta-wrap"><a href="#cta" class="nav-cta">Agendar Cita</a></span>
+    <button class="hamburger" id="hamburgerBtn" aria-label="Menú">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<div class="mobile-overlay" id="mobileOverlay"></div>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#sedes">Sedes</a>
+  <a href="#especialidades">Especialidades</a>
+  <a href="#equipo">Equipo</a>
+  <a href="#testimonios">Testimonios</a>
+  <a href="#cta" style="color:#ff7800; font-weight:700; margin-top:16px;">Agendar Cita</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-content">
+    <span class="hero-badge">+20 AÑOS CUIDANDO TU SALUD</span>
+    <h1>PREVALER</h1>
+    <p class="tagline">Tu salud, sin esperas</p>
+    <div class="search-bar">
+      <select aria-label="Especialidad">
+        <option value="">Especialidad</option>
+        <option>Cardiología</option>
+        <option>Imagenología</option>
+        <option>Laboratorio</option>
+        <option>Fisioterapia</option>
+        <option>Cirugía</option>
+        <option>Consulta General</option>
+      </select>
+      <select aria-label="Sede">
+        <option value="">Sede</option>
+        <option>Porlamar</option>
+        <option>Valencia</option>
+        <option>Maracay</option>
+      </select>
+      <button class="btn-agendar">Agendar Cita</button>
+    </div>
+    <div class="insurance-row">
+      <span>Seguros aliados</span>
+      <div class="insurance-logo">Seguro 1</div>
+      <div class="insurance-logo">Seguro 2</div>
+      <div class="insurance-logo">Seguro 3</div>
+      <div class="insurance-logo">Seguro 4</div>
+      <div class="insurance-logo">Seguro 5</div>
+    </div>
+  </div>
+  <a href="#stats" class="scroll-indicator" aria-label="Desplazar hacia abajo">
+    <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </a>
+</section>
+
+<!-- STATS -->
+<section class="stats" id="stats">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-item reveal">
+        <h3><span class="counter" data-target="20">0</span>+</h3>
+        <p>Años de experiencia</p>
+      </div>
+      <div class="stat-item reveal">
+        <h3><span class="counter" data-target="32">0</span></h3>
+        <p>Especialistas</p>
+      </div>
+      <div class="stat-item reveal">
+        <h3><span class="counter" data-target="12000">0</span>+</h3>
+        <p>Pacientes atendidos</p>
+      </div>
+      <div class="stat-item reveal">
+        <h3><span class="counter" data-target="3">0</span></h3>
+        <p>Sedes en Venezuela</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SEDES -->
+<section class="sedes" id="sedes">
+  <div class="container">
+    <p class="section-label reveal">Nuestras sedes</p>
+    <h2 class="section-title reveal">Estamos cerca de ti</h2>
+    <div class="sedes-grid">
+      <div class="sede-card reveal">
+        <div class="sede-img porlamar"><span>🏝️</span></div>
+        <div class="sede-body">
+          <h3>Prevaler Porlamar</h3>
+          <div class="sede-info">
+            <strong>📍</strong> Av. Santiago Mariño, Porlamar<br>
+            <strong>📞</strong> +58 295-000-0000<br>
+            <strong>🕐</strong> Lun–Sáb: 7:00am – 7:00pm
+          </div>
+          <a href="https://wa.me/582950000000" class="btn-whatsapp" target="_blank" rel="noopener" aria-label="WhatsApp Porlamar">💬 WhatsApp</a>
+        </div>
+      </div>
+      <div class="sede-card reveal">
+        <div class="sede-img valencia"><span>🏙️</span></div>
+        <div class="sede-body">
+          <h3>Prevaler Valencia</h3>
+          <div class="sede-info">
+            <strong>📍</strong> Av. Bolívar Norte, Valencia<br>
+            <strong>📞</strong> +58 241-000-0000<br>
+            <strong>🕐</strong> Lun–Sáb: 7:00am – 7:00pm
+          </div>
+          <a href="https://wa.me/582410000000" class="btn-whatsapp" target="_blank" rel="noopener" aria-label="WhatsApp Valencia">💬 WhatsApp</a>
+        </div>
+      </div>
+      <div class="sede-card reveal">
+        <div class="sede-img maracay"><span>🌿</span></div>
+        <div class="sede-body">
+          <h3>Prevaler Maracay</h3>
+          <div class="sede-info">
+            <strong>📍</strong> Av. Las Delicias, Maracay<br>
+            <strong>📞</strong> +58 243-000-0000<br>
+            <strong>🕐</strong> Lun–Sáb: 7:00am – 7:00pm
+          </div>
+          <a href="https://wa.me/582430000000" class="btn-whatsapp" target="_blank" rel="noopener" aria-label="WhatsApp Maracay">💬 WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ESPECIALIDADES -->
+<section class="especialidades" id="especialidades">
+  <div class="container">
+    <p class="section-label reveal">Servicios médicos</p>
+    <h2 class="section-title reveal">Nuestras especialidades</h2>
+    <div class="esp-grid" id="espGrid">
+      <div class="esp-card reveal" data-esp="cardio">
+        <span class="icon">🫀</span>
+        <h3>Cardiología</h3>
+        <p>Salud cardiovascular</p>
+      </div>
+      <div class="esp-card reveal" data-esp="lab">
+        <span class="icon">🔬</span>
+        <h3>Laboratorio</h3>
+        <p>Análisis clínicos</p>
+      </div>
+      <div class="esp-card reveal" data-esp="imagen">
+        <span class="icon">📷</span>
+        <h3>Imagenología</h3>
+        <p>Diagnóstico por imagen</p>
+      </div>
+      <div class="esp-card reveal" data-esp="fisio">
+        <span class="icon">🦴</span>
+        <h3>Fisioterapia</h3>
+        <p>Rehabilitación física</p>
+      </div>
+      <div class="esp-card reveal" data-esp="quirofano">
+        <span class="icon">🏥</span>
+        <h3>Quirófano</h3>
+        <p>Cirugías ambulatorias</p>
+      </div>
+      <div class="esp-card reveal" data-esp="general">
+        <span class="icon">👁️</span>
+        <h3>Consultas Generales</h3>
+        <p>Atención primaria</p>
+      </div>
+    </div>
+    <div class="esp-detail" id="espDetail">
+      <h4 id="espDetailTitle"></h4>
+      <div class="doctor-placeholder">
+        <div class="doctor-avatar">👨‍⚕️</div>
+        <div class="doctor-info"><span class="name">Dr. Juan Pérez</span><span class="spec">15 años de experiencia</span></div>
+      </div>
+      <div class="doctor-placeholder">
+        <div class="doctor-avatar">👩‍⚕️</div>
+        <div class="doctor-info"><span class="name">Dra. María González</span><span class="spec">12 años de experiencia</span></div>
+      </div>
+      <a href="#cta" class="btn-primary">Agendar Cita →</a>
+    </div>
+  </div>
+</section>
+
+<!-- EQUIPO -->
+<section class="equipo" id="equipo">
+  <div class="container">
+    <p class="section-label reveal">Profesionales de confianza</p>
+    <h2 class="section-title reveal">Nuestro equipo médico</h2>
+    <div class="carousel-wrapper" id="doctorCarousel">
+      <div class="carousel-track" id="doctorTrack">
+        <div class="doctor-card"><div class="doctor-photo d1"><span>👨‍⚕️</span></div><div class="doctor-card-body"><h4>Dr. Carlos Rodríguez</h4><p class="specialty">Cardiología</p><p class="years">18 años de experiencia</p></div></div>
+        <div class="doctor-card"><div class="doctor-photo d2"><span>👩‍⚕️</span></div><div class="doctor-card-body"><h4>Dra. Ana Martínez</h4><p class="specialty">Imagenología</p><p class="years">15 años de experiencia</p></div></div>
+        <div class="doctor-card"><div class="doctor-photo d3"><span>👨‍⚕️</span></div><div class="doctor-card-body"><h4>Dr. Luis Hernández</h4><p class="specialty">Cirugía General</p><p class="years">20 años de experiencia</p></div></div>
+        <div class="doctor-card"><div class="doctor-photo d4"><span>👩‍⚕️</span></div><div class="doctor-card-body"><h4>Dra. Patricia Gómez</h4><p class="specialty">Fisioterapia</p><p class="years">10 años de experiencia</p></div></div>
+        <div class="doctor-card"><div class="doctor-photo d5"><span>👨‍⚕️</span></div><div class="doctor-card-body"><h4>Dr. Roberto Díaz</h4><p class="specialty">Laboratorio Clínico</p><p class="years">14 años de experiencia</p></div></div>
+        <div class="doctor-card"><div class="doctor-photo d6"><span>👩‍⚕️</span></div><div class="doctor-card-body"><h4>Dra. Carmen López</h4><p class="specialty">Medicina Interna</p><p class="years">12 años de experiencia</p></div></div>
+      </div>
+    </div>
+    <div class="carousel-nav">
+      <button class="carousel-btn" id="docPrev" aria-label="Anterior">‹</button>
+      <button class="carousel-btn" id="docNext" aria-label="Siguiente">›</button>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIOS -->
+<section class="testimonios" id="testimonios">
+  <div class="container">
+    <p class="section-label reveal">Lo que dicen nuestros pacientes</p>
+    <h2 class="section-title reveal">Testimonios</h2>
+    <div class="carousel-wrapper" id="testCarousel">
+      <div class="carousel-track test-track" id="testTrack">
+        <div class="test-card">
+          <div class="test-stars">★★★★★</div>
+          <p class="test-quote">"Excelente atención desde que llegas. El personal es muy amable y los doctores son de primera. Totalmente recomendado."</p>
+          <div class="test-author"><div class="test-avatar">MR</div><div><div class="test-name">María Rodríguez</div><div class="test-loc">Porlamar</div></div></div>
+        </div>
+        <div class="test-card">
+          <div class="test-stars">★★★★★</div>
+          <p class="test-quote">"Me operaron en el quirófano de Valencia y todo salió perfecto. Las instalaciones son modernas y muy limpias."</p>
+          <div class="test-author"><div class="test-avatar">JG</div><div><div class="test-name">José García</div><div class="test-loc">Valencia</div></div></div>
+        </div>
+        <div class="test-card">
+          <div class="test-stars">★★★★★</div>
+          <p class="test-quote">"El laboratorio entrega resultados muy rápido. Ya no tengo que esperar días. Muy eficientes."</p>
+          <div class="test-author"><div class="test-avatar">LP</div><div><div class="test-name">Laura Pérez</div><div class="test-loc">Maracay</div></div></div>
+        </div>
+        <div class="test-card">
+          <div class="test-stars">★★★★★</div>
+          <p class="test-quote">"La fisioterapia me ayudó muchísimo con mi recuperación. Profesionales de verdad. Gracias Prevaler."</p>
+          <div class="test-author"><div class="test-avatar">CF</div><div><div class="test-name">Carlos Fuentes</div><div class="test-loc">Porlamar</div></div></div>
+        </div>
+        <div class="test-card">
+          <div class="test-stars">★★★★★</div>
+          <p class="test-quote">"Llevo años atendiéndome aquí. La calidad ha sido siempre constante. Mi familia entera va a Prevaler."</p>
+          <div class="test-author"><div class="test-avatar">AS</div><div><div class="test-name">Andrea Sánchez</div><div class="test-loc">Valencia</div></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-nav">
+      <button class="carousel-btn" id="testPrev" aria-label="Anterior">‹</button>
+      <button class="carousel-btn" id="testNext" aria-label="Siguiente">›</button>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="cta-final" id="cta">
+  <div class="container">
+    <h2 class="reveal">Agenda tu cita hoy</h2>
+    <p class="reveal">Tu salud no puede esperar. Reserva tu consulta en minutos.</p>
+    <a href="#hero" class="btn-pulse reveal">Agendar Cita</a>
+    <div class="cta-phones reveal">
+      <div class="cta-phone"><strong>Porlamar</strong>+58 295-000-0000</div>
+      <div class="cta-phone"><strong>Valencia</strong>+58 241-000-0000</div>
+      <div class="cta-phone"><strong>Maracay</strong>+58 243-000-0000</div>
+    </div>
+    <div class="map-placeholder reveal">📍 Google Maps — Nuestras 3 sedes</div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo">PREVALER</div>
+        <p>Centro Médico con más de 20 años cuidando la salud de los venezolanos. Sedes en Porlamar, Valencia y Maracay.</p>
+        <div class="footer-social">
+          <a href="https://www.instagram.com/clinicaprevaler" target="_blank" rel="noopener" aria-label="Instagram">📷</a>
+          <a href="#" aria-label="Facebook">👥</a>
+          <a href="#" aria-label="LinkedIn">💼</a>
+        </div>
+      </div>
+      <div class="footer-links">
+        <h4>Enlaces</h4>
+        <a href="#sedes">Sedes</a>
+        <a href="#especialidades">Especialidades</a>
+        <a href="#equipo">Equipo Médico</a>
+        <a href="#testimonios">Testimonios</a>
+        <a href="#cta">Agendar Cita</a>
+      </div>
+      <div class="footer-links">
+        <h4>Contacto</h4>
+        <a href="https://wa.me/582950000000" target="_blank" rel="noopener">WhatsApp Porlamar</a>
+        <a href="https://wa.me/582410000000" target="_blank" rel="noopener">WhatsApp Valencia</a>
+        <a href="https://wa.me/582430000000" target="_blank" rel="noopener">WhatsApp Maracay</a>
+        <a href="https://www.instagram.com/clinicaprevaler" target="_blank" rel="noopener">@clinicaprevaler</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      © 2025 Prevaler Centro Médico. Todos los derechos reservados.
+    </div>
+  </div>
+</footer>
+
+<!-- STICKY BAR -->
+<div class="sticky-bar" id="stickyBar">
+  <div class="container">
+    <span class="sticky-logo">PREVALER</span>
+    <span class="sticky-phone">📞 +58 295-000-0000</span>
+    <a href="#cta" class="nav-cta">Agendar Cita</a>
+  </div>
+</div>
+
+<script>
+// === NAV SCROLL ===
+const nav = document.getElementById('mainNav');
+const sticky = document.getElementById('stickyBar');
+window.addEventListener('scroll', () => {
+  const s = window.scrollY;
+  nav.classList.toggle('scrolled', s > 60);
+  sticky.classList.toggle('show', s > window.innerHeight * 0.6);
+});
+
+// === HAMBURGER ===
+const hBtn = document.getElementById('hamburgerBtn');
+const mMenu = document.getElementById('mobileMenu');
+const mOver = document.getElementById('mobileOverlay');
+function toggleMenu() { hBtn.classList.toggle('active'); mMenu.classList.toggle('open'); mOver.classList.toggle('open'); }
+hBtn.addEventListener('click', toggleMenu);
+mOver.addEventListener('click', toggleMenu);
+mMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', toggleMenu));
+
+// === REVEAL ON SCROLL ===
+const ro = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      const siblings = e.target.parentElement.querySelectorAll('.reveal');
+      const idx = Array.from(siblings).indexOf(e.target);
+      setTimeout(() => e.target.classList.add('visible'), idx * 150);
+      ro.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.15 });
+document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+
+// === COUNTER ANIMATION ===
+let counted = false;
+const counterObs = new IntersectionObserver((entries) => {
+  if (entries[0].isIntersecting && !counted) {
+    counted = true;
+    document.querySelectorAll('.counter').forEach(c => {
+      const target = +c.dataset.target;
+      const dur = 2000;
+      const start = performance.now();
+      function update(now) {
+        const p = Math.min((now - start) / dur, 1);
+        const ease = 1 - Math.pow(1 - p, 3);
+        c.textContent = target >= 1000 ? Math.floor(ease * target).toLocaleString('es') : Math.floor(ease * target);
+        if (p < 1) requestAnimationFrame(update);
+      }
+      requestAnimationFrame(update);
+    });
+  }
+}, { threshold: 0.3 });
+counterObs.observe(document.getElementById('stats'));
+
+// === ESPECIALIDADES EXPAND ===
+const espGrid = document.getElementById('espGrid');
+const espDetail = document.getElementById('espDetail');
+const espTitle = document.getElementById('espDetailTitle');
+const espNames = { cardio:'Cardiología', lab:'Laboratorio', imagen:'Imagenología', fisio:'Fisioterapia', quirofano:'Quirófano', general:'Consultas Generales' };
+espGrid.addEventListener('click', (e) => {
+  const card = e.target.closest('.esp-card');
+  if (!card) return;
+  const esp = card.dataset.esp;
+  document.querySelectorAll('.esp-card').forEach(c => c.classList.remove('active'));
+  card.classList.add('active');
+  espTitle.textContent = espNames[esp] || '';
+  espDetail.classList.add('show');
+  // Insert detail after the correct row
+  const cards = [...espGrid.querySelectorAll('.esp-card')];
+  const idx = cards.indexOf(card);
+  const cols = window.innerWidth > 980 ? 3 : window.innerWidth > 767 ? 2 : 1;
+  const rowEnd = Math.ceil((idx + 1) / cols) * cols - 1;
+  const ref = cards[Math.min(rowEnd, cards.length - 1)];
+  ref.after(espDetail);
+});
+
+// === CAROUSEL HELPER ===
+function setupCarousel(trackId, prevId, nextId, autoMs) {
+  const track = document.getElementById(trackId);
+  const prev = document.getElementById(prevId);
+  const next = document.getElementById(nextId);
+  let pos = 0;
+  function getStep() { return track.firstElementChild.offsetWidth + 24; }
+  function maxPos() { return Math.max(0, track.scrollWidth - track.parentElement.offsetWidth); }
+  function go(dir) { pos = Math.max(0, Math.min(pos + dir * getStep(), maxPos())); track.style.transform = `translateX(-${pos}px)`; }
+  prev.addEventListener('click', () => go(-1));
+  next.addEventListener('click', () => go(1));
+  if (autoMs) {
+    let iv = setInterval(() => go(1), autoMs);
+    track.parentElement.addEventListener('mouseenter', () => clearInterval(iv));
+    track.parentElement.addEventListener('mouseleave', () => { iv = setInterval(() => go(1), autoMs); });
+  }
+}
+setupCarousel('doctorTrack', 'docPrev', 'docNext', 3000);
+setupCarousel('testTrack', 'testPrev', 'testNext', 4000);
+</script>
+</body>
+</html>
