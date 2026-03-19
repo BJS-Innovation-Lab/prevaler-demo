@@ -2,264 +2,286 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-<title>CMD Prevaler</title>
-<meta name="theme-color" content="#f0f4f8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Prevaler — Clínica Médica</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&display=swap');
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-html,body{height:100%;width:100%;overflow:hidden}
+*{margin:0;padding:0;box-sizing:border-box}
+
+:root{
+  --navy:#00005c;
+  --orange:#ff7800;
+  --white:#ffffff;
+  --gray-light:#f7f7fa;
+  --gray-text:#555;
+}
+
 body{
-  font-family:'DM Sans',system-ui,-apple-system,sans-serif;
-  background:#f0f4f8;
-  color:#1a1a2e;
-  display:flex;align-items:center;justify-content:center;
-  -webkit-font-smoothing:antialiased;
-}
-
-/* ===== ANIMATED BACKGROUND ===== */
-.scene{position:fixed;inset:0;z-index:0;overflow:hidden;background:linear-gradient(160deg,#f0f4f8 0%,#e8eef5 50%,#f5f7fa 100%)}
-
-/* Floating medical crosses */
-.float-el{position:absolute;opacity:.06;animation:floatUp linear infinite}
-.float-el svg{width:100%;height:100%}
-.f1{width:30px;height:30px;left:10%;animation-duration:18s;animation-delay:0s}
-.f2{width:22px;height:22px;left:25%;animation-duration:22s;animation-delay:-4s}
-.f3{width:36px;height:36px;left:45%;animation-duration:20s;animation-delay:-8s}
-.f4{width:26px;height:26px;left:65%;animation-duration:24s;animation-delay:-2s}
-.f5{width:20px;height:20px;left:80%;animation-duration:19s;animation-delay:-10s}
-.f6{width:32px;height:32px;left:35%;animation-duration:21s;animation-delay:-14s}
-.f7{width:24px;height:24px;left:55%;animation-duration:23s;animation-delay:-6s}
-.f8{width:28px;height:28px;left:90%;animation-duration:17s;animation-delay:-12s}
-@keyframes floatUp{
-  0%{transform:translateY(110vh) rotate(0deg);opacity:.04}
-  50%{opacity:.08}
-  100%{transform:translateY(-10vh) rotate(180deg);opacity:.04}
-}
-
-/* Heartbeat line */
-.heartbeat{position:absolute;bottom:30%;left:0;width:200%;height:60px;opacity:.04;animation:slideLeft 8s linear infinite}
-@keyframes slideLeft{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-
-/* Walking silhouettes */
-.walker{position:absolute;bottom:12%;opacity:.035;animation:walk linear infinite}
-.w1{animation-duration:25s;animation-delay:0s}
-.w2{animation-duration:30s;animation-delay:-12s}
-.w3{animation-duration:22s;animation-delay:-6s}
-@keyframes walk{0%{transform:translateX(-80px)}100%{transform:translateX(calc(100vw + 80px))}}
-.walker svg{width:40px;height:80px}
-
-/* ===== CARD ===== */
-.page{position:relative;z-index:1;width:100%;max-width:380px;padding:0 24px}
-
-.card{
-  padding:40px 28px 32px;
-  border-radius:28px;
-  background:rgba(255,255,255,.85);
-  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
-  border:1px solid rgba(255,255,255,.9);
-  box-shadow:0 4px 40px rgba(0,0,60,.06),0 1px 3px rgba(0,0,60,.04);
-  text-align:center;
-  animation:cardIn .55s cubic-bezier(.22,1,.36,1) both;
+  font-family:Georgia,'Times New Roman',serif;
+  min-height:100dvh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:var(--white);
+  overflow-x:hidden;
   position:relative;
 }
-@keyframes cardIn{from{opacity:0;transform:translateY(24px) scale(.97)}to{opacity:1;transform:none}}
 
-/* Top accent line */
-.card::before{
-  content:'';position:absolute;
-  top:-1px;left:15%;right:15%;height:3px;
-  background:linear-gradient(90deg,transparent,#ff7800,transparent);
-  border-radius:0 0 3px 3px;
+/* === CSS-ONLY MEDICAL BACKGROUND ANIMATIONS === */
+
+/* Heartbeat pulse line */
+.heartbeat-line{
+  position:fixed;
+  bottom:12%;
+  left:0;
+  width:200%;
+  height:60px;
+  opacity:0.06;
+  z-index:0;
+  overflow:hidden;
+}
+.heartbeat-line svg{
+  animation:heartbeat-scroll 8s linear infinite;
+}
+@keyframes heartbeat-scroll{
+  0%{transform:translateX(0)}
+  100%{transform:translateX(-50%)}
 }
 
-/* ===== AVATAR ===== */
-.avatar{
-  width:88px;height:88px;margin:0 auto 18px;
-  border-radius:50%;overflow:hidden;
-  border:3px solid #fff;
-  box-shadow:0 4px 20px rgba(0,0,60,.08);
-  animation:popIn .5s cubic-bezier(.175,.885,.32,1.275) .1s both;
+/* Floating medical crosses */
+.float-cross{
+  position:fixed;
+  opacity:0.04;
+  z-index:0;
+  color:var(--navy);
+  font-size:28px;
+  font-weight:300;
+  animation:float-up 12s ease-in-out infinite;
 }
-.avatar img{width:100%;height:100%;object-fit:cover;display:block}
-@keyframes popIn{from{opacity:0;transform:scale(.5)}to{opacity:1;transform:scale(1)}}
+.float-cross:nth-child(1){left:8%;top:15%;animation-delay:0s;font-size:22px}
+.float-cross:nth-child(2){right:12%;top:30%;animation-delay:3s;font-size:34px}
+.float-cross:nth-child(3){left:20%;bottom:25%;animation-delay:6s;font-size:18px}
+.float-cross:nth-child(4){right:25%;top:60%;animation-delay:9s;font-size:26px}
+.float-cross:nth-child(5){left:50%;top:8%;animation-delay:2s;font-size:20px}
 
-/* ===== TEXT ===== */
-.name{
-  font-family:'DM Serif Display',Georgia,'Times New Roman',serif;
-  font-size:1.4rem;font-weight:400;
-  color:#00005c;letter-spacing:.5px;
-  margin-bottom:3px;
-  animation:up .45s ease .2s both;
+@keyframes float-up{
+  0%,100%{transform:translateY(0) rotate(0deg);opacity:0.04}
+  50%{transform:translateY(-18px) rotate(8deg);opacity:0.07}
 }
-.sub{
-  font-size:.68rem;color:#8a8aa0;
-  font-weight:500;letter-spacing:2px;text-transform:uppercase;
-  animation:up .45s ease .28s both;
+
+/* Soft radial glow */
+.glow{
+  position:fixed;
+  width:300px;height:300px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(0,0,92,0.03) 0%,transparent 70%);
+  z-index:0;
+  animation:glow-pulse 6s ease-in-out infinite;
 }
-.accent{
-  width:28px;height:2px;margin:14px auto 26px;
-  background:#ff7800;border-radius:2px;
-  animation:up .45s ease .35s both;
+.glow-1{top:-80px;right:-60px;animation-delay:0s}
+.glow-2{bottom:-80px;left:-60px;animation-delay:3s}
+
+@keyframes glow-pulse{
+  0%,100%{transform:scale(1);opacity:0.5}
+  50%{transform:scale(1.15);opacity:1}
 }
-@keyframes up{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 
-/* ===== BUTTONS ===== */
-.btns{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
-.b{
-  display:flex;flex-direction:column;align-items:center;gap:10px;
-  padding:24px 12px 18px;
-  border-radius:18px;
-  background:#fff;
-  border:1.5px solid #eaedf2;
-  text-decoration:none;color:#1a1a2e;
-  transition:all .25s ease;
-  -webkit-tap-highlight-color:transparent;
+/* === MAIN CARD === */
+
+.card{
+  position:relative;
+  z-index:1;
+  width:92%;
+  max-width:380px;
+  padding:40px 28px 36px;
+  text-align:center;
+  background:var(--white);
+  border:1px solid rgba(0,0,92,0.08);
+  border-radius:20px;
+  box-shadow:0 4px 30px rgba(0,0,92,0.06);
 }
-.b:hover{border-color:#00005c;transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,60,.07)}
-.b:active{transform:translateY(0);box-shadow:none;transition-duration:.08s}
 
-.b .ic{
-  width:48px;height:48px;border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
-  transition:transform .25s;
+/* Logo */
+.logo{
+  width:90px;
+  height:90px;
+  border-radius:50%;
+  object-fit:cover;
+  margin-bottom:16px;
+  border:2px solid rgba(0,0,92,0.1);
 }
-.b:hover .ic{transform:scale(1.06)}
-.b .ic svg{width:22px;height:22px}
-.ic.green{background:#25d366;box-shadow:0 4px 12px rgba(37,211,102,.2)}
-.ic.orange{background:#ff7800;box-shadow:0 4px 12px rgba(255,120,0,.2)}
 
-.b .lbl{font-size:.88rem;font-weight:700;color:#1a1a2e}
-.b .mt{font-size:.6rem;color:#aaa;font-weight:500}
-.b:nth-child(1){animation:up .4s ease .42s both}
-.b:nth-child(2){animation:up .4s ease .5s both}
-
-/* ===== INSTAGRAM ===== */
-.ig{
-  display:flex;align-items:center;gap:14px;
-  padding:16px 20px;border-radius:16px;
-  background:#fff;border:1.5px solid #eaedf2;
-  text-decoration:none;color:#1a1a2e;
-  transition:all .25s ease;
-  animation:up .4s ease .58s both;
-  -webkit-tap-highlight-color:transparent;
+/* Title */
+.card h1{
+  font-size:1.4rem;
+  font-weight:700;
+  color:var(--navy);
+  letter-spacing:0.02em;
+  margin-bottom:4px;
+  font-family:Georgia,'Times New Roman',serif;
 }
-.ig:hover{border-color:#dd2a7b;transform:translateY(-3px);box-shadow:0 8px 24px rgba(221,42,123,.06)}
-.ig:active{transform:translateY(0);box-shadow:none;transition-duration:.08s}
 
-.ig-ic{
-  width:42px;height:42px;border-radius:12px;flex-shrink:0;
-  background:linear-gradient(135deg,#f58529,#dd2a7b,#8134af);
-  display:flex;align-items:center;justify-content:center;
-  box-shadow:0 4px 12px rgba(221,42,123,.15);
-  transition:transform .25s;
+.card .tagline{
+  font-size:0.82rem;
+  color:var(--gray-text);
+  margin-bottom:28px;
+  font-style:italic;
+  line-height:1.4;
 }
-.ig:hover .ig-ic{transform:scale(1.06)}
-.ig-ic svg{width:20px;height:20px}
 
-.ig-t{flex:1;text-align:left}
-.ig-h{font-size:.88rem;font-weight:700}
-.ig-s{font-size:.6rem;color:#aaa;margin-top:1px;font-weight:500}
-
-.ig .chv{
-  width:26px;height:26px;border-radius:50%;background:#f5f5f8;
-  display:flex;align-items:center;justify-content:center;transition:all .25s;
+/* Buttons */
+.btn-row{
+  display:flex;
+  gap:10px;
+  margin-bottom:12px;
 }
-.ig:hover .chv{background:#fce8f2;transform:translateX(2px)}
-.chv svg{width:10px;height:10px;stroke:#bbb;fill:none;stroke-width:2.5}
-.ig:hover .chv svg{stroke:#dd2a7b}
 
-/* ===== FOOTER ===== */
-.ft{margin-top:22px;font-size:.55rem;color:#ccc;letter-spacing:2px;text-transform:uppercase;animation:up .4s ease .66s both}
-
-/* ===== RESPONSIVE ===== */
-@media(max-width:420px){
-  .card{padding:32px 22px 26px;border-radius:24px}
-  .avatar{width:76px;height:76px}
-  .name{font-size:1.25rem}
-  .accent{margin:12px auto 22px}
-  .b{padding:20px 10px 16px;border-radius:16px}
-  .b .ic{width:44px;height:44px}
-  .b .lbl{font-size:.84rem}
-  .ig{padding:14px 16px;border-radius:14px}
-  .ig-ic{width:38px;height:38px;border-radius:10px}
+.btn{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  flex:1;
+  padding:14px 10px;
+  border-radius:12px;
+  text-decoration:none;
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  font-size:0.85rem;
+  font-weight:600;
+  transition:transform 0.2s ease, box-shadow 0.2s ease;
+  cursor:pointer;
+  border:none;
 }
-@media(max-width:360px){
-  .page{padding:0 18px}
-  .card{padding:26px 18px 22px;border-radius:22px}
-  .avatar{width:68px;height:68px}
-  .name{font-size:1.15rem}
-  .btns{gap:10px}
-  .b{padding:18px 8px 14px;border-radius:14px}
-  .b .ic{width:40px;height:40px}
-  .ig{gap:10px;padding:12px 14px;border-radius:12px}
-  .ig-ic{width:36px;height:36px}
+
+.btn:active{
+  transform:scale(0.97);
+}
+
+/* WhatsApp buttons */
+.btn-wa{
+  background:#25D366;
+  color:#fff;
+}
+.btn-wa:hover{
+  box-shadow:0 4px 14px rgba(37,211,102,0.35);
+  transform:translateY(-1px);
+}
+
+/* Telegram buttons */
+.btn-tg{
+  background:#2AABEE;
+  color:#fff;
+}
+.btn-tg:hover{
+  box-shadow:0 4px 14px rgba(42,171,238,0.35);
+  transform:translateY(-1px);
+}
+
+/* Instagram button */
+.btn-ig{
+  background:linear-gradient(135deg,#833AB4,#E1306C,#F77737);
+  color:#fff;
+  width:100%;
+  padding:14px;
+  margin-bottom:0;
+}
+.btn-ig:hover{
+  box-shadow:0 4px 14px rgba(225,48,108,0.35);
+  transform:translateY(-1px);
+}
+
+/* Section label */
+.section-label{
+  font-size:0.7rem;
+  text-transform:uppercase;
+  letter-spacing:0.12em;
+  color:var(--gray-text);
+  margin:6px 0 10px;
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+}
+
+/* Divider */
+.divider{
+  width:40px;
+  height:1px;
+  background:rgba(0,0,92,0.1);
+  margin:18px auto;
+}
+
+/* Footer */
+.footer{
+  margin-top:22px;
+  font-size:0.68rem;
+  color:#aaa;
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+}
+
+/* SVG icons inside buttons */
+.btn svg{
+  width:18px;
+  height:18px;
+  flex-shrink:0;
 }
 </style>
 </head>
 <body>
 
-<!-- ANIMATED BACKGROUND -->
-<div class="scene">
-  <!-- Floating medical crosses -->
-  <div class="float-el f1"><svg viewBox="0 0 24 24" fill="#00005c"><path d="M9 2h6v7h7v6h-7v7H9v-7H2V9h7z"/></svg></div>
-  <div class="float-el f2"><svg viewBox="0 0 24 24" fill="#ff7800"><circle cx="12" cy="12" r="10"/></svg></div>
-  <div class="float-el f3"><svg viewBox="0 0 24 24" fill="#00005c"><path d="M9 2h6v7h7v6h-7v7H9v-7H2V9h7z"/></svg></div>
-  <div class="float-el f4"><svg viewBox="0 0 24 24" fill="#ff7800"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
-  <div class="float-el f5"><svg viewBox="0 0 24 24" fill="#00005c"><path d="M9 2h6v7h7v6h-7v7H9v-7H2V9h7z"/></svg></div>
-  <div class="float-el f6"><svg viewBox="0 0 24 24" fill="#ff7800"><circle cx="12" cy="12" r="10"/></svg></div>
-  <div class="float-el f7"><svg viewBox="0 0 24 24" fill="#00005c"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
-  <div class="float-el f8"><svg viewBox="0 0 24 24" fill="#00005c"><path d="M9 2h6v7h7v6h-7v7H9v-7H2V9h7z"/></svg></div>
+<!-- Background medical elements -->
+<div class="float-cross">✚</div>
+<div class="float-cross">✚</div>
+<div class="float-cross">✚</div>
+<div class="float-cross">✚</div>
+<div class="float-cross">✚</div>
 
-  <!-- Heartbeat line -->
-  <svg class="heartbeat" viewBox="0 0 1200 60" fill="none" stroke="#00005c" stroke-width="2">
-    <polyline points="0,30 100,30 120,30 130,10 140,50 150,20 160,40 170,30 300,30 400,30 420,30 430,10 440,50 450,20 460,40 470,30 600,30 700,30 720,30 730,10 740,50 750,20 760,40 770,30 900,30 1000,30 1020,30 1030,10 1040,50 1050,20 1060,40 1070,30 1200,30"/>
+<div class="glow glow-1"></div>
+<div class="glow glow-2"></div>
+
+<!-- Heartbeat line -->
+<div class="heartbeat-line">
+  <svg width="2000" height="60" viewBox="0 0 2000 60" fill="none">
+    <polyline points="0,30 80,30 100,30 110,10 120,50 130,20 140,40 150,30 230,30 310,30 330,30 340,10 350,50 360,20 370,40 380,30 460,30 540,30 560,30 570,10 580,50 590,20 600,40 610,30 690,30 770,30 790,30 800,10 810,50 820,20 830,40 840,30 920,30 1000,30 1020,30 1030,10 1040,50 1050,20 1060,40 1070,30 1150,30 1230,30 1250,30 1260,10 1270,50 1280,20 1290,40 1300,30 1380,30 1460,30 1480,30 1490,10 1500,50 1510,20 1520,40 1530,30 1610,30 1690,30 1710,30 1720,10 1730,50 1740,20 1750,40 1760,30 1840,30 1920,30 1940,30 1950,10 1960,50 1970,20 1980,40 1990,30 2000,30" stroke="#00005c" stroke-width="1.5" fill="none"/>
   </svg>
-
-  <!-- Walking doctor silhouettes -->
-  <div class="walker w1">
-    <svg viewBox="0 0 40 80" fill="#00005c"><circle cx="20" cy="10" r="7"/><rect x="14" y="18" width="12" height="28" rx="4"/><rect x="10" y="22" width="8" height="3" rx="1.5"/><rect x="22" y="22" width="8" height="3" rx="1.5"/><rect x="14" y="46" width="5" height="22" rx="2.5"/><rect x="21" y="46" width="5" height="22" rx="2.5"/></svg>
-  </div>
-  <div class="walker w2">
-    <svg viewBox="0 0 40 80" fill="#00005c"><circle cx="20" cy="10" r="7"/><rect x="14" y="18" width="12" height="28" rx="4"/><rect x="10" y="22" width="8" height="3" rx="1.5"/><rect x="22" y="22" width="8" height="3" rx="1.5"/><rect x="14" y="46" width="5" height="22" rx="2.5"/><rect x="21" y="46" width="5" height="22" rx="2.5"/></svg>
-  </div>
-  <div class="walker w3">
-    <svg viewBox="0 0 40 80" fill="#ff7800"><circle cx="20" cy="10" r="7"/><rect x="14" y="18" width="12" height="28" rx="4"/><rect x="10" y="22" width="8" height="3" rx="1.5"/><rect x="22" y="22" width="8" height="3" rx="1.5"/><rect x="14" y="46" width="5" height="22" rx="2.5"/><rect x="21" y="46" width="5" height="22" rx="2.5"/></svg>
-  </div>
 </div>
 
-<!-- CARD -->
-<div class="page">
-  <div class="card">
-    <div class="avatar">
-      <img src="https://ugc.production.linktr.ee/y5ylGyXTtaFf3ebFkIQC_CmrdAYCbL3KPD5Re?io=true&size=avatar-v3_0" alt="CMD Prevaler" width="88" height="88">
-    </div>
+<!-- Main Card -->
+<div class="card">
 
-    <h1 class="name">CMD Prevaler</h1>
-    <p class="sub">Centro Médico</p>
-    <div class="accent"></div>
+  <!-- Logo (base64 embedded) -->
+  <img class="logo" alt="Prevaler" src="data:image/jpeg;base64,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">
 
-    <div class="btns">
-      <a href="https://wa.me/15855222431" class="b" target="_blank" rel="noopener">
-        <div class="ic green"><svg viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.832-1.438A9.955 9.955 0 0 0 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg></div>
-        <div class="lbl">Escribir</div>
-        <div class="mt">WhatsApp</div>
-      </a>
-      <a href="tel:+15855222431" class="b">
-        <div class="ic orange"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
-        <div class="lbl">Llamar</div>
-        <div class="mt">+1 (585) 522-2431</div>
-      </a>
-    </div>
+  <h1>Prevaler</h1>
+  <p class="tagline">Clínica Médica Integral</p>
 
-    <a href="https://www.instagram.com/clinicaprevaler" class="ig" target="_blank" rel="noopener">
-      <div class="ig-ic"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.2" fill="#fff" stroke="none"/></svg></div>
-      <div class="ig-t"><div class="ig-h">@clinicaprevaler</div><div class="ig-s">Síguenos en Instagram</div></div>
-      <div class="chv"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+  <!-- WhatsApp -->
+  <p class="section-label">WhatsApp</p>
+  <div class="btn-row">
+    <a href="https://wa.me/15855222431?text=Hola%2C%20me%20gustar%C3%ADa%20agendar%20una%20cita" class="btn btn-wa">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.118.549 4.107 1.511 5.838L.057 23.636l5.932-1.418A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.82c-1.87 0-3.63-.5-5.14-1.372l-.368-.218-3.816.912.96-3.714-.24-.382A9.79 9.79 0 012.18 12c0-5.423 4.397-9.82 9.82-9.82 5.423 0 9.82 4.397 9.82 9.82 0 5.423-4.397 9.82-9.82 9.82z"/></svg>
+      Escribir
     </a>
-
-    <p class="ft">Prevaler © 2025</p>
+    <a href="tel:+15855222431" class="btn btn-wa">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+      Llamar
+    </a>
   </div>
+
+  <!-- Telegram -->
+  <p class="section-label">Telegram</p>
+  <div class="btn-row">
+    <a href="https://t.me/clinicaprevaler" class="btn btn-tg">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 000 12a12 12 0 0012 12 12 12 0 0012-12A12 12 0 0012 0h-.056zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 01.171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.479.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+      Escribir
+    </a>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- Instagram -->
+  <a href="https://www.instagram.com/clinicaprevaler/" class="btn btn-ig">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+    @clinicaprevaler
+  </a>
+
+  <p class="footer">Prevaler — Tu salud, nuestra prioridad</p>
 </div>
 
 </body>
